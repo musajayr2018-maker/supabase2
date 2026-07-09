@@ -1,1510 +1,1142 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Access Deactivation Workspace</title>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- MAMMOTH.JS FOR WORD AND SHEETJS FOR EXCEL PARSING (CLIENT-SIDE) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    
-    <style>
-        :root {
-            --bg-color: #0b0e14;
-            --panel-bg: #141923;
-            --input-bg: #1f2635;
-            --border-color: #2d384e;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
-            --neon-blue: #38bdf8;
-            --neon-green: #34d399;
-            --neon-purple: #a855f7;
-            --neon-red: #f87171;
-            --alert-bg: rgba(248, 113, 113, 0.08);
-            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
-        body {
-            font-family: var(--font-family);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 2rem 1.5rem;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        /* SIDEBAR LAYOUT CONTAINER */
-        .container {
-            width: 100%;
-            max-width: 1600px;
-            display: flex;
-            flex-direction: row;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
-
-        /* LEFT SIDEBAR NAVIGATION */
-        .tabs-header {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 260px;
-            min-width: 260px;
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.25rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            box-sizing: border-box;
-        }
-
-        .tab-btn {
-            background-color: rgba(31, 38, 53, 0.4);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 0.9rem 1.25rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .tab-btn:hover {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.04);
-            border-color: rgba(56, 189, 248, 0.4);
-        }
-
-        .tab-btn.active-tab {
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--neon-blue);
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
-        }
-
-        /* MAIN CONTROLLER PANELS */
-        .panel-container {
-            flex: 1;
-            width: 100%;
-        }
-
-        .panel {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            display: none;
-            box-sizing: border-box;
-        }
-
-        .panel.active-panel {
-            display: block;
-        }
-
-        .header-section {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-        }
-
-        h2 {
-            margin: 0 0 0.25rem 0;
-            color: #ffffff;
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        .form-row, .portal-form-row {
-            display: grid;
-            grid-template-columns: 1.2fr 1.8fr 1.2fr auto;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
-            align-items: flex-end;
-            background-color: rgba(255,255,255,0.02);
-            padding: 1.25rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-
-        /* RESPONSIVE LAYOUT BREAKDOWN */
-        @media (max-width: 1100px) {
-            .container {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .tabs-header {
-                width: 100%;
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            .tab-btn {
-                width: calc(50% - 4px);
-            }
-        }
-
-        @media (max-width: 900px) {
-            .form-row, .template-layout, .notes-layout, .docs-layout, .summary-layout, .cred-form-row, .portal-form-row {
-                grid-template-columns: 1fr !important;
-                gap: 1rem;
-            }
-            .tab-btn {
-                width: 100%;
-            }
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.75px;
-        }
-
-        input, textarea, select {
-            background-color: var(--input-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-main);
-            padding: 0.75rem 1rem;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            width: 100%;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-        }
-
-        .btn {
-            background-color: var(--neon-blue);
-            color: #0b0e14;
-            border: none;
-            border-radius: 8px;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            height: 43px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn:hover {
-            background-color: #7dd3fc;
-            transform: translateY(-1px);
-        }
-
-        .btn-green { background-color: var(--neon-green); color: #0b0e14; }
-        .btn-green:hover { background-color: #6ee7b7; }
-        
-        .btn-purple { background-color: var(--neon-purple); color: #ffffff; }
-        .btn-purple:hover { background-color: #c084fc; }
-
-        .btn-secondary { background-color: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); }
-        .btn-secondary:hover { background-color: var(--border-color); }
-
-        .btn-danger { background-color: rgba(248, 113, 113, 0.2); color: var(--neon-red); border: 1px solid rgba(248, 113, 113, 0.3); }
-        .btn-danger:hover { background-color: rgba(248, 113, 113, 0.3); }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            text-align: left;
-        }
-
-        th {
-            background-color: rgba(255,255,255,0.03);
-            color: var(--text-main);
-            font-weight: 600;
-            padding: 14px 16px;
-            border-bottom: 2px solid var(--border-color);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.75px;
-        }
-
-        td {
-            padding: 14px 16px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
-            vertical-align: middle;
-        }
-
-        tr:hover { background-color: rgba(255, 255, 255, 0.01); }
-        tr.selected-row { background-color: rgba(56, 189, 248, 0.12) !important; border: 1px solid var(--neon-blue); }
-        tr.due-passed { background-color: var(--alert-bg); }
-
-        .progress-container { width: 100%; max-width: 140px; background-color: #273142; border-radius: 20px; overflow: hidden; height: 8px; display: inline-block; vertical-align: middle; }
-        .progress-bar { height: 100%; width: 0%; background-color: var(--neon-blue); transition: width 0.4s ease; border-radius: 20px; }
-        .progress-wrapper { display: flex; align-items: center; gap: 10px; }
-        .progress-text { font-size: 0.75rem; color: var(--text-muted); min-width: 32px; font-variant-numeric: tabular-nums; }
-
-        .status-badge { display: inline-flex; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
-        .status-badge.active-alert { background-color: rgba(248, 113, 113, 0.15); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.25); }
-        .status-badge.pending { background-color: rgba(56, 189, 248, 0.15); color: var(--neon-blue); border: 1px solid rgba(56, 189, 248, 0.25); }
-
-        .action-cell { display: flex; gap: 6px; flex-wrap: wrap; }
-        .btn-action { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-muted); padding: 4px 10px; font-size: 0.8rem; cursor: pointer; }
-        .btn-action:hover { border-color: var(--neon-blue); color: var(--neon-blue); }
-        .btn-remove:hover { border-color: var(--neon-red); color: var(--neon-red); }
-
-        /* Layouts */
-        .template-layout, .notes-layout, .docs-layout, .summary-layout {
-            display: grid;
-            grid-template-columns: 280px 1.5fr;
-            gap: 1.5rem;
-        }
-
-        .template-layout {
-            grid-template-columns: 280px 1.2fr 1.2fr;
-        }
-
-        .list-box {
-            background-color: rgba(0, 0, 0, 0.15);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow-y: auto;
-            max-height: 480px;
-        }
-
-        .list-item {
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .list-item:hover {
-            background-color: rgba(255, 255, 255, 0.02);
-            color: #ffffff;
-        }
-
-        .list-item.active-item {
-            background-color: rgba(56, 189, 248, 0.1);
-            color: var(--neon-blue);
-            border-left: 3px solid var(--neon-blue);
-        }
-
-        .variables-hint {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            background: rgba(0,0,0,0.2);
-            padding: 8px;
-            border-radius: 6px;
-            border-left: 3px solid var(--neon-blue);
-            line-height: 1.4;
-        }
-
-        .selected-ticket-indicator, .preview-container {
-            font-size: 0.85rem;
-            background: rgba(56, 189, 248, 0.08);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-        }
-
-        .preview-container {
-            background: rgba(0, 0, 0, 0.2);
-            border-color: var(--border-color);
-            padding: 1.5rem;
-            min-height: 500px;
-            max-height: 650px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .doc-meta {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .image-preview {
-            max-width: 100%;
-            max-height: 480px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            margin: 0.5rem auto 0 auto;
-            display: block;
-            object-fit: contain;
-        }
-
-        /* Embedded Render Engines */
-        .pdf-viewer-frame {
-            width: 100%;
-            height: 520px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background-color: #ffffff;
-        }
-
-        .internal-word-render {
-            background: #ffffff;
-            color: #1e293b;
-            padding: 2.5rem 2rem;
-            border-radius: 6px;
-            min-height: 400px;
-            border: 1px solid var(--border-color);
-            font-family: 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
-            overflow-y: auto;
-        }
-
-        .internal-excel-render {
-            overflow-x: auto;
-            background: #1e2635;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-        }
-
-        .internal-excel-render table {
-            background: #141923;
-            color: #e2e8f0;
-            font-size: 0.85rem;
-        }
-
-        .internal-excel-render th { background: #2d384e; color: var(--neon-blue); }
-        .internal-excel-render td { border-bottom: 1px solid #2d384e; border-right: 1px solid #2d384e; }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 7, 10, 0.85); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 1000; }
-        .modal-overlay.show { opacity: 1; pointer-events: auto; }
-        .modal-box { background-color: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; width: 90%; max-width: 520px; padding: 1.75rem; }
-        .modal-header { color: #f87171; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
-        .modal-body { font-size: 0.95rem; margin-bottom: 1.75rem; max-height: 240px; overflow-y: auto; }
-        .modal-item { padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); }
-
-        /* ADMIN CREDENTIALS SPECIFIC STYLES */
-        .cred-form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
-            align-items: flex-end;
-            background-color: rgba(255,255,255,0.02);
-            padding: 1.25rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-        .password-container, .copyable-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-        .password-container input, .copyable-container input {
-            padding-right: 4.5rem;
-        }
-        .password-toggle-btn {
-            position: absolute;
-            right: 42px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.85rem;
-            padding: 4px;
-        }
-        .password-toggle-btn:hover {
-            color: var(--neon-blue);
-        }
-        .copy-btn-inline {
-            position: absolute;
-            right: 8px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.85rem;
-            padding: 4px;
-        }
-        .copy-btn-inline:hover {
-            color: var(--neon-green);
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    
-    <!-- NAVIGATION TABS (LEFT SIDEBAR) -->
-    <div class="tabs-header">
-        <button class="tab-btn active-tab" onclick="switchTab('trackerTabPanel', this)">📊 Monitor Tracker</button>
-        <button class="tab-btn" onclick="switchTab('templatesTabPanel', this)">✉️ Email Templates</button>
-        <button class="tab-btn" onclick="switchTab('summaryTabPanel', this)">📋 Action Summary Notes</button>
-        <button class="tab-btn" onclick="switchTab('notesTabPanel', this)">📝 Process Notes</button>
-        <button class="tab-btn" onclick="switchTab('docsTabPanel', this)">📁 Documents Process</button>
-        <button class="tab-btn" onclick="switchTab('credentialsTabPanel', this)">🔑 Admin Credentials</button>
-        <button class="tab-btn" onclick="switchTab('portalLinksTabPanel', this)">🌐 Portal Links</button>
-    </div>
-    
-    <!-- PANELS CONTAINER -->
-    <div class="panel-container">
-        
-        <!-- TAB 1: MONITOR TRACKER -->
-        <div class="panel active-panel" id="trackerTabPanel">
-            <div class="header-section">
-                <h2>Access Deactivation Monitor</h2>
-                <p class="subtitle">Log security deactivation endpoints. Select a row here to inject details into Email and Summary tabs.</p>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="inputDate">Removal Date</label>
-                    <input type="date" id="inputDate">
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail">Email Address</label>
-                    <input type="email" id="inputEmail" placeholder="user@domain.com">
-                </div>
-                <div class="form-group">
-                    <label for="inputTicket">Ticket Number</label>
-                    <input type="text" id="inputTicket" placeholder="REQ0000123">
-                </div>
-                <button class="btn" id="submitBtn" onclick="handleSubmit()">Add Entry</button>
-            </div>
-
-            <div style="overflow-x: auto;">
-                <table id="trackerTable">
-                    <thead>
-                        <tr>
-                            <th>Removal Date</th>
-                            <th>Email Address</th>
-                            <th>Ticket Number</th>
-                            <th style="width: 200px;">Timeline Progress</th>
-                            <th>Status</th>
-                            <th style="width: 140px;">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="trackerBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- TAB 2: TEMPLATES -->
-        <div class="panel" id="templatesTabPanel">
-            <div class="header-section">
-                <h2>Email Template Library</h2>
-                <p class="subtitle">Manage message templates linked to the active selected tracker row.</p>
-            </div>
-
-            <div class="selected-ticket-indicator indicator-box">
-                Selected Work Record: <strong class="linked-tkn">None</strong> (Select an entry on Monitor Tracker).
-            </div>
-
-            <div class="template-layout">
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <label>Saved Templates</label>
-                    <div class="list-box" id="templateList"></div>
-                    <button class="btn btn-secondary" style="height: 36px; font-size: 0.8rem;" onclick="clearEditorForNew()">+ Clear for New Template</button>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                    <div class="form-group">
-                        <label for="templateTitle">Template Name</label>
-                        <input type="text" id="templateTitle" placeholder="e.g., Deactivation Alert">
-                    </div>
-                    <div class="form-group">
-                        <label for="templateSubject">Subject Line</label>
-                        <input type="text" id="templateSubject" placeholder="Action Required: Account Expiry">
-                    </div>
-                    <div class="form-group">
-                        <label for="templateBody">Email Body</label>
-                        <textarea id="templateBody" rows="7" placeholder="Hi team..."></textarea>
-                        <div class="variables-hint">
-                            <strong>Injectors:</strong> Use <code>{TICKET}</code> and <code>{EMAIL}</code> inside Subject or Body text fields.
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px;">
-                        <button class="btn btn-green" style="flex: 1;" onclick="saveTemplate()">Save Template</button>
-                        <button class="btn btn-secondary" onclick="deleteTemplate()">Delete</button>
-                    </div>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 1.25rem; background: rgba(255,255,255,0.01); padding: 1.5rem; border-radius: 8px; border: 1px dashed var(--border-color);">
-                    <label style="color: var(--neon-blue); font-weight: 700;">⚡ Live Processed Output Preview</label>
-                    <div class="form-group">
-                        <label>Generated Subject</label>
-                        <input type="text" id="previewSubject" readonly style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.05);">
-                    </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label>Generated Body</label>
-                        <textarea id="previewBody" readonly style="background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.05); height: 100%; min-height: 180px; font-family: monospace; font-size: 0.85rem;"></textarea>
-                    </div>
-                    <button class="btn" style="width: 100%;" onclick="copyGeneratedEmail()">📋 Copy Processed Content</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 3: ACTION SUMMARY NOTES -->
-        <div class="panel" id="summaryTabPanel">
-            <div class="header-section">
-                <h2>Action Summary Logs</h2>
-                <p class="subtitle">Generate internal system logs and resolution ticket closing notes instantly.</p>
-            </div>
-
-            <div class="selected-ticket-indicator indicator-box">
-                Selected Work Record: <strong class="linked-tkn">None</strong> (Select an entry on Monitor Tracker).
-            </div>
-
-            <div class="summary-layout">
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <label>Logged Summaries</label>
-                    <div class="list-box" id="summaryList"></div>
-                    <button class="btn btn-secondary" style="height: 36px; font-size: 0.8rem;" onclick="clearSummaryEditor()">+ Create Custom Summary</button>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                    <div style="display: flex; gap: 10px; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);">
-                        <button class="btn btn-purple" style="font-size: 0.8rem; height: 32px;" onclick="applySummaryTemplate('standard')">Apply standard layout</button>
-                        <button class="btn btn-purple" style="font-size: 0.8rem; height: 32px;" onclick="applySummaryTemplate('security')">Apply security rule</button>
-                    </div>
-                    <div class="form-group">
-                        <label for="summaryTitle">Log Ident / Heading</label>
-                        <input type="text" id="summaryTitle" placeholder="e.g., REQ001 - Process Complete">
-                    </div>
-                    <div class="form-group">
-                        <label for="summaryContent">Summary Closing Text</label>
-                        <textarea id="summaryContent" rows="12" style="font-family: monospace; font-size: 0.9rem;" placeholder="Log details here..."></textarea>
-                        <div class="variables-hint">
-                            Available string bindings: <code>{TICKET}</code>, <code>{EMAIL}</code>.
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px;">
-                        <button class="btn btn-green" style="flex: 1;" onclick="saveSummary()">💾 Save Summary Log</button>
-                        <button class="btn btn-danger" onclick="deleteSummary()">Delete</button>
-                        <button class="btn" style="padding: 0 1.5rem;" onclick="copySummaryText()">📋 Copy Text</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 4: PROCESS NOTES -->
-        <div class="panel" id="notesTabPanel">
-            <div class="header-section">
-                <h2>Process Documentation Notes</h2>
-                <p class="subtitle">Keep tech support standard procedures or structural access logs recorded locally.</p>
-            </div>
-
-            <div class="notes-layout">
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <label>Saved Process Topics</label>
-                    <div class="list-box" id="notesList"></div>
-                    <button class="btn btn-secondary" style="height: 36px; font-size: 0.8rem;" onclick="clearNotesEditor()">+ New Note Topic</button>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                    <div class="form-group">
-                        <label for="noteTopic">Topic Title</label>
-                        <input type="text" id="noteTopic" placeholder="e.g., UPN Structural Rules">
-                    </div>
-                    <div class="form-group">
-                        <label for="noteContent">Details / Steps</label>
-                        <textarea id="noteContent" rows="14" style="font-family: monospace; font-size: 0.9rem;" placeholder="Write procedures..."></textarea>
-                    </div>
-                    <div style="display: flex; gap: 10px;">
-                        <button class="btn" style="flex: 1;" onclick="saveNote()">💾 Save Note</button>
-                        <button class="btn btn-secondary" onclick="deleteNote()">Delete Note</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 5: ADVANCED DOCUMENTS PROCESS -->
-        <div class="panel" id="docsTabPanel">
-            <div class="header-section">
-                <h2>Documents Processing Center (Instant System View)</h2>
-                <p class="subtitle">Upload PDF, Images, Word (.docx), or Excel (.xlsx). Everything renders inside the system panel window.</p>
-            </div>
-
-            <div class="docs-layout">
-                <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                    <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 8px; border: 1px dashed var(--border-color);">
-                        <div class="form-group">
-                            <label for="fileSystemPicker">Choose Document / Image File</label>
-                            <input type="file" id="fileSystemPicker" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg,.gif">
-                        </div>
-                        <div class="form-group" style="margin-top: 0.75rem;">
-                            <label for="docCategory">Process Category</label>
-                            <select id="docCategory">
-                                <option value="Approvals">Sign-off / Approvals</option>
-                                <option value="Evidence">Ticket Screenshot / Evidence</option>
-                                <option value="Runbook">Runbook / Guide</option>
-                                <option value="Audit Log">Access Audit Log</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-green" style="width: 100%; margin-top: 1rem; height: 38px;" onclick="processLocalFile()">⚡ Store & Render File</button>
-                    </div>
-
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label>Stored System Documents</label>
-                        <div class="list-box" id="docList" style="max-height: 380px;"></div>
-                    </div>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <label style="color: var(--neon-blue); font-weight: 700;">📺 Live In-System Document View Panel</label>
-                        <div id="docActionsWrapper" style="display: none; gap: 10px;">
-                            <button class="btn btn-danger" style="height: 30px; font-size: 0.8rem; padding: 0 12px;" onclick="deleteDocument()">Delete File</button>
-                        </div>
-                    </div>
-                    <div class="preview-container" id="docViewerContent">
-                        <span style="color: var(--text-muted);">No document selected. Highlight a record to view without downloads.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 6: ADMIN CREDENTIALS -->
-        <div class="panel" id="credentialsTabPanel">
-            <div class="header-section">
-                <h2>Admin Credentials Manager</h2>
-                <p class="subtitle">Securely store and track application administrative accounts locally.</p>
-            </div>
-
-            <div class="cred-form-row">
-                <div class="form-group">
-                    <label for="credPortal">Portal Name</label>
-                    <input type="text" id="credPortal" placeholder="e.g., Azure Enterprise Portal">
-                </div>
-                <div class="form-group">
-                    <label for="credUsername">Username</label>
-                    <input type="text" id="credUsername" placeholder="admin@domain.com">
-                </div>
-                <div class="form-group">
-                    <label for="credPassword">Password</label>
-                    <div class="password-container">
-                        <input type="password" id="credPassword" placeholder="••••••••">
-                        <button type="button" class="password-toggle-btn" id="credPassToggle" onclick="togglePasswordVisibility('credPassword', this)">👁️</button>
-                    </div>
-                </div>
-                <button class="btn" id="credSubmitBtn" onclick="handleCredSubmit()">Add Account</button>
-            </div>
-
-            <div style="overflow-x: auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Portal Name</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th style="width: 180px;">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="credentialsBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- TAB 7: PORTAL LINKS -->
-        <div class="panel" id="portalLinksTabPanel">
-            <div class="header-section">
-                <h2>Portal Links Directory</h2>
-                <p class="subtitle">Store operational platform gateways alongside technical reminders or validation constraints.</p>
-            </div>
-
-            <div class="portal-form-row">
-                <div class="form-group">
-                    <label for="portalName">Portal Name</label>
-                    <input type="text" id="portalName" placeholder="e.g., AWS Security Control">
-                </div>
-                <div class="form-group">
-                    <label for="portalLink">Portal Link</label>
-                    <input type="url" id="portalLink" placeholder="https://portal.domain.com">
-                </div>
-                <div class="form-group">
-                    <label for="portalNotes">Notes / Reminder</label>
-                    <input type="text" id="portalNotes" placeholder="Requires corporate VPN scope context">
-                </div>
-                <button class="btn" id="portalSubmitBtn" onclick="handlePortalSubmit()">Add Portal</button>
-            </div>
-
-            <div style="overflow-x: auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Portal Name</th>
-                            <th>Portal Link</th>
-                            <th>Notes / Reminder</th>
-                            <th style="width: 220px;">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="portalBody"></tbody>
-                </table>
-            </div>
-        </div>
-        
-    </div>
-
-</div>
-
-<!-- ALERT MODAL -->
-<div class="modal-overlay" id="notificationModal">
-    <div class="modal-box">
-        <div class="modal-header">⚠️ Access Removal Action Required</div>
-        <div class="modal-body" id="modalContent"></div>
-        <div style="text-align: right;">
-            <button class="btn btn-secondary" style="height:36px;" onclick="closeModal()">Acknowledge</button>
-        </div>
-    </div>
-</div>
+<!DOCTYPE html><html lang="en" data-qb-installed="true"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-id="th-modified">RotaGuard — Standalone Ticket Rotation System</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg-color:#ffffff;--card-bg:#f8fafc;--text-color:#0f172a;--border-color:#e2e8f0;--accent-color:#4f46e5;--sidebar-bg:#f1f5f9;--text-muted:#64748b}
+.dark{--bg-color:#0f172a;--card-bg:#1e293b;--text-color:#f8fafc;--border-color:#334155;--accent-color:#6366f1;--sidebar-bg:#0f172a;--text-muted:#94a3b8}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:var(--text-color);min-height:100vh;transition:all 0.3s}
+.dark input,.dark select,.dark textarea{background:#334155;color:#f1f5f9;border-color:#475569}
+.dark .card{background:#1e293b;border-color:#475569}
+.dark .header{background:#1e293b;border-color:#475569}
+.dark .member-chip{background:#334155}
+.dark .ticket-card{background:#1e293b;border-color:#475569}
+.dark .modal-content{background:#1e293b}
+.dark .btn-secondary{background:#334155;color:#e2e8f0;border-color:#475569}
+.dark .tab{background:#334155;color:#e2e8f0;border-color:#475569}
+.dark .filter-select{background:#334155;color:#e2e8f0;border-color:#475569}
+.dark .search-box{background:#334155;border-color:#475569}
+.dark .search-box input{color:#f1f5f9}
+
+.header{background:rgba(15,23,42,0.8);backdrop-filter:blur(10px);padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:100}
+.header h1{font-size:1.2rem;font-weight:800;letter-spacing:-0.05em;background:linear-gradient(to right,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.btn{padding:7px 14px;border:none;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:500;transition:all 0.2s}
+.btn-primary{background:#4f46e5;color:#fff}
+.btn-primary:hover{background:#4338ca}
+.btn-secondary{background:#fff;color:#333;border:1px solid #d1d5db}
+.btn-secondary:hover{background:#f3f4f6}
+.btn-warning{background:#fffbeb;color:#92400e;border:1px solid #fbbf24}
+.btn-danger{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5}
+.btn-success{background:#ecfdf5;color:#059669;border:1px solid #10b981}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.btn-sm{padding:4px 10px;font-size:0.72rem}
+
+.container{max-width:1200px;margin:0 auto;padding:16px;display:flex;gap:20px;align-items:flex-start}
+
+.main-content{flex:1;min-width:0}
+.card{background:var(--card-bg);border-radius:16px;padding:20px;margin-bottom:16px;border:1px solid var(--border-color);transition:all 0.3s}
+.card h3{font-size:1rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.02em;color:var(--text-color)}
+
+.date-nav{display:flex;justify-content:space-between;align-items:center}
+.date-nav .date-label{font-size:1rem;font-weight:700;color:var(--text-color)}
+.date-nav .today-btn{font-size:0.7rem;padding:3px 8px;background:var(--accent-color);color:white;border:none;border-radius:4px;cursor:pointer;margin-left:8px}
+
+.summary{display:flex;gap:16px;flex-wrap:wrap;font-size:0.85rem;color:var(--text-color);opacity:0.8;align-items:center}
+.members-bar{display:flex;flex-wrap:wrap;gap:6px}
+.member-chip{display:inline-flex;align-items:center;gap:5px;background:var(--border-color);color:var(--text-color);padding:5px 12px;border-radius:12px;font-size:0.8rem;font-weight:500;opacity:0.8}
+.member-chip.active{background:var(--accent-color);color:white;opacity:1}
+.member-chip.blocked{background:rgba(239,68,68,0.2);color:#ef4444;opacity:0.7}
+
+.workload-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.workload-label{font-size:0.72rem;font-weight:500;min-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.workload-track{flex:1;height:16px;background:#f3f4f6;border-radius:8px;overflow:hidden}
+.workload-fill{height:100%;border-radius:8px;transition:width 0.3s}
+.workload-value{font-size:0.68rem;color:#6b7280;min-width:70px;text-align:right}
+
+.tickets-grid{display:flex;flex-wrap:wrap;gap:8px}
+.ticket-card{border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px;width:220px;cursor:pointer;transition:box-shadow 0.2s;border-left:3px solid #4f46e5}
+.ticket-card:hover{box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.ticket-card .title{font-weight:600;font-size:0.82rem;margin-bottom:4px}
+.ticket-card .meta{font-size:0.68rem;color:#6b7280}
+.ticket-card .assignee{font-size:0.72rem;color:#4338ca;font-weight:600;margin-bottom:3px}
+.ticket-card .actions{display:flex;gap:4px;margin-top:6px}
+.ticket-card.completed{opacity:0.5;border-left-color:#10b981}
+
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:1000;padding:16px}
+.modal-content{background:var(--card-bg);border-radius:16px;padding:24px;width:440px;max-width:calc(100vw - 32px);max-height:85vh;overflow-y:auto;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);border:1px solid var(--border-color)}
+.modal-content h3{margin-bottom:16px;font-size:1.1rem;color:var(--text-color)}
+.modal-content label{display:block;font-size:0.82rem;font-weight:600;margin-bottom:6px;color:var(--text-muted)}
+.modal-content input,.modal-content select,.modal-content textarea{width:100%;padding:12px;background:var(--bg-color);border:1px solid var(--border-color);border-radius:8px;font-size:0.9rem;margin-bottom:16px;color:var(--text-color)}
+.modal-content input:focus{outline:2px solid var(--accent-color)}
+.modal-content .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+
+.apps-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.app-chip{padding:6px 12px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;font-size:0.78rem;font-weight:500;transition:all 0.15s}
+.app-chip.selected{background:#4f46e5;color:#fff;border-color:#4f46e5}
+
+.login-page{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-card{background:#fff;border-radius:12px;padding:40px;max-width:400px;width:100%;box-shadow:0 4px 20px rgba(0,0,0,0.1);text-align:center}
+.login-card h1{font-size:1.5rem;margin-bottom:8px}
+.login-card p{color:#6b7280;font-size:0.85rem;margin-bottom:20px}
+
+.tabs{display:flex;flex-direction:column;gap:8px;width:220px}
+.tab{padding:12px 16px;border:1px solid #334155;border-radius:12px;background:#1e293b;color:#cbd5e1;cursor:pointer;font-size:0.9rem;font-weight:600;text-align:left;transition:all 0.3s}
+.tab:hover{background:#334155;border-color:#475569;color:#fff}
+.tab.active{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border:none;box-shadow:0 4px 12px rgba(79,70,229,0.3)}
+
+.leave-banner{background:#fef3c7;border:1px solid #fbbf24;border-radius:6px;padding:8px 12px;font-size:0.78rem;color:#92400e;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid #10b981;border-radius:12px;padding:14px 20px;box-shadow:0 8px 32px rgba(0,0,0,0.18);z-index:9999;display:flex;align-items:center;gap:10px;animation:toast-in 0.3s ease-out}
+@keyframes toast-in{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+.log-entry{padding:8px 12px;border-bottom:1px solid #f0f0f0;font-size:0.78rem}
+.log-entry .log-time{color:#9ca3af;font-size:0.68rem}
+.log-entry .log-action{font-weight:600;color:#4f46e5}
+
+.filter-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.filter-select{padding:6px 10px;font-size:0.78rem;border:1px solid #d1d5db;border-radius:6px;background:#fff}
+.search-box{display:flex;align-items:center;border:1px solid #d1d5db;border-radius:6px;padding:0 10px;background:#fff}
+.search-box input{border:none;outline:none;padding:8px;flex:1;font-size:0.85rem;background:transparent}
+
+.fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#4f46e5;color:#fff;border:none;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 14px rgba(79,70,229,0.4);display:flex;align-items:center;justify-content:center;z-index:800;transition:transform 0.2s}
+.fab:hover{transform:scale(1.1)}
+.user-badge{font-size:0.78rem;background:#eef2ff;color:#4338ca;padding:4px 10px;border-radius:10px;border:1px solid #c7d2fe}
+.hidden{display:none!important}
+@media(max-width:768px){.header h1{font-size:1rem}.ticket-card{width:100%}.container{padding:10px}.workload-label{min-width:60px;font-size:0.65rem}}
+</style>
+<meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
+<body class="">
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Wed, Jul 8, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab" onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Wed, Jul 8, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='kyle'; render();"><span class="workload-label">kyle</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Junealyn'; render();"><span class="workload-label">Junealyn</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();"><span class="workload-label">Paola</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Joshua'; render();"><span class="workload-label">Joshua</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Carlo'; render();"><span class="workload-label">John Carlo</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Jenica'; render();"><span class="workload-label">Jenica</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Rendy'; render();"><span class="workload-label">Rendy</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
+            <span class="workload-label">Jenica</span>
+            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">20 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Paola</span>
+            <div class="workload-track"><div class="workload-fill" style="width:85%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">17 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">John Carlo</span>
+            <div class="workload-track"><div class="workload-fill" style="width:80%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">16 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Rendy</span>
+            <div class="workload-track"><div class="workload-fill" style="width:20%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">kyle</span>
+            <div class="workload-track"><div class="workload-fill" style="width:5%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">1 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Junealyn</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Joshua</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Junealyn</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-08</div><button class="btn btn-sm btn-secondary" onclick="unblock('Junealyn')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Joshua</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-08</div><button class="btn btn-sm btn-secondary" onclick="unblock('Joshua')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Rendy</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-08</div><button class="btn btn-sm btn-secondary" onclick="unblock('Rendy')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">Paola</div><div style="color:var(--text-muted)">2026-07-09</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">John Carlo</div><div style="color:var(--text-muted)">2026-07-09</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">Paola</div><div style="color:var(--text-muted)">2026-07-10</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">John Carlo</div><div style="color:var(--text-muted)">2026-07-10</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">kyle</div><div style="color:var(--text-muted)">2026-07-11</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip">kyle (0)</span><span class="member-chip blocked">⏸️ Junealyn (0)</span><span class="member-chip">Paola (0)</span><span class="member-chip blocked">⏸️ Joshua (0)</span><span class="member-chip">John Carlo (0)</span><span class="member-chip active">Jenica (0)</span><span class="member-chip blocked">⏸️ Rendy (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-    let editTargetRow = null;
-    let editTargetCredRow = null;
-    let editTargetPortalRow = null;
-    let selectedRowData = null;
-    let selectedTemplateName = null;
-    let selectedSummaryId = null;
-    let selectedNoteTopic = null;
-    let selectedDocId = null;
-  const supabaseUrl = 'https://oaurwkqbmtzevzozkijg.supabase.co';
-  const supabaseKey = 'sb_publishable_7pogosOM-Z_lsQ63rkt2UQ_ClrB88sL';
+const SUPABASE_URL = "https://oaurwkqbmtzevzoxkijg.supabase.co";
 
-// I-assign nang diretso sa window object para accessible kahit saan
-  window.mySupabase = supabase.createClient(supabaseUrl, supabaseKey);
+const SUPABASE_ANON_KEY =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9hdXJ3a3FibXR6ZXZ6b3hraWpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwNzUxNTIsImV4cCI6MjA5NjY1MTE1Mn0.hBSBr63PYm5AGb59xfKQ3f2P71VPSzs7zJzg0D60gZo";
 
-    let templates = JSON.parse(localStorage.getItem('email_templates')) || {
-        "Deactivation Notice": {
-            subject: "⚠️ Access Removal Action Required - {TICKET}",
-            body: "Hi Team,\n\nThis is to notify you that the temporary access for entry {EMAIL} has reached its scheduled expiration date today.\n\nPlease complete the standard account security removal procedure referenced under tracking log {TICKET}.\n\nBest Regards,\nJay-R"
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+</script>
+<script>
+const DEFAULT_APPS=['Active Directory','Email Account','Phoenix','Peoplesoft','8x8','CBIS','Astra','Adobe','Purchase Order'];
+
+function setTab(t){ state.activeTab = t; render(); }
+function doLogout(){
+    localStorage.removeItem('rotaguard-user');
+    state.loggedIn=false;
+    state.currentUser='';
+    render();
+}
+function toggleDark(){
+    state.darkMode=!state.darkMode;
+    localStorage.setItem('rotaguard-dark',state.darkMode);
+    render();
+}
+function doLogin(){
+    const e = document.getElementById('login-email').value.trim();
+    if(!e || !e.includes('@')){ alert('Please enter a valid email'); return; }
+    state.loggedIn=true;
+    state.currentUser=e;
+    localStorage.setItem('rotaguard-user',e);
+    render();
+}
+
+let state={loggedIn:false,currentUser:'',darkMode:false,members:[],tickets:[],leaves:[],rotationIndex:0,customApps:[],logs:[],memberEmails:{},maxTicketsPerDay:0,memberTicketCaps:{},dedicatedRules:[],activeTab:'dashboard',viewDate:getTodayStr(),filterMember:'all',searchQuery:'',ticketsViewMode:'byMember'};
+function getTodayStr(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')}
+function formatDate(d){return new Date(d+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})}
+function getLocalISO(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')+'T'+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')}
+async function loadState() {
+    try {
+        const { data, error } = await supabaseClient
+            .from('rotaguard_state')
+            .select('*')
+            .eq('id', 1)
+            .single();
+
+        if (!error && data && data.payload) {
+            Object.assign(state, data.payload);
+            // Siguraduhin na laging array ang dedicatedRules
+            state.dedicatedRules = state.dedicatedRules || [];
+            state.activeTab = 'dashboard';
+            state.viewDate = getTodayStr();
         }
-    };
 
-    let tableEntries = JSON.parse(localStorage.getItem('tracker_entries')) || [
-        { date: '2026-07-15', email: 'alex.jones@cb.winadroot.com', ticket: 'REQ1095500', created: '2026-06-20' }
-    ];
-
-    let actionSummaries = JSON.parse(localStorage.getItem('action_summaries')) || {
-        "REQ1095500 - System Closure": "Ticket Ref: REQ1095500\nTarget User Identity: alex.jones@cb.winadroot.com\nStatus: Deactivated\nExecution details: Checked dependencies. Removed all linked application assignment tokens successfully. Active records updated inside structural repository."
-    };
-
-    let processNotes = JSON.parse(localStorage.getItem('process_notes')) || {
-        "UPN Name Mapping Policy": "Ensure preferred UPN structural format filters special characters.\nExample: Prioritize indunil.rathnayake over alternative casing.",
-        "CBIS Access Handling": "For specialized technical access updates (e.g. user Nathan), ensure the environment reference maps explicitly to UK180 rules."
-    };
-
-    let processedDocs = JSON.parse(localStorage.getItem('processed_docs')) || [];
-    
-    // Credentials array initialization
-    let credentialsEntries = JSON.parse(localStorage.getItem('admin_credentials')) || [];
-    
-    // Portal links array initialization
-    let portalEntries = JSON.parse(localStorage.getItem('portal_links')) || [];
-
-    function saveData() {
-        localStorage.setItem('email_templates', JSON.stringify(templates));
-        localStorage.setItem('tracker_entries', JSON.stringify(tableEntries));
-        localStorage.setItem('action_summaries', JSON.stringify(actionSummaries));
-        localStorage.setItem('process_notes', JSON.stringify(processNotes));
-        localStorage.setItem('admin_credentials', JSON.stringify(credentialsEntries));
-        localStorage.setItem('portal_links', JSON.stringify(portalEntries));
-        try {
-            localStorage.setItem('processed_docs', JSON.stringify(processedDocs));
-        } catch (e) {
-            alert("Storage capacity reached for files. Consider clearing out older logs.");
+        const u = localStorage.getItem('rotaguard-user');
+        if (u) {
+            state.loggedIn = true;
+            state.currentUser = u;
         }
+
+        state.darkMode =
+            localStorage.getItem('rotaguard-dark') === 'true';
+
+    } catch (e) {
+        console.error(e);
     }
-
-    function switchTab(panelId, btnElement) {
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active-panel'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
-        document.getElementById(panelId).classList.add('active-panel');
-        btnElement.classList.add('active-tab');
-    }
-
-    function updateIndicators() {
-        const text = selectedRowData ? 
-            `Linked Work Record: <strong style="color:var(--neon-blue);">${selectedRowData.ticket}</strong> │ Target User: <strong style="color:var(--neon-green);">${selectedRowData.email}</strong>` :
-            `Selected Work Record: <strong>None</strong> (Select an entry on Monitor Tracker).`;
-        
-        document.querySelectorAll('.indicator-box').forEach(box => {
-            box.innerHTML = text;
-        });
-    }
-
-    // --- SYSTEM UTILITIES ---
-    function copyDirectText(text, successMessage) {
-        if (!text) return alert('No content available to copy.');
-        navigator.clipboard.writeText(text).then(() => {
-            alert(successMessage || 'Copied to clipboard!');
-        }).catch(err => {
-            alert('Failed to copy text safely.');
-        });
-    }
-
-    // --- MONITOR TRACKER CONTROLS ---
-    function renderTable() {
-        const tbody = document.getElementById('trackerBody');
-        tbody.innerHTML = '';
-        tableEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-        tableEntries.forEach((entry, index) => {
-            const tr = document.createElement('tr');
-            tr.setAttribute('data-index', index);
-            if (selectedRowData && selectedRowData.ticket === entry.ticket && selectedRowData.email === entry.email) {
-                tr.classList.add('selected-row');
-            }
-            tr.onclick = function(e) { if(e.target.tagName === 'BUTTON') return; selectRow(this, entry); };
-            tbody.appendChild(tr);
-        });
-        checkDueDates();
-    }
-
-    function calculateProgress(createdStr, expiryStr) {
-        const today = new Date(); today.setHours(0,0,0,0);
-        const created = new Date(createdStr); created.setHours(0,0,0,0);
-        const expiry = new Date(expiryStr); expiry.setHours(0,0,0,0);
-        if (today >= expiry) return 100;
-        if (today <= created) return 0;
-        return Math.min(Math.max(Math.round(((today - created) / (expiry - created)) * 100), 0), 100);
-    }
-
-    function checkDueDates() {
-        const rows = document.querySelectorAll('#trackerBody tr');
-        const today = new Date(); today.setHours(0,0,0,0);
-        let dueItems = [];
-
-        rows.forEach(row => {
-            const idx = row.getAttribute('data-index');
-            const data = tableEntries[idx];
-            const targetDate = new Date(data.date); targetDate.setHours(0,0,0,0);
-            const pct = calculateProgress(data.created, data.date);
-            
-            let barColor = 'var(--neon-blue)';
-            if (pct >= 100) barColor = 'var(--neon-red)';
-            else if (pct >= 75) barColor = '#fb923c';
-
-            let statusBadge = `<span class="status-badge pending">Pending</span>`;
-            if (targetDate <= today) {
-                row.classList.add('due-passed');
-                statusBadge = `<span class="status-badge active-alert">DUE NOW</span>`;
-                dueItems.push(data);
-            }
-
-            row.innerHTML = `
-                <td>${data.date}</td>
-                <td>${data.email}</td>
-                <td>${data.ticket}</td>
-                <td>
-                    <div class="progress-wrapper">
-                        <div class="progress-container"><div class="progress-bar" style="width: ${pct}%; background-color: ${barColor}"></div></div>
-                        <span class="progress-text">${pct}%</span>
-                    </div>
-                </td>
-                <td>${statusBadge}</td>
-                <td>
-                    <div class="action-cell">
-                        <button class="btn-action" onclick="editRow(${idx})">Edit</button>
-                        <button class="btn-action btn-remove" onclick="removeRow(${idx})">Remove</button>
-                    </div>
-                </td>
-            `;
-        });
-
-        if (dueItems.length > 0 && !sessionStorage.getItem('alerted_today')) {
-            triggerModal(dueItems);
-            sessionStorage.setItem('alerted_today', 'true');
-        }
-    }
-
-    function selectRow(rowElement, data) {
-        document.querySelectorAll('#trackerBody tr').forEach(r => r.classList.remove('selected-row'));
-        rowElement.classList.add('selected-row');
-        selectedRowData = data;
-        updateIndicators();
-        updateLivePreview();
-        
-        // Auto update input if creating new log
-        if(!selectedSummaryId) {
-            document.getElementById('summaryTitle').value = `${data.ticket} - Deactivation Log`;
-        }
-    }
-
-    function handleSubmit() {
-        const dateVal = document.getElementById('inputDate').value;
-        const emailVal = document.getElementById('inputEmail').value;
-        const ticketVal = document.getElementById('inputTicket').value;
-
-        if (!dateVal || !emailVal || !ticketVal) return alert('Fill in all fields.');
-
-        if (editTargetRow !== null) {
-            tableEntries[editTargetRow].date = dateVal;
-            tableEntries[editTargetRow].email = emailVal;
-            tableEntries[editTargetRow].ticket = ticketVal;
-            editTargetRow = null;
-            document.getElementById('submitBtn').innerText = 'Add Entry';
-        } else {
-            tableEntries.push({ date: dateVal, email: emailVal, ticket: ticketVal, created: new Date().toISOString().split('T')[0] });
-        }
-        document.getElementById('inputDate').value = '';
-        document.getElementById('inputEmail').value = '';
-        document.getElementById('inputTicket').value = '';
-        saveData(); renderTable();
-    }
-
-    // --- TEMPLATE MECHANICS ---
-    function renderTemplateList() {
-        const container = document.getElementById('templateList');
-        container.innerHTML = '';
-        Object.keys(templates).forEach(key => {
-            const div = document.createElement('div');
-            div.className = 'list-item' + (key === selectedTemplateName ? ' active-item' : '');
-            div.innerText = key;
-            div.onclick = function() { loadTemplate(key); };
-            container.appendChild(div);
-        });
-    }
-
-    function loadTemplate(name) {
-        selectedTemplateName = name;
-        document.getElementById('templateTitle').value = name;
-        document.getElementById('templateSubject').value = templates[name].subject;
-        document.getElementById('templateBody').value = templates[name].body;
-        renderTemplateList(); updateLivePreview();
-    }
-
-    function clearEditorForNew() {
-        selectedTemplateName = null;
-        document.getElementById('templateTitle').value = '';
-        document.getElementById('templateSubject').value = '';
-        document.getElementById('templateBody').value = '';
-        renderTemplateList(); updateLivePreview();
-    }
-
-    function saveTemplate() {
-        const title = document.getElementById('templateTitle').value.trim();
-        const subject = document.getElementById('templateSubject').value.trim();
-        const body = document.getElementById('templateBody').value;
-        if (!title || !subject) return alert('Template title and subject are mandatory.');
-        templates[title] = { subject, body };
-        selectedTemplateName = title;
-        saveData(); renderTemplateList(); updateLivePreview();
-    }
-
-    function deleteTemplate() {
-        if(selectedTemplateName) { delete templates[selectedTemplateName]; clearEditorForNew(); saveData(); }
-    }
-
-    function updateLivePreview() {
-        let subText = document.getElementById('templateSubject').value;
-        let bodyText = document.getElementById('templateBody').value;
-        const tkn = selectedRowData ? selectedRowData.ticket : '[Select a Ticket Row from Monitor Tab]';
-        const eml = selectedRowData ? selectedRowData.email : '[Select a Ticket Row from Monitor Tab]';
-        subText = subText.replace(/{TICKET}/g, tkn).replace(/{EMAIL}/g, eml);
-        bodyText = bodyText.replace(/{TICKET}/g, tkn).replace(/{EMAIL}/g, eml);
-        document.getElementById('previewSubject').value = subText;
-        document.getElementById('previewBody').value = bodyText;
-    }
-
-    function copyGeneratedEmail() {
-        const body = document.getElementById('previewBody');
-        if (!selectedRowData) return alert('Select a ticket link first.');
-        body.select(); document.execCommand('copy');
-        alert('Copied Email Body to clipboard!');
-    }
-
-    // --- ACTION SUMMARY NOTES MECHANICS ---
-    function renderSummaryList() {
-        const container = document.getElementById('summaryList');
-        container.innerHTML = '';
-        Object.keys(actionSummaries).forEach(id => {
-            const div = document.createElement('div');
-            div.className = 'list-item' + (id === selectedSummaryId ? ' active-item' : '');
-            div.innerText = id;
-            div.onclick = function() { loadSummary(id); };
-            container.appendChild(div);
-        });
-    }
-
-    function loadSummary(id) {
-        selectedSummaryId = id;
-        document.getElementById('summaryTitle').value = id;
-        document.getElementById('summaryContent').value = actionSummaries[id];
-        renderSummaryList();
-    }
-
-    function clearSummaryEditor() {
-        selectedSummaryId = null;
-        document.getElementById('summaryTitle').value = selectedRowData ? `${selectedRowData.ticket} - Deactivation Log` : '';
-        document.getElementById('summaryContent').value = '';
-        renderSummaryList();
-    }
-
-    function applySummaryTemplate(type) {
-        const tkn = selectedRowData ? selectedRowData.ticket : '{TICKET}';
-        const eml = selectedRowData ? selectedRowData.email : '{EMAIL}';
-        
-        let text = "";
-        if(type === 'standard') {
-            text = `Ticket Reference: ${tkn}\nTarget Operational Email: ${eml}\nStatus: Access Successfully Revoked\nExecution Details: Verified token configuration state. Expired access groups isolated inside system parameters. Workspace secure.`;
-        } else if(type === 'security') {
-            text = `Ticket Scope: ${tkn}\nTarget Target: ${eml}\nResolution Summary:\n1. Extraction Rules Applied: Verified extraction structures filter special characters and hyphens completely.\n2. Access Correction Scope: Access updated to system target block. CBIS pointer routed explicitly to UK180 rules architecture. Active tokens disabled.`;
-        }
-        document.getElementById('summaryContent').value = text;
-    }
-
-    function saveSummary() {
-        const title = document.getElementById('summaryTitle').value.trim();
-        const content = document.getElementById('summaryContent').value;
-        if (!title) return alert('Heading identifier is mandatory.');
-        actionSummaries[title] = content;
-        selectedSummaryId = title;
-        saveData(); renderSummaryList();
-    }
-
-    function deleteSummary() {
-        if(selectedSummaryId) { delete actionSummaries[selectedSummaryId]; clearSummaryEditor(); saveData(); }
-    }
-
-    function copySummaryText() {
-        const area = document.getElementById('summaryContent');
-        if(!area.value) return alert('No content to copy.');
-        area.select(); document.execCommand('copy');
-        alert('Summary text copied!');
-    }
-
-    // --- NOTES MECHANICS ---
-    function renderNotesList() {
-        const container = document.getElementById('notesList');
-        container.innerHTML = '';
-        Object.keys(processNotes).forEach(topic => {
-            const div = document.createElement('div');
-            div.className = 'list-item' + (topic === selectedNoteTopic ? ' active-item' : '');
-            div.innerText = topic;
-            div.onclick = function() { loadNote(topic); };
-            container.appendChild(div);
-        });
-    }
-    function loadNote(topic) {
-        selectedNoteTopic = topic;
-        document.getElementById('noteTopic').value = topic;
-        document.getElementById('noteContent').value = processNotes[topic];
-        renderNotesList();
-    }
-    function clearNotesEditor() {
-        selectedNoteTopic = null;
-        document.getElementById('noteTopic').value = '';
-        document.getElementById('noteContent').value = '';
-        renderNotesList();
-    }
-    function saveNote() {
-        const topic = document.getElementById('noteTopic').value.trim();
-        const content = document.getElementById('noteContent').value;
-        if (!topic) return alert('Topic title required.');
-        processNotes[topic] = content; selectedNoteTopic = topic;
-        saveData(); renderNotesList();
-    }
-    function deleteNote() {
-        if(selectedNoteTopic) { delete processNotes[selectedNoteTopic]; clearNotesEditor(); saveData(); }
-    }
-
-    // --- 100% INTERNAL LIVE VIEW PARSING ENGINE ---
-    function renderDocList() {
-        const container = document.getElementById('docList');
-        container.innerHTML = '';
-        if (processedDocs.length === 0) {
-            container.innerHTML = '<div style="padding:1rem; font-size:0.85rem; color:var(--text-muted);">No documents loaded.</div>';
-            return;
-        }
-        processedDocs.forEach(doc => {
-            const div = document.createElement('div');
-            div.className = 'list-item' + (doc.id === selectedDocId ? ' active-item' : '');
-            div.innerHTML = `
-                <div>
-                    <div style="text-overflow: ellipsis; overflow: hidden; max-width: 230px; white-space: nowrap; color:#fff;">${doc.name}</div>
-                    <div class="doc-meta">[${doc.category}] • ${doc.uploadedAt}</div>
-                </div>
-            `;
-            div.onclick = function() { viewDocument(doc.id); };
-            container.appendChild(div);
-        });
-    }
-
-    function processLocalFile() {
-        const fileInput = document.getElementById('fileSystemPicker');
-        const categorySelect = document.getElementById('docCategory');
-        
-        if (!fileInput.files || fileInput.files.length === 0) return alert('Please select a file first.');
-        
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        
-        reader.onload = function(e) {
-            const rawDataUrl = e.target.result;
-            const todayStr = new Date().toISOString().split('T')[0];
-            
-            const newDoc = {
-                id: 'doc_' + Date.now(),
-                name: file.name,
-                type: file.type || getExtensionType(file.name),
-                category: categorySelect.value,
-                dataUrl: rawDataUrl,
-                uploadedAt: todayStr
-            };
-            
-            processedDocs.push(newDoc);
-            saveData(); renderDocList(); viewDocument(newDoc.id);
-            fileInput.value = '';
+}
+async function saveState() {
+    try {
+        const payload = {
+            members: state.members,
+            tickets: state.tickets,
+            leaves: state.leaves,
+            rotationIndex: state.rotationIndex,
+            customApps: state.customApps,
+            logs: state.logs,
+            memberEmails: state.memberEmails,
+            maxTicketsPerDay: state.maxTicketsPerDay,
+            memberTicketCaps: state.memberTicketCaps,
+            dedicatedRules: state.dedicatedRules
         };
+
+        const { error } = await supabaseClient
+            .from('rotaguard_state')
+            .upsert({
+                id: 1,
+                payload: payload,
+                updated_at: new Date().toISOString()
+            });
+
+        if (error) console.error(error);
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+function addLog(a,d){state.logs.unshift({id:Date.now().toString(),timestamp:new Date().toISOString(),action:a,details:d});if(state.logs.length>200)state.logs=state.logs.slice(0,200)}
+function isMemberBlocked(m){const today=getTodayStr();const now=new Date();const ct=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');return state.leaves.some(l=>{if(l.memberId!==m)return false;if(l.type==='Skip'){if(l.startDate!==today)return false;return l.skipStartTime&&l.skipEndTime?ct>=l.skipStartTime&&ct<=l.skipEndTime:false}if(l.startDate<=today&&l.endDate>=today){if(l.blockFromTime&&l.startDate===today)return ct>=l.blockFromTime;return true}return false})}
+function getDayBalance(m){const today=getTodayStr();return state.tickets.filter(t=>t.assignee===m&&t.createdAt.startsWith(today)&&!t.removedReason).reduce((s,t)=>s+(t.applications||[]).length,0)}
+function getNextAssignee(){
+    const jsDay = new Date().getDay();
+    const dayIndex = jsDay === 0 ? 6 : jsDay - 1;
+    
+    // Identify who is "exclusive" today
+    const exclusiveMembers = (state.dedicatedRules || [])
+        .filter(r => r.exclusiveOnly && r.activeDays[dayIndex])
+        .map(r => r.assignee);
+
+    const av = state.members.filter(m => !isMemberBlocked(m) && !exclusiveMembers.includes(m));
+    
+    if(av.length===0) return '';
+    
+    let min=Infinity,cands=[];
+    for(const m of av){
+        const c=getDayBalance(m);
+        if(c<min){ min=c; cands=[m] }
+        else if(c===min) cands.push(m)
+    }
+    if(cands.length>1) return cands[state.rotationIndex%cands.length];
+    return cands[0]||''
+}
+function getTicketsForDate(){return state.tickets.filter(t=>t.createdAt.startsWith(state.viewDate))}
+function getFilteredTickets(){
+    let pool=state.searchQuery?state.tickets:getTicketsForDate();
+    let r=pool.filter(t=>!t.removedReason);
+    
+    // If NOT searching and not filtering by member, exclude children tickets from the main view
+    if(!state.searchQuery && state.filterMember === 'all') {
+        r = r.filter(t=>!t.parentId);
+    }
+
+    if(state.filterMember!=='all')r=r.filter(t=>t.assignee===state.filterMember);
+    if(state.searchQuery){
+        const q=state.searchQuery.toLowerCase();
+        r=r.filter(t=>t.title.toLowerCase().includes(q)||t.assignee.toLowerCase().includes(q)||(t.applications||[]).some(a=>a.toLowerCase().includes(q)))
+    }
+    return r
+}
+function render(){
+    const app=document.getElementById('app');
+    if(!state.loggedIn){app.innerHTML=renderLogin();return}
+    document.body.className=state.darkMode?'dark':'';
+    
+    state.tickets = state.tickets || [];
+    state.dedicatedRules = state.dedicatedRules || [];
+    state.members = state.members || [];
+    state.leaves = state.leaves || [];
+    
+    app.innerHTML=renderMain();
+}
+
+function renderLogin(){return '<div class="login-page" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px"><div class="card" style="width:100%;max-width:400px;text-align:center"><h2>RotaGuard Login</h2><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px">Enter your email to access your dashboard.</p><input type="email" id="login-email" placeholder="email@company.com" style="width:100%;padding:10px;border:1px solid var(--border-color);border-radius:8px;background:var(--bg-color);margin-bottom:16px"><button class="btn btn-primary" style="width:100%" onclick="doLogin()">Enter Dashboard</button></div></div>'}
+function renderMain(){const today=getTodayStr();const tfd=getTicketsForDate();const ac=tfd.filter(t=>!t.removedReason).length;const na=getNextAssignee();return '<div class="header"><h1>\u{1F6E1}\uFE0F RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">'+formatDate(getTodayStr())+'</span></h1><div class="header-actions"><span class="user-badge">\u{1F464} '+escHtml(state.currentUser)+'</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">'+(state.darkMode?'\u2600\uFE0F':'\u{1F319}')+'</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">\u{1F4E5} CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">\u{1F4E6} Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab '+(state.activeTab==='dashboard'?'active':'')+'" onclick="console.log(1);setTab(\'dashboard\')">\u{1F4CA} Dashboard</div><div class="tab '+(state.activeTab==='tickets'?'active':'')+'" onclick="console.log(2);setTab(\'tickets\')">\u{1F4CB} Tickets</div><div class="tab '+(state.activeTab==='done'?'active':'')+'" onclick="console.log(8);setTab(\'done\')">✅ Done</div><div class="tab '+(state.activeTab==='members'?'active':'')+'" onclick="console.log(3);setTab(\'members\')">\u{1F465} Members</div><div class="tab '+(state.activeTab==='schedule'?'active':'')+'" onclick="console.log(4);setTab(\'schedule\')">\u{1F4C5} Schedule</div><div class="tab '+(state.activeTab==='dedicated'?'active':'')+'" onclick="console.log(5);setTab(\'dedicated\')">\u{1F3AF} Dedicated</div><div class="tab '+(state.activeTab==='availability'?'active':'')+'" onclick="console.log(6);setTab(\'availability\')">\u{1F550} Availability</div><div class="tab '+(state.activeTab==='log'?'active':'')+'" onclick="console.log(7);setTab(\'log\')">\u{1F4DC} Log</div><div class="tab '+(state.activeTab==='perf'?'active':'')+'" onclick="console.log(9);setTab(\'perf\')">📈 Performance</div></div></div><div class="main-content">'+(state.activeTab==='dashboard'?renderDashboard(tfd,ac,na,today):'')+(state.activeTab==='tickets'?renderTickets():'')+(state.activeTab==='done'?renderDoneTickets():'')+(state.activeTab==='members'?renderMembers():'')+(state.activeTab==='schedule'?renderSchedule():'')+(state.activeTab==='dedicated'?renderDedicated():'')+(state.activeTab==='availability'?renderAvailability():'')+(state.activeTab==='log'?renderLog():'')+(state.activeTab==='perf'?renderPerformance():'')+'</div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button>'}
+function renderDashboard(tfd,ac,na,today){
+    // Exclude child tickets from stats: t.parentId === null
+    const allTix = state.tickets.filter(t => t.createdAt.startsWith(today) && !t.parentId);
+    const openTix = allTix.filter(t => t.status === 'Open' && !t.removedReason).length;
+    const doneTix = allTix.filter(t => t.status === 'Completed').length;
+    const removedTix = allTix.filter(t => t.removedReason).length;
+    const completionRate = (allTix.length - removedTix) > 0 ? Math.round((doneTix / (allTix.length - removedTix)) * 100) : 0;
+
+    const currentMonth = today.substring(0, 7);
+    const monthlyTix = state.tickets.filter(t => t.createdAt.startsWith(currentMonth) && !t.parentId);
+
+    const lvs=state.leaves.filter(l=>{if(l.type==='Skip'){return l.startDate===today}return l.startDate<=today&&l.endDate>=today});
+    
+    let h='<div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">\u25C0 Prev</button><div><span class="date-label">'+formatDate(state.viewDate)+'</span>'+(state.viewDate!==today?'<button class="today-btn" onclick="goToday()">Today</button>':'')+'</div><button class="btn btn-secondary btn-sm" onclick="goDate(1)"'+(state.viewDate>=today?' disabled':'')+'>Next \u25B6</button></div></div>';
+    
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;">';
+    h+='<div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">'+allTix.length+'</div></div>';
+    h+='<div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">'+openTix+'</div></div>';
+    h+='<div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">'+doneTix+'</div></div>';
+    h+='<div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">'+completionRate+'%</div></div>';
+    h+='</div>';
+
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;">';
+    
+    // Day Balance (Today)
+    h+='<div class="card"><h3>\u2696\uFE0F Day Balance (Today)</h3>';
+    const mx=Math.max(...state.members.map(m=>getDayBalance(m)),1);
+    state.members.forEach(m=>{
+        const c=getDayBalance(m);
+        const p=(c/mx)*100;
+        const col=p>=90?'#ef4444':p>=60?'#f59e0b':'#10b981';
+        const tx=state.tickets.filter(t=>t.assignee===m&&t.createdAt.startsWith(today)&&!t.removedReason).length;
+        h+='<div class="workload-row" style="cursor:pointer" onclick="state.activeTab=\'tickets\'; state.filterMember=\''+m+'\'; render();"><span class="workload-label">'+m+'</span><div class="workload-track"><div class="workload-fill" style="width:'+p+'%;background:'+col+'"></div></div><span class="workload-value">'+tx+' tix</span></div>';
+    });
+    h+='</div>';
+
+    h += '<div class="card"><h3>📅 Monthly Output (Per Member)</h3>';
+    const mSorted = state.members.map(m => ({
+        name: m,
+        count: monthlyTix.filter(t => t.assignee === m && !t.removedReason).length
+    })).sort((a, b) => b.count - a.count);
+    const mMax = Math.max(...mSorted.map(item => item.count), 1);
+
+    mSorted.forEach(m => {
+        const p = (m.count / mMax) * 100;
+        h += `<div class="workload-row">
+            <span class="workload-label">${m.name}</span>
+            <div class="workload-track"><div class="workload-fill" style="width:${p}%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">${m.count} tix</span>
+        </div>`;
+    });
+    h += '</div>';
+    
+    
+
+    if(lvs.length>0){h+='<div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">\u23F8\uFE0F Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px">';lvs.forEach(l=>{const colors=l.type==='VL'?{bg:'#dbeafe',text:'#1d4ed8'}:l.type==='SL'?{bg:'#fef3c7',text:'#b45309'}:l.type==='Unpaid Leave'?{bg:'#fee2e2',text:'#dc2626'}:l.type==='Skip'?{bg:'#fef9c3',text:'#a16207'}:{bg:'#e0e7ff',text:'#4338ca'};h+='<div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">'+escHtml(l.memberId)+'</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:'+colors.bg+';color:'+colors.text+'">'+(l.type==='Skip'?'\u23ED\uFE0F Skip':l.type)+'</span></div>';if(l.type==='Skip'){h+='<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">\u{1F550} '+escHtml(l.skipStartTime||'')+' \u2013 '+escHtml(l.skipEndTime||'')+' on '+l.startDate+'</div>'}else{h+='<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">\u{1F4C5} '+l.startDate+(l.startDate!==l.endDate?' \u2192 '+l.endDate:'')+'</div>'}if(l.remarks){h+='<div style="font-size:0.8rem;color:var(--text-muted);font-style:italic;margin-bottom:8px">\u{1F4AC} '+escHtml(l.remarks)+'</div>'}h+='<button class="btn btn-sm btn-secondary" onclick="unblock(\''+escHtml(l.memberId)+'\')">Unblock</button></div>'});h+='</div></div>'}
+    
+    // Upcoming Leaves
+    const upcoming = state.leaves.filter(l => l.startDate > today).sort((a,b) => a.startDate.localeCompare(b.startDate)).slice(0, 5);
+    if(upcoming.length > 0){
+        h+='<div class="card"><h3>\u{1F4C5} Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px">';
+        upcoming.forEach(l => {
+            h+='<div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem">';
+            h+='<div style="font-weight:600">'+escHtml(l.memberId)+'</div>';
+            h+='<div style="color:var(--text-muted)">'+l.startDate+'</div>';
+            h+='<div style="font-weight:600;color:var(--accent-color)">'+l.type+'</div>';
+            h+='</div>';
+        });
+        h+='</div></div>';
+    }
+    h+='<div class="card"><div class="members-bar">';state.members.forEach(m=>{const b=isMemberBlocked(m);const isN=na===m;const tc=state.tickets.filter(t=>t.assignee===m&&t.createdAt.startsWith(today)&&!t.removedReason).length;h+='<span class="member-chip'+(b?' blocked':'')+(isN?' active':'')+'">'+(b?'\u23F8\uFE0F ':'')+m+' ('+tc+')</span>'});h+='</div></div>';
+
+    h+='<div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()"'+(na?'':' disabled')+'>+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()"'+(state.members.length===0?' disabled':'')+'>\u23F8\uFE0F Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div>';return h}
+function toggleActions(el){
+    const actions = el.nextElementSibling;
+    actions.style.display = actions.style.display === 'flex' ? 'none' : 'flex';
+}
+
+function renderTicketCard(t){const time=new Date(t.createdAt).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});const cls=t.status==='Completed'?'completed':'';const isMember = state.members.includes(state.currentUser) || Object.values(state.memberEmails).includes(state.currentUser); return '<div class="ticket-card '+cls+'"><div onclick="showTicketDetails(\''+t.id+'\')"><div class="title">'+escHtml(t.title)+' '+(t.actionType ? '<span style="font-size:0.7rem; color: #6366f1; background: #e0e7ff; padding: 2px 6px; border-radius: 4px;">'+t.actionType+'</span>' : '')+'</div><div class="assignee">\u{1F464} '+t.assignee+'</div><div class="meta">'+time+' \u2022 '+(t.applications||[]).join(', ')+'</div><div class="meta" style="font-size:0.65rem; color:#6b7280;">Assigned by: '+escHtml(t.assignedBy||'System')+'</div></div><div class="actions" onclick="event.stopPropagation()" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;align-items:center"><button class="btn btn-secondary btn-sm" onclick="toggleActions(this)">⋮ Actions</button><div style="display:none;flex-wrap:wrap;gap:4px">'+(t.status==='Open'?'<button class="btn btn-success btn-sm" onclick="completeTicket(\''+t.id+'\')">✅ Done</button>':'')+'<button class="btn btn-secondary btn-sm" onclick="showRouteToGroup(\''+t.id+'\')">🔀 Route to Group</button>'+(isMember ? '<button class="btn btn-secondary btn-sm" onclick="takeOwnership(\''+t.id+'\')">🙋 Take Ownership</button>' : '')+'<button class="btn btn-secondary btn-sm" onclick="showRouteToMember(\''+t.id+'\')">🔄 Reassign</button><button class="btn btn-secondary btn-sm" onclick="showEditTicket(\''+t.id+'\')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="removeTicket(\''+t.id+'\')">🗑️ Remove</button></div></div></div>'}
+function renderDoneTickets() {
+    state.filterMember = state.filterMember || 'all';
+    state.doneViewMode = state.doneViewMode || 'grouped';
+    
+    // Filter by completed status, then by member if selected
+    let doneTickets = state.tickets.filter(t => t.status === 'Completed' && !t.removedReason);
+    if(state.filterMember !== 'all') doneTickets = doneTickets.filter(t => t.assignee === state.filterMember);
+    doneTickets.sort((a,b) => new Date(b.completedAt || 0) - new Date(a.completedAt || 0));
+
+    let h = '<div class="card">';
+    h += '<div class="filter-row" style="margin-bottom:12px; justify-content:space-between;">';
+    h += '<div>';
+    h += '<select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" '+(state.filterMember==='all'?'selected':'')+'>All Members</option>'+state.members.map(m=>'<option value="'+m+'" '+(state.filterMember===m?'selected':'')+'>'+m+'</option>').join('')+'</select>';
+    h += '<span style="font-size:0.78rem;color:var(--text-muted);margin-left:8px;">'+doneTickets.length+' tickets</span>';
+    h += '</div>';
+    
+    h += '<select class="filter-select" onchange="state.doneViewMode=this.value;render()"><option value="grouped" '+(state.doneViewMode==='grouped'?'selected':'')+'>Grouped by Date</option><option value="list" '+(state.doneViewMode==='list'?'selected':'')+'>List View</option><option value="table" '+(state.doneViewMode==='table'?'selected':'')+'>Table View</option></select>';
+    h += '</div>';
+
+    if (state.doneViewMode === 'table') {
+        h += `<table style="width:100%;border-collapse:collapse;font-size:0.8rem">
+            <thead><tr style="text-align:left;border-bottom:1px solid #eee"><th>Completed</th><th>Title</th><th>Assignee</th><th>Apps</th></tr></thead>
+            <tbody>${doneTickets.map(t => `<tr><td style="padding:8px 0">${new Date(t.completedAt).toLocaleDateString()}</td><td style="padding:8px 0;font-weight:600">${escHtml(t.title)}</td><td style="padding:8px 0">${t.assignee}</td><td style="padding:8px 0">${(t.applications||[]).join(', ')}</td></tr>`).join('')}</tbody>
+        </table>`;
+    } else if (state.doneViewMode === 'list') {
+         h += '<div style="display:flex; flex-direction:column; gap:8px;">' + doneTickets.map(t => `<div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee; font-size:0.85rem"><span><strong>${escHtml(t.title)}</strong> (${t.assignee})</span><span style="color:var(--text-muted)">${new Date(t.completedAt).toLocaleDateString()}</span></div>`).join('') + '</div>';
+    } else {
+        // Group by Date (Original)
+        const grouped = {};
+        doneTickets.forEach(t => {
+            const d = t.completedAt ? t.completedAt.substring(0, 10) : 'Unknown';
+            if(!grouped[d]) grouped[d] = [];
+            grouped[d].push(t);
+        });
         
-        reader.readAsDataURL(file);
-    }
-
-    function getExtensionType(filename) {
-        if (filename.endsWith('.pdf')) return 'application/pdf';
-        if (filename.endsWith('.docx')) return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-        if (filename.endsWith('.xlsx')) return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-        return 'image/jpeg';
-    }
-
-    function base64ToArrayBuffer(base64DataUrl) {
-        const base64Str = base64DataUrl.split(',')[1];
-        const binaryStr = window.atob(base64Str);
-        const len = binaryStr.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-            bytes[i] = binaryStr.charCodeAt(i);
+        for (const date in grouped) {
+            h += '<h3 style="margin-top:20px">✅ Done ('+formatDate(date)+')</h3>';
+            h += '<div class="tickets-grid" style="margin-bottom:20px;">';
+            h += grouped[date].map(t => renderTicketCard(t)).join('');
+            h += '</div>';
         }
-        return bytes.buffer;
+        if (Object.keys(grouped).length === 0) h += '<p style="color:#999;font-size:0.85rem;padding:10px;">No completed tickets found</p>';
     }
+    
+    h += '</div>';
+    return h;
+}
 
-    function viewDocument(id) {
-        selectedDocId = id;
-        renderDocList();
-        
-        const doc = processedDocs.find(d => d.id === id);
-        const viewer = document.getElementById('docViewerContent');
-        const actions = document.getElementById('docActionsWrapper');
-        
-        if (!doc) {
-            viewer.innerHTML = `<span style="color:var(--text-muted)">No document selected.</span>`;
-            actions.style.display = 'none';
-            return;
-        }
+function renderTickets(){const f=getFilteredTickets();
+let viewContent = '';
+if(state.ticketsViewMode==='card') viewContent = '<div class="tickets-grid">'+f.map(t=>renderTicketCard(t)).join('')+'</div>';
+else if(state.ticketsViewMode==='list') viewContent = '<div style="display:flex;flex-direction:column;gap:8px">'+f.map(t=>renderTicketRow(t)).join('')+'</div>';
+else if(state.ticketsViewMode==='table') viewContent = '<table style="width:100%;border-collapse:collapse"><tr style="border-bottom:1px solid #ddd"><th>ID</th><th>Assignee</th><th>Status</th></tr>'+f.map(t=>'<tr><td>'+escHtml(t.title)+'</td><td>'+t.assignee+'</td><td>'+t.status+'</td></tr>').join('')+'</table>';
+else if(state.ticketsViewMode==='compact') viewContent = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:4px">'+f.map(t=>'<div style="font-size:0.7rem;padding:4px;border:1px solid var(--border-color)">'+escHtml(t.title)+'</div>').join('')+'</div>';
+else if(state.ticketsViewMode==='kanban') viewContent = '<div style="display:flex;gap:10px"><div style="flex:1;background:rgba(0,0,0,0.05);padding:10px"><h3>Open</h3>'+f.filter(t=>t.status==='Open').map(t=>renderTicketCard(t)).join('')+'</div><div style="flex:1;background:rgba(0,0,0,0.05);padding:10px"><h3>Done</h3>'+f.filter(t=>t.status==='Completed').map(t=>renderTicketCard(t)).join('')+'</div></div>';
+else if(state.ticketsViewMode==='detailed') viewContent = '<div style="display:flex;flex-direction:column;gap:12px">'+f.map(t=>'<div style="padding:15px;border:1px solid var(--border-color)"><strong>'+escHtml(t.title)+'</strong><br>By: '+t.assignee+' | Status: '+t.status+'</div>').join('')+'</div>';
+else if(state.ticketsViewMode==='byMember') {
+    const activeMembers = (state.filterMember === 'all') ? state.members : [state.filterMember];
+    const rows = activeMembers.map(m => {
+        const memberTix = f.filter(t => t.assignee === m);
+        return `<tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">${m}</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">${memberTix.length} tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        ${memberTix.length > 0 ? '<div class="tickets-grid">'+memberTix.map(t=>renderTicketCard(t)).join('')+'</div>' : '<span style="color:#ccc;font-size:0.8rem">No pending tasks</span>'}
+                    </td>
+                </tr>`;
+    }).join('');
+    
+    viewContent = '<div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+}
+else viewContent = '<div class="tickets-grid">'+f.map(t=>renderTicketCard(t)).join('')+'</div>';
 
-        actions.style.display = 'flex';
-        viewer.innerHTML = `
-            <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1rem; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-weight:600; color:#fff; font-size:0.95rem;">${doc.name}</span>
-                <span class="status-badge pending" style="font-size:0.7rem;">${doc.category}</span>
+return '<div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">\u25C0 Prev</button><div><span class="date-label">'+formatDate(state.viewDate)+'</span>'+(state.viewDate!==getTodayStr()?'<button class="today-btn" onclick="goToday()">Today</button>':'')+'</div><button class="btn btn-secondary btn-sm" onclick="goDate(1)"'+(state.viewDate>=getTodayStr()?' disabled':'')+'>Next \u25B6</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>\u{1F50D}</span><input type="text" placeholder="Search tickets..." value="'+escHtml(state.searchQuery)+'" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all"'+(state.filterMember==='all'?' selected':'')+'>All Members</option>'+state.members.map(m=>'<option value="'+m+'"'+(state.filterMember===m?' selected':'')+'>'+m+'</option>').join('')+'</select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card" '+(state.ticketsViewMode==='card'?'selected':'')+'>Cards</option><option value="list" '+(state.ticketsViewMode==='list'?'selected':'')+'>List</option><option value="table" '+(state.ticketsViewMode==='table'?'selected':'')+'>Table</option><option value="compact" '+(state.ticketsViewMode==='compact'?'selected':'')+'>Compact</option><option value="kanban" '+(state.ticketsViewMode==='kanban'?'selected':'')+'>Kanban</option><option value="detailed" '+(state.ticketsViewMode==='detailed'?'selected':'')+'>Detailed</option><option value="byMember" '+(state.ticketsViewMode==='byMember'?'selected':'')+'>By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">'+f.length+' tickets</span></div></div><div class="card">'+viewContent+(f.length===0?'<p style="color:#999;font-size:0.85rem">No tickets found</p>':'')+'</div>'}
+
+function renderTicketRow(t){const cls=t.status==='Completed'?'completed':'';return '<div class="ticket-card '+cls+'" onclick="showTicketDetails(\''+t.id+'\')" style="width:100%;display:flex;justify-content:space-between;align-items:center;cursor:pointer"><div style="flex:1"><div style="font-weight:600">'+escHtml(t.title)+'</div><div style="font-size:0.75rem;color:var(--text-muted)">'+t.assignee+' \u2022 '+t.status+'</div></div>'+(t.status==='Open'?'<div class="actions" onclick="event.stopPropagation()"><button class="btn btn-success" onclick="completeTicket(\''+t.id+'\')">\u2705</button></div>':'')+'</div>'}
+function renderMembers(){return '<div class="card"><h3>\u{1F465} Team Members ('+state.members.length+')</h3><button class="btn btn-primary" onclick="showAddMember()" style="margin-bottom:16px">+ Add Member</button><table style="width:100%;border-collapse:collapse"><tr style="text-align:left;color:var(--text-muted);font-size:0.8rem"><th>Name</th><th>Email</th><th>Actions</th></tr>'+state.members.map(m=>{const em=state.memberEmails[m]||'-';return '<tr style="border-top:1px solid var(--border-color)"><td style="padding:12px 0;font-weight:600">'+m+'</td><td style="padding:12px 0;color:var(--text-muted)">'+em+'</td><td style="padding:12px 0"><button class="btn btn-secondary btn-sm" onclick="showEditMember(\''+m+'\')">Edit</button> <button class="btn btn-danger btn-sm" onclick="removeMember(\''+m+'\')">Remove</button></td></tr>'}).join('')+'</table></div>'}
+var schedWeekOffset=0;
+function getWeekDates(offset){const now=new Date();const day=now.getDay();const diff=day===0?-6:1-day;const mon=new Date(now);mon.setDate(now.getDate()+diff+offset*7);const dates=[];for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);dates.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'))}return dates}
+function fmtShort(d){return new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})}
+function getLeaveForCell(member,date){return state.leaves.find(l=>{if(l.memberId!==member)return false;if(l.type==='Skip'||l.type==='Skip by Tickets')return false;return l.startDate<=date&&l.endDate>=date})}
+function getTypeStyle(type){switch(type){case'VL':return{bg:'#dbeafe',color:'#1d4ed8',label:'VL'};case'SL':return{bg:'#fef3c7',color:'#b45309',label:'SL'};case'Unpaid Leave':return{bg:'#fee2e2',color:'#dc2626',label:'UL'};default:return{bg:'#e0e7ff',color:'#4338ca',label:'OFF'}}}
+function schedPrev(){schedWeekOffset--;render()}
+function schedNext(){schedWeekOffset++;render()}
+function schedToday(){schedWeekOffset=0;render()}
+function schedCellClick(member,date){const today=getTodayStr();const existing=getLeaveForCell(member,date);if(existing){if(confirm('Remove '+existing.type+' for '+member+' on '+date+'?')){removeLeave(member,existing.startDate)}return}if(date<today){alert('Cannot add leave on past dates');return}showScheduleType(member,date)}
+function showScheduleType(member,date){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content" style="text-align:center"><h3>\u{1F4CB} Select Leave Type</h3><p style="font-size:0.85rem;color:#555;margin-bottom:16px"><strong>'+member+'</strong> \u2014 '+new Date(date+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})+'</p><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"><button class="btn" style="padding:12px;background:#e0e7ff;color:#4338ca;border:2px solid #c7d2fe;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'Day Off\')">\u{1F5D3}\uFE0F Day Off</button><button class="btn" style="padding:12px;background:#dbeafe;color:#1d4ed8;border:2px solid #93c5fd;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'VL\')">\u{1F3D6}\uFE0F VL (Vacation)</button><button class="btn" style="padding:12px;background:#fef3c7;color:#b45309;border:2px solid #fde68a;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'SL\')">\u{1F912} SL (Sick Leave)</button><button class="btn" style="padding:12px;background:#fee2e2;color:#dc2626;border:2px solid #fecaca;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'Unpaid Leave\')">\u{1F4B0} Unpaid Leave</button></div><button class="btn btn-secondary" onclick="closeModal()">Cancel</button></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+function doScheduleAdd(member,date,type){state.leaves=state.leaves.filter(l=>!(l.memberId===member&&l.type!=='Skip'&&l.type!=='Skip by Tickets'&&l.startDate<=date&&l.endDate>=date));state.leaves.push({memberId:member,type:type,startDate:date,endDate:date,remarks:''});addLog('Leave Scheduled',member+' - '+type+' on '+date);saveState();closeModal();render();showToast(member+' \u2192 '+type)}
+function renderSchedule(){const today=getTodayStr();const dates=getWeekDates(schedWeekOffset);const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];const startLabel=fmtShort(dates[0]);const endLabel=new Date(dates[6]+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});let totalOffs=0;state.members.forEach(m=>{dates.forEach(d=>{if(getLeaveForCell(m,d))totalOffs++})});let h='<div class="card"><h3>\u{1F4C5} Weekly Schedule Board</h3><p style="font-size:0.78rem;color:#666;margin-bottom:12px">Click a cell to add/remove leave. Color-coded by type.</p>';h+='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding:10px 14px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb"><div style="display:flex;gap:4px"><button class="btn btn-secondary btn-sm" onclick="schedPrev()">\u25C0 Prev</button><button class="btn btn-secondary btn-sm" onclick="schedToday()"'+(schedWeekOffset===0?' style="opacity:0.5"':'')+'>Today</button><button class="btn btn-secondary btn-sm" onclick="schedNext()">Next \u25B6</button></div><span style="font-size:0.95rem;font-weight:700">'+startLabel+' \u2014 '+endLabel+'</span><span style="font-size:0.78rem;font-weight:600;color:#4f46e5;background:#eef2ff;padding:4px 10px;border-radius:6px">\u{1F5D3}\uFE0F '+totalOffs+' off this week</span></div>';h+='<div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="text-align:left;padding:12px 14px;font-size:0.82rem;font-weight:700;color:#374151;background:#f3f4f6;border-bottom:2px solid #e5e7eb;min-width:120px">Member</th>';dates.forEach((d,i)=>{const isToday=d===today;h+='<th style="text-align:center;padding:10px 8px;font-size:0.75rem;font-weight:600;color:'+(isToday?'#4f46e5':'#6b7280')+';background:'+(isToday?'#eef2ff':'#f3f4f6')+';border-bottom:2px solid #e5e7eb;min-width:80px"><div style="font-size:0.82rem;font-weight:700">'+days[i]+'</div><div style="font-size:0.68rem;font-weight:400;color:#9ca3af;margin-top:2px">'+fmtShort(d)+'</div>'+(isToday?'<div style="font-size:0.5rem;color:#4f46e5;margin-top:2px">\u25CF</div>':'')+'</th>'});h+='</tr></thead><tbody>';if(state.members.length===0){h+='<tr><td colspan="8" style="text-align:center;padding:30px;color:#888;font-size:0.85rem">No members added yet.</td></tr>'}else{state.members.forEach(m=>{h+='<tr><td style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid #f3f4f6;background:#fff;min-width:120px"><div style="width:28px;height:28px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0">'+m[0].toUpperCase()+'</div><span style="font-size:0.85rem;font-weight:600;color:#1f2937;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">'+m+'</span></td>';dates.forEach(d=>{const leave=getLeaveForCell(m,d);const isToday=d===today;const isPast=d<today;const style=leave?getTypeStyle(leave.type):null;let cellBg=isToday?'#f8faff':'#fff';if(leave)cellBg=style.bg;if(isPast&&!leave)cellBg='#f9fafb';h+='<td style="text-align:center;padding:8px 4px;border-bottom:1px solid #f3f4f6;cursor:'+(isPast&&!leave?'not-allowed':'pointer')+';background:'+cellBg+';vertical-align:middle;transition:all 0.15s'+(isPast&&!leave?';opacity:0.6':'')+'" onclick="schedCellClick(\''+m+'\',\''+d+'\')">';if(leave){h+='<div style="display:flex;flex-direction:column;align-items:center;gap:2px"><span style="font-size:0.72rem;font-weight:700;color:'+style.color+'">'+style.label+'</span><span style="font-size:0.82rem;color:#10b981;font-weight:700">\u2713</span></div>'}else{h+='<div style="display:flex;align-items:center;justify-content:center;height:36px"><span style="font-size:1.2rem;color:#d1d5db;font-weight:300">'+(isPast?'\u{1F512}':'+')+'</span></div>'}h+='</td>'});h+='</tr>'})}h+='</tbody></table></div>';h+='<div style="display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap;padding:10px 14px;background:#f9fafb;border-radius:8px"><span style="font-size:0.75rem;font-weight:600;color:#555">Legend:</span><span style="font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;background:#e0e7ff;color:#4338ca">Day Off</span><span style="font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;background:#dbeafe;color:#1d4ed8">VL</span><span style="font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;background:#fef3c7;color:#b45309">SL</span><span style="font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;background:#fee2e2;color:#dc2626">Unpaid</span><span style="font-size:0.7rem;font-weight:600;color:#10b981;margin-left:auto">\u2713 = Saved \u2022 Click to add/remove</span></div>';h+='</div>';return h}
+
+function renderAvailability(){
+  const today = getTodayStr();
+  // Filter: Only show active today (or earlier if valid) blocks, hide upcoming
+  const activeLeaves = state.leaves.filter(l => l.startDate <= today);
+  
+  return `<div class="card">
+    <h3>\u{1F550} Availability Settings</h3>
+    <p style="font-size:0.85rem;color:#666;margin-bottom:16px;">Current blocks (Only active/past entries shown).</p>
+    <div style="margin-bottom:20px;">
+        <button class="btn btn-primary" onclick="showBlock()">+ Add New Block / Skip</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+        ${activeLeaves.map(l => `
+            <div style="border:1px solid var(--border-color);padding:16px;border-radius:8px;background:var(--bg-color)">
+                <div style="font-weight:bold;font-size:1.1rem;margin-bottom:8px">${l.memberId}</div>
+                <div style="margin-bottom:4px"><strong>Type:</strong> ${l.type}</div>
+                <div style="margin-bottom:4px"><strong>Date:</strong> ${l.startDate} ${l.startDate !== l.endDate ? 'to '+l.endDate : ''}</div>
+                ${l.skipStartTime ? `<div style="margin-bottom:4px"><strong>Time:</strong> ${l.skipStartTime} - ${l.skipEndTime}</div>` : ''}
+                ${l.remarks ? `<div style="margin-bottom:12px;font-style:italic">"${l.remarks}"</div>` : ''}
+                <button class="btn btn-danger btn-sm" onclick="removeLeave('${l.memberId}','${l.startDate}')">Remove</button>
             </div>
-            <div id="fileRenderArea" style="flex:1; display:flex; flex-direction:column; justify-content:flex-start; min-height:460px;">
-                <span style="color:var(--text-muted); font-size:0.85rem;">Processing live frame parser...</span>
-            </div>
-        `;
+        `).join('')}
+    </div>
+  </div>`;
+}
+function toggleBlockFields(){const t=document.getElementById('b-type').value;document.getElementById('b-dates').className=t==='Skip'?'hidden':'';document.getElementById('b-time').className=t==='Skip'?'':'hidden'}
+function renderLog(){
+    state.logViewMode = state.logViewMode || 'list';
+    
+    let logs = state.logs.slice(0, 100);
+    let content = '';
 
-        const renderArea = document.getElementById('fileRenderArea');
-        const lowercaseName = doc.name.toLowerCase();
-
-        if (doc.type === 'application/pdf' || lowercaseName.endsWith('.pdf')) {
-            const parts = doc.dataUrl.split(';base64,');
-            const cType = parts[0].split(':')[1];
-            const raw = window.atob(parts[1]);
-            const uInt8 = new Uint8Array(raw.length);
-            for (let i = 0; i < raw.length; ++i) uInt8[i] = raw.charCodeAt(i);
-            const blob = new Blob([uInt8], { type: cType });
-            const blobUrl = URL.createObjectURL(blob);
-            
-            renderArea.innerHTML = `<iframe src="${blobUrl}" class="pdf-viewer-frame" title="PDF Panel View"></iframe>`;
-        } 
-        else if (doc.type.startsWith('image/') || lowercaseName.endsWith('.png') || lowercaseName.endsWith('.jpg') || lowercaseName.endsWith('.jpeg') || lowercaseName.endsWith('.gif')) {
-            renderArea.innerHTML = `<img src="${doc.dataUrl}" class="image-preview" alt="Screenshot Data">`;
-        } 
-        else if (lowercaseName.endsWith('.docx')) {
-            try {
-                const arrayBuffer = base64ToArrayBuffer(doc.dataUrl);
-                mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
-                    .then(function(result) {
-                        renderArea.innerHTML = `<div class="internal-word-render">${result.value || '<p style="color:#64748b;">[No readable content inside the file.]</p>'}</div>`;
-                    })
-                    .catch(function(err) {
-                        renderArea.innerHTML = `<span style="color:var(--neon-red); font-size:0.85rem;">Word processing failure: ${err.message}</span>`;
-                    });
-            } catch(e) {
-                renderArea.innerHTML = `<span style="color:var(--neon-red); font-size:0.85rem;">Failed to parse structure.</span>`;
-            }
-        } 
-        else if (lowercaseName.endsWith('.xlsx')) {
-            try {
-                const arrayBuffer = base64ToArrayBuffer(doc.dataUrl);
-                const data = new Uint8Array(arrayBuffer);
-                const workbook = XLSX.read(data, { type: 'array' });
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
-                const htmlTable = XLSX.utils.sheet_to_html(worksheet);
-                
-                renderArea.innerHTML = `
-                    <p style="font-size:0.75rem; color:var(--text-muted); margin:0 0 8px 0;">Active Sheet: <strong>${firstSheetName}</strong></p>
-                    <div class="internal-excel-render">${htmlTable}</div>
-                `;
-            } catch(e) {
-                renderArea.innerHTML = `<span style="color:var(--neon-red); font-size:0.85rem;">Excel parsing error.</span>`;
-            }
-        } 
-        else {
-            renderArea.innerHTML = `<span style="color:var(--text-muted); font-size:0.85rem;">Unsupported real-time file extension block.</span>`;
-        }
+    if (state.logViewMode === 'table') {
+        content = `<table style="width:100%;border-collapse:collapse;font-size:0.8rem">
+            <thead><tr style="text-align:left;border-bottom:1px solid #eee"><th>Time</th><th>Action</th><th>Details</th></tr></thead>
+            <tbody>${logs.map(l => `<tr><td style="padding:8px 0;width:150px">${new Date(l.timestamp).toLocaleString()}</td><td style="padding:8px 0;font-weight:600">${l.action}</td><td style="padding:8px 0;color:#666">${escHtml(l.details)}</td></tr>`).join('')}</tbody>
+        </table>`;
+    } else if (state.logViewMode === 'condensed') {
+        content = logs.map(l => `<div style="padding:4px 0;font-size:0.75rem;border-bottom:1px solid #f9f9f9"><strong>${l.action}</strong> - ${escHtml(l.details)}</div>`).join('');
+    } else {
+        content = logs.map(l => `<div class="log-entry"><span class="log-time">${new Date(l.timestamp).toLocaleString()}</span> <span class="log-action">${l.action}</span><div style="color:#555;font-size:0.72rem;margin-top:2px">${escHtml(l.details)}</div></div>`).join('');
     }
 
-    function deleteDocument() {
-        if (!selectedDocId) return;
-        const doc = processedDocs.find(d => d.id === selectedDocId);
-        if (doc && confirm(`Remove database record for "${doc.name}"?`)) {
-            processedDocs = processedDocs.filter(d => d.id !== selectedDocId);
-            selectedDocId = null;
-            saveData(); renderDocList();
-            document.getElementById('docViewerContent').innerHTML = `<span style="color: var(--text-muted);">No document selected.</span>`;
-            document.getElementById('docActionsWrapper').style.display = 'none';
-        }
-    }
+    return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3>\u{1F4DC} Activity Log ('+state.logs.length+')</h3><select class="filter-select" onchange="state.logViewMode=this.value;render()"><option value="list" '+(state.logViewMode==='list'?'selected':'')+'>Detailed List</option><option value="table" '+(state.logViewMode==='table'?'selected':'')+'>Table View</option><option value="condensed" '+(state.logViewMode==='condensed'?'selected':'')+'>Condensed</option></select></div><div style="max-height:500px;overflow-y:auto">'+(content || '<p style="color:#999;font-size:0.85rem">No activity yet</p>')+'</div></div>';
+}
 
-    // --- ADMIN CREDENTIALS ENGINE ---
-    function renderCredentialsTable() {
-        const tbody = document.getElementById('credentialsBody');
-        tbody.innerHTML = '';
+function renderPerformance() {
+    const totalRoutedToGroup = state.logs.filter(l => l.action.includes('Routed') && l.details.includes('Group:')).length;
+    const totalRoutedToMember = state.logs.filter(l => l.action.includes('Routed') && !l.details.includes('Group:')).length;
+    const totalRemoved = state.logs.filter(l => l.action.includes('Removed')).length;
+
+    const parentTickets = state.tickets.filter(t => !t.parentId);
+    const childTickets = state.tickets.filter(t => t.parentId);
+
+    let h = '<div class="card"><h3>📈 Performance Metrics Overview</h3>';
+    h += '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:20px;">';
+    h += `<div style="background:#fefce8; padding:16px; border-radius:8px; border:1px solid #fde68a;">
+            <div style="font-size:0.8rem; color:#854d0e; font-weight:600">Parent Tickets</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#713f12">${parentTickets.length}</div>
+          </div>
+          <div style="background:#f0fdfa; padding:16px; border-radius:8px; border:1px solid #99f6e4;">
+            <div style="font-size:0.8rem; color:#115e59; font-weight:600">Child Tickets</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#134e4a">${childTickets.length}</div>
+          </div>
+          <div style="background:#eff6ff; padding:16px; border-radius:8px; border:1px solid #bfdbfe;">
+            <div style="font-size:0.8rem; color:#1e40af; font-weight:600">Total Group Routes</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#1e3a8a">${totalRoutedToGroup}</div>
+          </div>`;
+    h += '</div>';
+
+    h += '<h3>Detailed Productivity per Member</h3>';
+    h += '<table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;">';
+    h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Parent</th><th style="padding:10px">Child</th><th style="padding:10px">Group Route</th><th style="padding:10px">Member Route</th><th style="padding:10px">Removed</th><th style="padding:10px; font-weight:bold">Net</th><th style="padding:10px; font-weight:bold">Eff. %</th></tr>';
+    
+    state.members.forEach(m => {
+        const parents = state.tickets.filter(t => t.assignee === m && !t.parentId && !t.removedReason).length;
+        const children = state.tickets.filter(t => t.assignee === m && t.parentId && !t.removedReason).length;
+        const group = getMemberLogs(m, 'Routed to Group');
+        const member = getMemberLogs(m, 'Routed to Member');
+        const removed = getMemberLogs(m, 'Removed');
         
-        if (credentialsEntries.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">No accounts found. Use the layout block above to record active admin nodes.</td></tr>`;
-            return;
-        }
+        // Net calculation: All Assigned - (Routed + Removed)
+        const totalAssigned = parents + children;
+        const totalDeductions = group + member + removed;
+        const netTotal = totalAssigned - totalDeductions;
+        const effPercent = totalAssigned > 0 ? Math.round((netTotal / totalAssigned) * 100) : 0;
+        
+        h += `<tr style="border-bottom:1px solid #eee">
+            <td style="padding:10px"><strong>${m}</strong></td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'parent')">${parents}</td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'child')">${children}</td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'group')">${group}</td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'member')">${member}</td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'removed')">${removed}</td>
+            <td style="padding:10px; font-weight:bold">${netTotal}</td>
+            <td style="padding:10px; font-weight:bold; color: ${effPercent < 50 ? '#dc2626' : '#059669'}; cursor:pointer; text-decoration:underline" onclick="showMemberSummary('${m}')">${effPercent}%</td>
+        </tr>`;
+    });
+    h += '</table></div>';
+    return h;
+}
 
-        credentialsEntries.forEach((cred, index) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><strong>${cred.portal}</strong></td>
-                <td>
-                    <div class="copyable-container">
-                        <input type="text" value="${cred.username}" readonly style="background:transparent; border:none; padding:0 2.5rem 0 0; width:100%; color:var(--text-main);" id="rowUser_${index}">
-                        <button type="button" class="copy-btn-inline" title="Copy Username" onclick="copyDirectText('${cred.username}', 'Username copied!')">📋</button>
-                    </div>
-                </td>
-                <td>
-                    <div class="password-container">
-                        <input type="password" value="${cred.password}" readonly style="background:transparent; border:none; padding:0; width:100%; color:var(--text-main);" id="rowPass_${index}">
-                        <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('rowPass_${index}', this)">👁️</button>
-                        <button type="button" class="copy-btn-inline" title="Copy Password" onclick="copyDirectText('${cred.password}', 'Password copied!')">📋</button>
-                    </div>
-                </td>
-                <td>
-                    <div class="action-cell">
-                        <button class="btn-action" onclick="editCredRow(${index})">Edit</button>
-                        <button class="btn-action btn-remove" onclick="removeCredRow(${index})">Remove</button>
-                    </div>
-                </td>
-            `;
-            tbody.appendChild(tr);
-        });
+function showPerformanceDetail(member, type) {
+    let title = 'Summary - ' + member + ' (' + type + ')';
+    let data = [];
+    let isLog = false;
+    
+    if (type === 'parent') {
+        data = state.tickets.filter(t => t.assignee === member && !t.parentId && !t.removedReason);
+    } else if (type === 'child') {
+        data = state.tickets.filter(t => t.assignee === member && t.parentId && !t.removedReason);
+    } else {
+        isLog = true;
+        let action = type === 'group' ? 'Routed to Group' : type === 'member' ? 'Routed to Member' : 'Removed';
+        data = state.logs.filter(l => l.details && l.details.includes(member) && l.action.includes(action));
     }
 
-    function handleCredSubmit() {
-        const portalVal = document.getElementById('credPortal').value.trim();
-        const userVal = document.getElementById('credUsername').value.trim();
-        const passVal = document.getElementById('credPassword').value;
-
-        if (!portalVal || !userVal || !passVal) return alert('Portal, Username, and Password fields are all mandatory.');
-
-        if (editTargetCredRow !== null) {
-            credentialsEntries[editTargetCredRow] = { portal: portalVal, username: userVal, password: passVal };
-            editTargetCredRow = null;
-            document.getElementById('credSubmitBtn').innerText = 'Add Account';
+    const dataJson = encodeURIComponent(JSON.stringify(data));
+    let h = '<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content" style="max-width:600px; max-height:80vh; overflow-y:auto;"><h3>'+title+'</h3>';
+    
+    h += `<div style="margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="exportPerformanceDetail('${escHtml(title)}', '${dataJson}', ${isLog})">📥 Download CSV</button>
+          </div>`;
+    
+    if (data.length === 0) h += '<p style="color:#666">No records found.</p>';
+    else {
+        h += '<table style="width:100%; border-collapse:collapse; font-size:0.8rem;">';
+        if (isLog) {
+            h += '<tr><th>Time</th><th>Action</th><th>Details</th></tr>';
+            h += data.map(l => `<tr><td>${new Date(l.timestamp).toLocaleDateString()}</td><td>${l.action}</td><td>${escHtml(l.details)}</td></tr>`).join('');
         } else {
-            credentialsEntries.push({ portal: portalVal, username: userVal, password: passVal });
+            h += '<tr><th>Title</th><th>Apps</th><th>Status</th></tr>';
+            h += data.map(t => `<tr><td>${escHtml(t.title)}</td><td>${(t.applications||[]).join(', ')}</td><td>${t.status}</td></tr>`).join('');
         }
-
-        document.getElementById('credPortal').value = '';
-        document.getElementById('credUsername').value = '';
-        document.getElementById('credPassword').value = '';
-        
-        saveData(); renderCredentialsTable();
+        h += '</table>';
     }
+    h += '<div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div></div></div>';
+    document.getElementById('app').insertAdjacentHTML('beforeend', h);
+}
 
-    function editCredRow(idx) {
-        editTargetCredRow = idx;
-        const cred = credentialsEntries[idx];
-        document.getElementById('credPortal').value = cred.portal;
-        document.getElementById('credUsername').value = cred.username;
-        document.getElementById('credPassword').value = cred.password;
-        document.getElementById('credSubmitBtn').innerText = 'Update Account';
-    }
+function showMemberSummary(m) {
+    const parentTix = state.tickets.filter(t => t.assignee === m && !t.parentId && !t.removedReason);
+    const childTix = state.tickets.filter(t => t.assignee === m && t.parentId && !t.removedReason);
+    
+    const logs = state.logs.filter(l => l.details && l.details.includes(m));
+    const groupRoutes = logs.filter(l => l.action.includes('Routed') && l.details.includes('Group:'));
+    const memberRoutes = logs.filter(l => l.action.includes('Routed') && !l.details.includes('Group:'));
+    const removedLogs = logs.filter(l => l.action.includes('Removed'));
 
-    function removeCredRow(idx) {
-        if (confirm('Are you sure you want to remove this account identity record permanently?')) {
-            credentialsEntries.splice(idx, 1);
-            if (editTargetCredRow === idx) {
-                editTargetCredRow = null;
-                document.getElementById('credSubmitBtn').innerText = 'Add Account';
-            }
-            saveData(); renderCredentialsTable();
+    const net = (parentTix.length + childTix.length) - (groupRoutes.length + memberRoutes.length + removedLogs.length);
+    const eff = (parentTix.length + childTix.length) > 0 ? Math.round((net / (parentTix.length + childTix.length)) * 100) : 0;
+
+    const report = {
+        member: m,
+        date: new Date().toLocaleDateString(),
+        metrics: { 
+            parents: parentTix.map(t => t.title), 
+            children: childTix.map(t => t.title), 
+            groupRoutes: groupRoutes.map(l => l.details), 
+            memberRoutes: memberRoutes.map(l => l.details), 
+            removed: removedLogs.map(l => l.details), 
+            net: net, 
+            eff: eff + '%' 
         }
-    }
-
-    function togglePasswordVisibility(id, btn) {
-        const field = document.getElementById(id);
-        if (field.type === "password") {
-            field.type = "text";
-            btn.textContent = "🙈";
-        } else {
-            field.type = "password";
-            btn.textContent = "👁️";
-        }
-    }
-
-    // --- PORTAL LINKS ENGINE ---
-    function renderPortalLinksTable() {
-        const tbody = document.getElementById('portalBody');
-        tbody.innerHTML = '';
-        
-        if (portalEntries.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">No portals tracked yet. Register custom targets above.</td></tr>`;
-            return;
-        }
-
-        portalEntries.forEach((portal, index) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><strong>${portal.name}</strong></td>
-                <td>
-                    <div class="copyable-container">
-                        <input type="text" value="${portal.link}" readonly style="background:transparent; border:none; padding:0 2.5rem 0 0; width:100%; color:var(--neon-blue);" id="rowLink_${index}">
-                        <button type="button" class="copy-btn-inline" title="Copy Target Link" onclick="copyDirectText('${portal.link}', 'Portal link copied!')">📋</button>
-                    </div>
-                </td>
-                <td><span style="color: var(--text-muted); font-size: 0.85rem;">${portal.notes || '—'}</span></td>
-                <td>
-                    <div class="action-cell">
-                        <button class="btn-action" onclick="copyDirectText('${portal.link}', 'Portal link copied!')">Copy Link</button>
-                        <button class="btn-action" onclick="editPortalRow(${index})">Edit</button>
-                        <button class="btn-action btn-remove" onclick="removePortalRow(${index})">Remove</button>
-                    </div>
-                </td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
-
-    function handlePortalSubmit() {
-        const nameVal = document.getElementById('portalName').value.trim();
-        const linkVal = document.getElementById('portalLink').value.trim();
-        const notesVal = document.getElementById('portalNotes').value.trim();
-
-        if (!nameVal || !linkVal) return alert('Portal Name and Portal Link target inputs are required.');
-
-        if (editTargetPortalRow !== null) {
-            portalEntries[editTargetPortalRow] = { name: nameVal, link: linkVal, notes: notesVal };
-            editTargetPortalRow = null;
-            document.getElementById('portalSubmitBtn').innerText = 'Add Portal';
-        } else {
-            portalEntries.push({ name: nameVal, link: linkVal, notes: notesVal });
-        }
-
-        document.getElementById('portalName').value = '';
-        document.getElementById('portalLink').value = '';
-        document.getElementById('portalNotes').value = '';
-        
-        saveData(); renderPortalLinksTable();
-    }
-
-    function editPortalRow(idx) {
-        editTargetPortalRow = idx;
-        const portal = portalEntries[idx];
-        document.getElementById('portalName').value = portal.name;
-        document.getElementById('portalLink').value = portal.link;
-        document.getElementById('portalNotes').value = portal.notes;
-        document.getElementById('portalSubmitBtn').innerText = 'Update Portal';
-    }
-
-    function removePortalRow(idx) {
-        if (confirm('Delete this portal reference profile permanently?')) {
-            portalEntries.splice(idx, 1);
-            if (editTargetPortalRow === idx) {
-                editTargetPortalRow = null;
-                document.getElementById('portalSubmitBtn').innerText = 'Add Portal';
-            }
-            saveData(); renderPortalLinksTable();
-        }
-    }
-
-    function editRow(idx) {
-        editTargetRow = idx;
-        const entry = tableEntries[idx];
-        document.getElementById('inputDate').value = entry.date;
-        document.getElementById('inputEmail').value = entry.email;
-        document.getElementById('inputTicket').value = entry.ticket;
-        document.getElementById('submitBtn').innerText = 'Update Entry';
-    }
-
-    function removeRow(idx) {
-        if (confirm('Delete?')) {
-            if(selectedRowData === tableEntries[idx]) selectedRowData = null;
-            tableEntries.splice(idx, 1);
-            saveData(); renderTable(); updateLivePreview(); updateIndicators();
-        }
-    }
-
-    // Modal Notifications
-    function triggerModal(items) {
-        const container = document.getElementById('modalContent');
-        container.innerHTML = '<p style="color: var(--text-muted)">Evaluation required:</p>';
-        items.forEach(item => {
-            container.innerHTML += `<div class="modal-item"><strong>${item.ticket}</strong> │ <span style="color: var(--neon-blue)">${item.email}</span></div>`;
-        });
-        document.getElementById('notificationModal').classList.add('show');
-    }
-    function closeModal() { document.getElementById('notificationModal').classList.remove('show'); }
-
-    document.getElementById('templateSubject').oninput = updateLivePreview;
-    document.getElementById('templateBody').oninput = updateLivePreview;
-
-    window.onload = function() {
-        renderTable(); renderTemplateList(); renderSummaryList(); renderNotesList(); renderDocList(); renderCredentialsTable(); renderPortalLinksTable(); updateLivePreview(); updateIndicators();
     };
+
+    let h = '<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content" style="max-width:900px; max-height:80vh; overflow-y:auto;"><h3>Performance Summary: '+m+'</h3>';
+    h += `<div style="display:flex; gap:16px; margin-bottom:16px; background:#f9fafb; padding:15px; border-radius:8px">
+            <div><strong>Efficiency:</strong> ${report.metrics.eff}</div>
+            <div><strong>Net Total:</strong> ${report.metrics.net}</div>
+        </div>
+        <button class="btn btn-primary" style="width:100%" onclick="downloadReport()">📥 Download Excel Report (CSV)</button>
+        
+        <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:10px; margin-top:16px;">
+            <div><h4>Parents</h4><div style="font-size:0.75rem; background:#fff; padding:8px; border:1px solid #ddd; height:200px; overflow-y:scroll">${report.metrics.parents.join('<br>')}</div></div>
+            <div><h4>Children</h4><div style="font-size:0.75rem; background:#fff; padding:8px; border:1px solid #ddd; height:200px; overflow-y:scroll">${report.metrics.children.join('<br>')}</div></div>
+            <div><h4>Group Route</h4><div style="font-size:0.75rem; background:#fff; padding:8px; border:1px solid #ddd; height:200px; overflow-y:scroll">${report.metrics.groupRoutes.join('<br>')}</div></div>
+            <div><h4>Member Route</h4><div style="font-size:0.75rem; background:#fff; padding:8px; border:1px solid #ddd; height:200px; overflow-y:scroll">${report.metrics.memberRoutes.join('<br>')}</div></div>
+            <div><h4>Removed</h4><div style="font-size:0.75rem; background:#fff; padding:8px; border:1px solid #ddd; height:200px; overflow-y:scroll">${report.metrics.removed.join('<br>')}</div></div>
+        </div>`;
+    
+    h += '<div class="modal-actions"><br><button class="btn btn-secondary" onclick="closeModal()">Close</button></div></div></div>';
+    document.getElementById('app').insertAdjacentHTML('beforeend', h);
+}
+
+function downloadReport() {
+    const report = window.currentMemberReport;
+    if (!report) return;
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Category,Detail\n";
+    csvContent += `Member,${report.member}\n`;
+    csvContent += `Date,${report.date}\n`;
+    csvContent += `Efficiency,${report.metrics.eff}\n`;
+    csvContent += `Net Total,${report.metrics.net}\n\n`;
+    
+    csvContent += "Category,Item\n";
+    report.metrics.parents.forEach(p => csvContent += `Parent,"${p}"\n`);
+    report.metrics.children.forEach(c => csvContent += `Child,"${c}"\n`);
+    report.metrics.groupRoutes.forEach(l => csvContent += `Group Route,"${l}"\n`);
+    report.metrics.memberRoutes.forEach(l => csvContent += `Member Route,"${l}"\n`);
+    report.metrics.removed.forEach(l => csvContent += `Removed,"${l}"\n`);
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `Performance_Report_${report.member}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function exportPerformanceDetail(title, dataJson, isLog) {
+    const data = JSON.parse(decodeURIComponent(dataJson));
+    let csvCells = isLog ? ['Time', 'Action', 'Details'] : ['Title', 'Apps', 'Status'];
+    let csv = csvCells.join(',') + '\\n';
+    
+    data.forEach(item => {
+        if (isLog) csv += `"${new Date(item.timestamp).toLocaleDateString()}","${item.action.replace(/"/g, '""')}","${(item.details||'').replace(/"/g, '""')}"\\n`;
+        else csv += `"${(item.title||'').replace(/"/g, '""')}","${(item.applications||[]).join(';').replace(/"/g, '""')}","${item.status}"\\n`;
+    });
+    
+    const b = new Blob([csv], {type:'text/csv'});
+    const url = URL.createObjectURL(b);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = title + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+function renderDedicated(){
+    const rules=state.dedicatedRules||[];
+    let h='<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:16px"><div><h3 style="margin:0 0 4px;font-size:1.05rem;font-weight:700">\u{1F3AF} Dedicated Task Assignments</h3><p style="margin:0;font-size:0.78rem;color:#6b7280">Assign specific tasks to a dedicated person. If they\'re on leave, task goes to the backup chain.</p></div><button class="btn btn-primary btn-sm" onclick="showAddDedicated()">+ Add Rule</button></div>';
+    
+    if(rules.length===0){
+        h+='<div style="text-align:center;padding:32px 16px;background:#f9fafb;border-radius:8px;border:1px dashed #d1d5db"><span style="font-size:2rem">\u{1F4CC}</span><p style="margin:8px 0 0;font-size:0.85rem;color:#6b7280">No dedicated task rules yet.</p></div>';
+    }
+    
+    rules.forEach((r,idx)=>{
+            const backs = Array.isArray(r.backups) ? r.backups : [];
+            const daysArr=r.activeDays||[true,true,true,true,true,true,true];
+            const allDays=daysArr.every(d=>d);
+            const dayNames=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+            
+            h+='<div style="border:1px solid #e5e7eb;border-radius:8px;margin-bottom:10px;overflow:hidden">';
+            h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#f8fafc;border-bottom:1px solid #e5e7eb"><span style="font-size:0.85rem;font-weight:600;color:#1f2937">\u{1F4CB} \"'+escHtml(r.taskPattern)+'\"</span><div style="display:flex;gap:4px"><button class="btn btn-sm btn-secondary" onclick="editDedicated('+idx+')">\u270F\uFE0F</button><button class="btn btn-sm btn-danger" onclick="deleteDedicated('+idx+')">\u{1F5D1}\uFE0F</button></div></div>';
+            h+='<div style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="padding:4px 10px;border-radius:12px;background:#dbeafe;color:#1d4ed8;font-size:0.8rem;font-weight:600">\u{1F464} '+escHtml(r.assignee)+'</span>';
+            
+            if(backs.length > 0){
+                h+='<span style="font-size:0.72rem;color:#9ca3af"> → backup → </span>';
+                backs.forEach((b,i)=>{
+                    h+='<span style="padding:4px 10px;border-radius:12px;background:#fef3c7;color:#92400e;font-size:0.8rem;font-weight:600">\u{1F504} '+escHtml(b)+'</span>';
+                    if(i<backs.length-1) h+='<span style="font-size:0.72rem;color:#9ca3af"> \u2192 </span>';
+                });
+            } else {
+                h+='<span style="font-size:0.72rem;color:#9ca3af"> (No backups)</span>';
+            }
+            
+            h+='</div>';
+            if(!allDays){h+='<div style="margin-top:8px;font-size:0.72rem;color:#0369a1;background:#e0f2fe;padding:4px 8px;border-radius:4px;border:1px solid #bae6fd">\u{1F319} '+escHtml(r.assignee)+'\'s shift days: '+dayNames.filter((_,i)=>daysArr[i]).join(', ')+'</div>'}
+            if(r.exclusiveOnly!==false){h+='<div style="margin-top:8px;font-size:0.72rem;color:#7c3aed;background:#f5f3ff;padding:4px 8px;border-radius:4px;border:1px solid #ddd6fe">\u{1F512} Exclusive \u2014 '+escHtml(r.assignee)+' only receives dedicated tasks, not regular rotation</div>'}
+            if(r.description){h+='<p style="margin:8px 0 0;font-size:0.75rem;color:#6b7280">\u{1F4AC} '+escHtml(r.description)+'</p>'}
+            h+='</div></div>';
+        });
+    h+='</div>';
+    return h;
+}
+function showAddDedicated(existingBackups=null){const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];window.tempBackups = existingBackups || []; const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>\u2795 New Dedicated Task Rule</h3><label>Task Pattern (matches ticket title or application)</label><input type="text" id="d-pattern" placeholder="e.g. PO BT admin reset, Termination..."><span style="font-size:0.68rem;color:#9ca3af">Case-insensitive. Matches if ticket title or app contains this text.</span><label style="margin-top:12px">Primary Assignee \u{1F464}</label><select id="d-assignee" style="margin-bottom:12px">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><label>Backups (Ordered Priority)</label><div style="display:flex;gap:6px"><select id="d-backup-add" style="flex:1">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><button class="btn btn-secondary btn-sm" onclick="addBackup()">+ Add</button></div><div id="d-backup-list" style="margin:8px 0;display:flex;gap:6px;flex-wrap:wrap"></div><label style="margin-top:12px">Description (optional)</label><input type="text" id="d-desc" placeholder="e.g. Kyle handles all PO resets"><label style="margin-top:8px">\u{1F4C5} Active Days</label><div style="display:flex;gap:8px;flex-wrap:wrap;padding:8px 12px;background:#f0fdf4;border-radius:6px;border:1px solid #bbf7d0;margin-bottom:12px">'+days.map((d,i)=>'<label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" class="d-day" data-idx="'+i+'" checked><span style="font-size:0.8rem;font-weight:600">'+d+'</span></label>').join('')+'</div><div style="padding:10px 12px;background:#f5f3ff;border-radius:6px;border:1px solid #ddd6fe;margin-bottom:12px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin:0"><input type="checkbox" id="d-exclusive" checked><span style="font-size:0.82rem;font-weight:500;color:#374151">\u{1F512} Exclusive Only \u2014 NOT in regular rotation</span></label></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddDedicated()">Save Rule</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h);renderBackupList();document.getElementById('d-pattern').focus()}
+
+function addBackup(){const b=document.getElementById('d-backup-add').value;if(!window.tempBackups.includes(b))window.tempBackups.push(b);renderBackupList()}
+function removeBackup(b){window.tempBackups=window.tempBackups.filter(x=>x!==b);renderBackupList()}
+function renderBackupList(){const c=document.getElementById('d-backup-list');if(!c)return;c.innerHTML=window.tempBackups.map(b=>`<span style="padding:4px 10px;background:#ddd;border-radius:12px;font-size:0.8rem;display:flex;align-items:center;gap:4px">${b} <button type="button" onclick="removeBackup('${b}')" style="border:none;background:none;cursor:pointer;font-weight:bold">x</button></span>`).join('')}
+
+function doAddDedicated(){const pattern=document.getElementById('d-pattern').value.trim();const assignee=document.getElementById('d-assignee').value;const desc=document.getElementById('d-desc').value.trim();const exclusive=document.getElementById('d-exclusive').checked;const dayChecks=document.querySelectorAll('.d-day');const activeDays=[];dayChecks.forEach(c=>{activeDays.push(c.checked)});if(!pattern){alert('Task pattern required');return}if(!assignee){alert('Select an assignee');return}if(!state.dedicatedRules)state.dedicatedRules=[];state.dedicatedRules.push({id:Date.now().toString(),taskPattern:pattern,assignee,backups:window.tempBackups,description:desc,exclusiveOnly:exclusive,activeDays});addLog('Dedicated Rule Added','"'+pattern+'" -> '+assignee+' (Backups: '+window.tempBackups.join(', ')+')');saveState();closeModal();render();showToast('Rule added: '+pattern)}
+function editDedicated(idx){
+    const r=state.dedicatedRules[idx];
+    if(!r) return;
+    deleteDedicated(idx);
+    showAddDedicated(r.backups || []);
+    setTimeout(()=>{
+        document.getElementById('d-pattern').value=r.taskPattern;
+        document.getElementById('d-assignee').value=r.assignee;
+        document.getElementById('d-desc').value=r.description||'';
+        document.getElementById('d-exclusive').checked=r.exclusiveOnly!==false;
+        
+        const dayChecks=document.querySelectorAll('.d-day');
+        const days=r.activeDays||[true,true,true,true,true,true,true];
+        dayChecks.forEach((c,i)=>{c.checked=days[i]});
+    }, 100);
+}
+function deleteDedicated(idx){if(!confirm('Delete this dedicated task rule?'))return;state.dedicatedRules.splice(idx,1);addLog('Dedicated Rule Removed','Rule #'+(idx+1)+' deleted');saveState();render()}
+function doLogin(){const e=document.getElementById('login-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email');return}state.loggedIn=true;state.currentUser=e;localStorage.setItem('rotaguard-user',e);render()}
+function doLogout(){localStorage.removeItem('rotaguard-user');state.loggedIn=false;state.currentUser='';render()}
+function toggleDark(){state.darkMode=!state.darkMode;localStorage.setItem('rotaguard-dark',state.darkMode);render()}
+function setTab(t){state.activeTab=t;render()}
+function goDate(o){const d=new Date(state.viewDate+'T00:00:00');d.setDate(d.getDate()+o);state.viewDate=d.toISOString().split('T')[0];render()}
+function goToday(){state.viewDate=getTodayStr();render()}
+function showAddMember(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>+ Add Team Member</h3><label>Name</label><input type="text" id="m-name" placeholder="e.g. Juan Dela Cruz"><label>Email (optional)</label><input type="email" id="m-email" placeholder="e.g. juan@company.com"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddMember()">Add</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h);document.getElementById('m-name').focus()}
+function doAddMember(){const n=document.getElementById('m-name').value.trim();const e=document.getElementById('m-email').value.trim();if(!n){alert('Name required');return}if(state.members.includes(n)){alert('Already exists');return}state.members.push(n);if(e)state.memberEmails[n]=e;addLog('Member Added',n+(e?' ('+e+')':''));saveState();closeModal();render()}
+
+function doLogin(){const e=document.getElementById('login-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email');return}state.loggedIn=true;state.currentUser=e;localStorage.setItem('rotaguard-user',e);render()}
+function doLogout(){localStorage.removeItem('rotaguard-user');state.loggedIn=false;state.currentUser='';render()}
+function removeMember(n){if(!confirm('Remove '+n+'?'))return;state.members=state.members.filter(m=>m!==n);delete state.memberEmails[n];addLog('Member Removed',n);saveState();render()}
+
+function showEditMember(name){const em=state.memberEmails[name]||'';const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Edit Member</h3><label>Name</label><input type="text" id="m-edit-name" value="'+name+'"><label>Email</label><input type="email" id="m-edit-email" value="'+em+'"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doEditMember(\''+name+'\')">Save</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+
+function showEditTicket(id){
+    const t=state.tickets.find(x=>x.id===id);
+    const isChild = !!t.parentId;
+    const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Editing: '+escHtml(t.title)+'</h3>'+(isChild?'<div style="background:rgba(239, 68, 68, 0.1);color:#b91c1c;padding:8px;border-radius:4px;margin-bottom:10px;font-size:0.8rem;font-weight:bold">CHILD TICKET MODE</div>':'')+'<label>Ticket Title</label><input type="text" id="t-edit-title" value="'+escHtml(t.title)+'"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doEditTicket(\''+id+'\')">Update Ticket</button></div></div></div>';
+    document.getElementById('app').insertAdjacentHTML('beforeend',h);
+}
+
+function doEditTicket(id){
+    const t=state.tickets.find(x=>x.id===id);
+    const oldTitle = t.title;
+    const newTitle=document.getElementById('t-edit-title').value.trim();
+    if(newTitle){
+        t.title=newTitle;
+        addLog((t.parentId ? 'Child Ticket Edited' : 'Ticket Edited'), (t.parentId ? '[Child] ' : '') + oldTitle +' \u2192 '+newTitle);
+        saveState();
+        closeModal();
+        render();
+        showToast('Ticket updated successfully');
+    }
+}
+function doEditMember(oldName){const n=document.getElementById('m-edit-name').value.trim();const e=document.getElementById('m-edit-email').value.trim();if(!n){alert('Name required');return}state.members=state.members.map(m=>m===oldName?n:m);delete state.memberEmails[oldName];state.memberEmails[n]=e;addLog('Member Edited',oldName+' \u2192 '+n);saveState();closeModal();render()}
+function checkDuplicate(val){
+    const msg = document.getElementById('t-dup-msg');
+    if(!val || val.length < 3) { if(msg) msg.innerHTML = ''; return; }
+    const dup = state.tickets.find(t => t.title.toLowerCase() === val.toLowerCase() && !t.removedReason);
+    if(dup) msg.innerHTML = '⚠️ Duplicate detected: ' + dup.title + ' (Assignee: ' + dup.assignee + ')';
+    else msg.innerHTML = '';
+}
+
+function showAddTicket(){showTicketModal()}
+function showTicketModal(parentId=null){const allApps=[...DEFAULT_APPS,...state.customApps];const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>'+(parentId?'Add Child Ticket':'Create Ticket')+'</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600"></div><label>Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label>Applications</label><div class="apps-grid" id="t-apps">'+allApps.map(a=>'<div class="app-chip" onclick="this.classList.toggle(\'selected\')">'+a+'</div>').join('')+'</div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div>'+
+(parentId?'':'<label>Assignment</label><div style="display:flex;gap:8px;margin-bottom:12px"><button onclick="document.getElementById(\'t-assign-opt\').value=\'auto\'; this.style.background=\'#e0e7ff\'; this.nextElementSibling.style.background=\'#f3f4f6\'; document.getElementById(\'t-assign-specific\').style.display=\'none\'; document.getElementById(\'t-assign-expl\').style.display=\'block\';" class="btn" style="flex:1;background:#e0e7ff;border:1px solid #c7d2fe">⚖️ Auto (Balanced)</button><button onclick="document.getElementById(\'t-assign-opt\').value=\'specific\'; this.style.background=\'#e0e7ff\'; this.previousElementSibling.style.background=\'#f3f4f6\'; document.getElementById(\'t-assign-specific\').style.display=\'block\'; document.getElementById(\'t-assign-expl\').style.display=\'none\';" class="btn" style="flex:1;background:#f3f4f6;border:1px solid #d1d5db">👤 Specific Person</button></div><input type="hidden" id="t-assign-opt" value="auto"><div id="t-assign-expl">'+getAssignmentExplanation()+'</div><select id="t-assign-specific" style="margin-bottom:12px; display:none;">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select>')+'<div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddTicket(\''+parentId+'\')">Create</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h);document.getElementById('t-title').focus()}
+function addCustomApp(){const i=document.getElementById('t-newapp');const n=i.value.trim();if(!n)return;if(!state.customApps.includes(n))state.customApps.push(n);document.getElementById('t-apps').insertAdjacentHTML('beforeend','<div class="app-chip selected" onclick="this.classList.toggle(\'selected\')">'+n+'</div>');i.value=''}
+
+function getAssignmentExplanation() {
+    const today = getTodayStr();
+    const calculations = state.members.map(m => {
+        const isBlocked = isMemberBlocked(m);
+        const tix = state.tickets.filter(t => t.assignee === m && t.createdAt.startsWith(today) && !t.removedReason);
+        // Load = apps + 1 per ticket as per user description of "tasks"
+        const load = tix.reduce((sum, t) => sum + (t.applications ? t.applications.length : 1), 0);
+        return { name: m, load, tixCount: tix.length, isBlocked };
+    });
+
+    const active = calculations.filter(c => !c.isBlocked).sort((a,b) => a.load - b.load);
+    if (active.length === 0) return 'No eligible members found.';
+    
+    const best = active[0];
+    
+    let msg = `<div style="font-size:0.75rem; color:#4338ca; background:#e0e7ff; padding:8px; border-radius:6px; margin-bottom:8px;">
+        <div style="font-weight:700; margin-bottom:4px">📊 Why ${best.name}? (⚖️ Day Balance)</div>
+        <div style="margin-left:4px">
+            • <strong>${best.name}</strong>: ${best.load} tasks today (${best.tixCount} tickets) (lowest today)<br>
+            • Others:<br>
+            ${active.slice(1, 4).map(c => `&nbsp;&nbsp; ${c.name}: ${c.load} (${c.tixCount} tix)`).join('<br>')}
+        </div>`;
+    
+    const skipped = calculations.filter(c => c.isBlocked);
+    if(skipped.length > 0) {
+        msg += `<div style="margin-top:4px; margin-left:4px">⏸️ Skipped: ${skipped.map(c => c.name).join(', ')} (on leave/blocked)</div>`;
+    }
+    msg += `<div style="margin-top:6px; font-weight:600; color:#059669">✅ Fewest daily tasks (apps + child tickets) gets the next ticket</div>
+    </div>`;
+    return msg;
+}
+function findDedicatedAssignee(title, apps) {
+    if (!state.dedicatedRules) return null;
+    const jsDay = new Date().getDay();
+    const dayIndex = jsDay === 0 ? 6 : jsDay - 1; 
+
+    for (const rule of state.dedicatedRules) {
+        // Alisin lahat ng space para kahit anong format, mahanap niya
+        const pattern = rule.taskPattern.toLowerCase().replace(/\s+/g, '');
+        const cleanTitle = title.toLowerCase().replace(/\s+/g, '');
+        const cleanApps = apps.map(a => a.toLowerCase().replace(/\s+/g, ''));
+        
+        // Match condition
+        if (cleanTitle.includes(pattern) || cleanApps.some(a => a.includes(pattern))) {
+            // Check if active on this day
+            if (rule.activeDays && rule.activeDays[dayIndex] === false) continue;
+            
+            // Return Assignee if NOT blocked
+            if (!isMemberBlocked(rule.assignee)) return rule.assignee;
+            
+            // Check Backups
+            const backups = rule.backups || [];
+            for (const b of backups) {
+                if (!isMemberBlocked(b)) return b;
+            }
+            
+            // Fallback
+            return rule.assignee;
+        }
+    }
+    return null;
+}
+
+function doAddTicket(parentId){
+    if (parentId === 'null') parentId = null;
+    const title=document.getElementById('t-title').value.trim();
+    const sel=[...document.querySelectorAll('#t-apps .app-chip.selected')].map(el=>el.textContent);
+    if(!title){alert('Ticket number required');return}
+    if(sel.length===0){alert('Select at least one application');return}
+    
+    let assignee = null;
+    if (parentId) {
+        assignee = state.tickets.find(t=>t.id===parentId).assignee;
+    } else {
+        const assignOpt = document.getElementById('t-assign-opt').value;
+        if (assignOpt === 'specific') {
+            assignee = document.getElementById('t-assign-specific').value;
+        } else {
+            assignee = findDedicatedAssignee(title, sel) || getNextAssignee();
+        }
+    }
+    
+    if(!assignee){alert('No available members');return}
+    
+    const actionType = document.getElementById('t-action').value;
+    state.tickets.push({id:Date.now().toString(),parentId:parentId||null,title,actionType,assignee,priority:'Medium',status:'Open',createdAt:getLocalISO(),applications:sel,notes:'',assignedBy:state.currentUser});
+    if(!parentId)state.rotationIndex++;
+    addLog(parentId ? 'Child Ticket Created' : 'Ticket Created', (parentId ? '[Child] ' : '') + '"'+title+'" -> '+assignee+' ('+sel.length+' apps)');
+    saveState();
+    closeModal();
+    render();
+    showToast(title+' \u2192 '+assignee)
+}
+
+function showTicketDetails(id){
+    const t=state.tickets.find(x=>x.id===id);
+    if(!t)return;
+    const children=state.tickets.filter(x=>x.parentId===id);
+    const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Ticket: '+escHtml(t.title)+'</h3><p><strong>App:</strong> '+(t.applications||[]).join(', ')+'</p><p><strong>Assignee:</strong> '+t.assignee+'</p><p><strong>Status:</strong> '+t.status+'</p><h4>Route Options</h4><div style="display:flex;gap:8px;margin-bottom:15px"><button class="btn btn-secondary" onclick="showRouteToGroup(\''+id+'\')">Route to Group</button><button class="btn btn-secondary" onclick="showRouteToMember(\''+id+'\')">Route to Member</button></div><div style="background:var(--bg-color);padding:15px;border-radius:12px;border:1px solid var(--border-color);margin-top:10px"><h4>Child Tickets ('+children.length+')</h4><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:15px">'+children.map(c=>'<div style="font-size:0.85rem;padding:10px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);"><div><strong>'+(c.status==='Completed'?'✅ Done ':'⏳ Pending ')+'📋 '+c.title+'</strong></div><div style="font-size:0.75rem;color:#666;margin:4px 0">Apps: '+(c.applications||[]).join(', ')+'</div><div style="display:flex;gap:4px;flex-wrap:wrap">'+(c.status==='Open'?'<button class="btn btn-success btn-sm" onclick="completeTicket(\''+c.id+'\')">✅ Done</button>':'')+'<button class="btn btn-secondary btn-sm" onclick="showRouteToGroup(\''+c.id+'\')">🔀 Route to Group</button><button class="btn btn-secondary btn-sm" onclick="takeOwnership(\''+c.id+'\')">🙋 Take Ownership</button><button class="btn btn-secondary btn-sm" onclick="showRouteToMember(\''+c.id+'\')">🔄 Reassign</button><button class="btn btn-secondary btn-sm" onclick="showEditTicket(\''+c.id+'\')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="removeTicket(\''+c.id+'\')">🗑️ Remove</button></div></div>').join('')+'</div><button class="btn btn-primary btn-sm" onclick="showTicketModal(\''+id+'\')">+ Add Child Ticket</button></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div></div></div>';
+    document.getElementById('app').insertAdjacentHTML('beforeend',h);
+}
+
+function showEditApplications(id){
+    const t = state.tickets.find(x => x.id === id);
+    const allApps = [...DEFAULT_APPS, ...state.customApps];
+    const h = '<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Update Applications: '+escHtml(t.title)+'</h3><div class="apps-grid" id="edit-t-apps">'+allApps.map(a => '<div class="app-chip '+(t.applications.includes(a)?'selected':'')+'" onclick="this.classList.toggle(\'selected\')">'+a+'</div>').join('')+'</div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="updateApplications(\''+id+'\')">Save</button></div></div></div>';
+    document.getElementById('app').insertAdjacentHTML('beforeend', h);
+}
+
+function updateApplications(id){
+    const justification = prompt("Enter justification for changing applications:");
+    if (!justification) { alert("Justification is required."); return; }
+    const t = state.tickets.find(x => x.id === id);
+    if(!t) return;
+    const sel = [...document.querySelectorAll('#edit-t-apps .app-chip.selected')].map(el => el.textContent);
+    t.applications = sel;
+    addLog('Apps Updated', t.title + ' | ' + justification + ' | Apps: ' + sel.join(', '));
+    saveState();
+    closeModal();
+    render();
+    showToast('Apps updated');
+}
+
+function showRouteToGroup(id){
+    const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Route to Group</h3><label>Group Name</label><input type="text" id="t-route-group" placeholder="e.g. L2 Support"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doRouteGroup(\''+id+'\')">Confirm</button></div></div></div>';
+    document.getElementById('app').insertAdjacentHTML('beforeend',h);
+}
+
+function doRouteGroup(id){
+    const group=document.getElementById('t-route-group').value.trim();
+    const justification = prompt("Enter justification for routing:");
+    if (!justification) { alert("Justification is required."); return; }
+    
+    const t = state.tickets.find(x => x.id === id);
+    if(t && group){
+        t.assignee = 'Group: ' + group;
+        addLog((t.parentId ? 'Child Ticket Routed' : 'Ticket Routed'), (t.parentId ? '[Child] ' : '') + t.title + ' -> ' + group + ' | ' + justification);
+        saveState();
+        closeModal();
+        closeModal();
+        render();
+        showToast('Ticket routed to ' + group);
+    }
+}
+function showRouteToMember(id){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Route Ticket</h3><label>Select New Member</label><select id="t-route-assignee">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doRouteTicket(\''+id+'\')">Confirm Route</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+
+function showRouteToGroup(id){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Route Ticket</h3><p><em>(Routing to groups not yet implemented)</em></p><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+
+function takeOwnership(id){
+    const t=state.tickets.find(x=>x.id===id);
+    if(!t)return;
+    const oldAssignee=t.assignee;
+    t.assignee=state.currentUser;
+    addLog('Ticket Ownership Taken',t.title+' taken by '+state.currentUser + ' (was '+oldAssignee+')');
+    saveState();
+    render();
+    showToast('You took ownership of ticket');
+}
+
+function doRouteTicket(id){
+    const newAssignee=document.getElementById('t-route-assignee').value;
+    const justification = prompt("Enter justification for routing:");
+    if (!justification) { alert("Justification is required."); return; }
+    
+    const t=state.tickets.find(x=>x.id===id);
+    if(t){
+        t.assignee=newAssignee;
+        addLog((t.parentId ? 'Child Ticket Routed' : 'Ticket Routed'), (t.parentId ? '[Child] ' : '') + t.title+' routed to '+newAssignee + ' | ' + justification);
+        saveState();
+        closeModal();
+        closeModal();
+        render();
+        showToast('Ticket routed to '+newAssignee);
+    }
+}
+function completeTicket(id){const t=state.tickets.find(x=>x.id===id);if(!t)return;t.status='Completed';t.completedAt=new Date().toISOString();addLog((t.parentId ? 'Child Ticket Completed' : 'Ticket Completed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'"');saveState();render()}
+function removeTicket(id){const r=prompt('Reason for removal?');if(!r)return;const t=state.tickets.find(x=>x.id===id);if(!t)return;t.removedReason=r;t.status='Completed';addLog((t.parentId ? 'Child Ticket Removed' : 'Ticket Removed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'" - '+r);saveState();render()}
+function showBlock(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>\u23F8\uFE0F Block / Skip Member</h3><label>Member</label><select id="b-member">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><label>Type</label><select id="b-type" onchange="toggleBlockFields()"><option value="Day Off">Day Off</option><option value="VL">Vacation Leave</option><option value="SL">Sick Leave</option><option value="Skip">Skip (Time Range)</option></select><div id="b-dates"><label>Start Date</label><input type="date" id="b-start" value="'+getTodayStr()+'"><label>End Date</label><input type="date" id="b-end" value="'+getTodayStr()+'"></div><div id="b-time" class="hidden"><label>Skip From</label><input type="time" id="b-sfrom" value="08:00"><label>Skip Until</label><input type="time" id="b-sto" value="12:00"></div><label>Remarks (optional)</label><input type="text" id="b-remarks" placeholder="Reason..."><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-warning" onclick="doBlock()">Block</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+function toggleBlockFields(){const t=document.getElementById('b-type').value;document.getElementById('b-dates').className=t==='Skip'?'hidden':'';document.getElementById('b-time').className=t==='Skip'?'':'hidden'}
+function doBlock(){
+    const m=document.getElementById('b-member').value;
+    const t=document.getElementById('b-type').value;
+    const rm=document.getElementById('b-remarks').value.trim();
+    const start = document.getElementById('b-start').value;
+    const end = document.getElementById('b-end').value;
+    
+    // Validation
+    const today = getTodayStr();
+    if (t !== 'Skip' && (start < today || end < start)) {
+        alert('Invalid Date: Start date cannot be in the past, and end date must be after start date.');
+        return;
+    }
+    
+    let rec={memberId:m,type:t,remarks:rm,startDate:start,endDate:end};
+    
+    if(t==='Skip'){
+        rec.skipStartTime=document.getElementById('b-sfrom').value;
+        rec.skipEndTime=document.getElementById('b-sto').value;
+        rec.startDate = today;
+        rec.endDate = today;
+        if (rec.skipEndTime <= rec.skipStartTime) {
+            alert('Invalid Time: End time must be after start time.');
+            return;
+        }
+    }
+    
+    state.leaves=state.leaves.filter(l=>!(l.memberId===m&&l.type===t && l.startDate===rec.startDate));
+    state.leaves.push(rec);
+    addLog('Member Blocked',m+' - '+t+(rm?': '+rm:''));
+    saveState();
+    closeModal();
+    render();
+}
+function unblock(m){state.leaves=state.leaves.filter(l=>l.memberId!==m);addLog('Member Unblocked',m);saveState();render()}
+function removeLeave(m,sd){state.leaves=state.leaves.filter(l=>!(l.memberId===m&&l.startDate===sd));addLog('Leave Removed',m);saveState();render()}
+function exportCSV(){const t=getTicketsForDate();let c='Time,Title,Assignee,Applications,Status,Removed\n';t.forEach(x=>{const tm=new Date(x.createdAt).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});c+=tm+',"'+x.title+'",'+x.assignee+',"'+(x.applications||[]).join('; ')+'",'+x.status+',"'+(x.removedReason||'')+'"\n'});dlFile('rotaguard-'+state.viewDate+'.csv',c,'text/csv')}
+function exportJSON(){const d={exportedAt:new Date().toISOString(),members:state.members,memberEmails:state.memberEmails,tickets:state.tickets,leaves:state.leaves,logs:state.logs,customApps:state.customApps,rotationIndex:state.rotationIndex,dedicatedRules:state.dedicatedRules||[]};dlFile('rotaguard-backup-'+getTodayStr()+'.json',JSON.stringify(d,null,2),'application/json')}
+function dlFile(fn,content,mime){const b=new Blob([content],{type:mime});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)}
+function closeModal(){const o=document.querySelector('.modal-overlay');if(o)o.remove()}
+function showToast(msg, type='success'){
+    const t=document.createElement('div');
+    t.className='toast';
+    t.style.border = type === 'error' ? '2px solid #ef4444' : '2px solid #10b981';
+    t.innerHTML='<span style="font-size:1.2rem">'+(type === 'error' ? '\u274C' : '\u2705')+'</span><span style="font-size:0.88rem;font-weight:600">'+msg+'</span>';
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),2500);
+}
+
+function showConfirmAction(msg, onConfirm) {
+    const h = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+                 <div class="modal-content" style="text-align:center;width:300px">
+                    <h3>Confirm Action</h3>
+                    <p style="margin:16px 0">${msg}</p>
+                    <div class="modal-actions" style="justify-content:center">
+                        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                        <button class="btn btn-primary" onclick="closeModal(); ${onConfirm}">Confirm</button>
+                    </div>
+                 </div>
+               </div>`;
+    document.getElementById('app').insertAdjacentHTML('beforeend',h);
+}
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+(async () => {
+    await loadState();
+    render();
+    
+// Realtime subscription
+    supabaseClient
+      .channel('schema-db-changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'rotaguard_state' },
+        (payload) => {
+          console.log('Change received!', payload);
+          // Only update if data actually changed
+          if (payload.new && payload.new.payload) {
+             Object.assign(state, payload.new.payload);
+             render();
+          }
+        }
+      )
+      .subscribe((status) => {
+        console.log('Realtime subscription status:', status);
+      });
+
+    // Run Daily Health Check
+    setTimeout(showDailyHealthModal, 2000);
+})();
+
+function getMemberLogs(member, actionType) {
+    return state.logs.filter(l => 
+        l.details && 
+        l.details.includes(member) && 
+        l.action.toLowerCase().includes(actionType.toLowerCase())
+    ).length;
+}
+
+function runSystemDiagnostics() {
+    let issues = 0;
+    
+    // 1. Check for orphaned tickets (No such member)
+    const invalidAssignees = state.tickets.filter(t => !state.members.includes(t.assignee) && !t.assignee.startsWith('Group:')).map(t => t.title);
+    
+    // 2. Clear removed tickets/duplicates if logic permits
+    
+    return {
+        hasIssues: invalidAssignees.length > 0,
+        issueCount: invalidAssignees.length,
+        report: invalidAssignees.length > 0 ? 'Invalid assignees found: ' + invalidAssignees.join(', ') : 'All systems clean.'
+    };
+}
+
+function fixSystemIssues() {
+    const invalidTickets = state.tickets.filter(t => !state.members.includes(t.assignee) && !t.assignee.startsWith('Group:'));
+    const defaultMember = state.members.length > 0 ? state.members[0] : 'Unassigned';
+    
+    invalidTickets.forEach(t => {
+        t.assignee = defaultMember;
+        t.assignmentReason = 'System Auto-Fix (Invalid assignee reset)';
+    });
+    
+    addLog('System Auto-Fix', 'Fixed ' + invalidTickets.length + ' invalid assignees.');
+    saveState();
+    render();
+    alert('Fixed ' + invalidTickets.length + ' invalid tickets. They have been reassigned to ' + defaultMember);
+}
+
+function showDailyHealthModal() {
+    const lastCheck = localStorage.getItem('rotaguard-last-health-check');
+    const today = getTodayStr();
+    
+    if (lastCheck === today) return; 
+
+    const diagnostics = runSystemDiagnostics();
+    const h = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+                 <div class="modal-content" style="max-width:400px">
+                    <h3>🛡️ System Health Check</h3>
+                    <p style="font-size:0.9rem; color:#555">Daily diagnostic report for ${today}:</p>
+                    <div style="background:${diagnostics.hasIssues ? '#fee2e2' : '#dcfce7'}; padding:15px; border-radius:8px; margin:16px 0; border:1px solid ${diagnostics.hasIssues ? '#fca5a5' : '#86efac'}">
+                        <strong>Status:</strong> ${diagnostics.hasIssues ? 'Issues Detected ('+diagnostics.issueCount+')' : 'Healthy'}<br>
+                        <small>${diagnostics.report}</small>
+                    </div>
+                    ${diagnostics.hasIssues ? '<button class="btn btn-warning" onclick="fixSystemIssues(); closeModal();" style="width:100%; margin-bottom:10px;">Fix Automatically</button>' : ''}
+                    <div class="modal-actions">
+                        <button class="btn btn-primary" onclick="localStorage.setItem('rotaguard-last-health-check', '${today}'); closeModal()">Close</button>
+                    </div>
+                 </div>
+               </div>`;
+    document.getElementById('app').insertAdjacentHTML('beforeend', h);
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)saveState()});
 </script>
 
-</body>
-</html>
+  </body></html>
