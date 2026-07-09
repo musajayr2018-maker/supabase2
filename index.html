@@ -928,7 +928,7 @@ function doAddTicket(parentId) {
     render();
 }
     
-    if(!assignee){alert('No available members');return}
+  if(!assignee){alert('No available members');return} // This is valid now!
     
     const actionType = document.getElementById('t-action').value;
     state.tickets.push({id:Date.now().toString(),parentId:parentId||null,title,actionType,assignee,priority:'Medium',status:'Open',createdAt:getLocalISO(),applications:sel,notes:'',assignedBy:state.currentUser});
@@ -938,7 +938,7 @@ function doAddTicket(parentId) {
     closeModal();
     render();
     showToast(title+' \u2192 '+assignee)
-}
+} // This closing brace MUST exist
 
 function showTicketDetails(id){
     const t=state.tickets.find(x=>x.id===id);
