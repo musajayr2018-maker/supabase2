@@ -800,7 +800,24 @@ function checkDuplicate(val){
     else msg.innerHTML = '';
 }
 
-function showAddTicket(){showTicketModal()}
+function showTicketModal() {
+    onst h = `
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>Create New Ticket</h3>
+                <!-- Iba mo pang inputs... -->
+                <label>Parent Ticket Number (Optional)</label>
+                <input type="text" id="t-parent-id" placeholder="Ex: TKT-123">
+                
+                <div class="modal-actions">
+                    <button onclick="closeModal()">Cancel</button>
+                    <button onclick="doAddTicket()">Save</button>
+                </div>
+            </div>
+        </div>`;
+    document.getElementById('app').insertAdjacentHTML('beforeend', h);
+}
+
 function showTicketModal(parentId=null){const allApps=[...DEFAULT_APPS,...state.customApps];const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>'+(parentId?'Add Child Ticket':'Create Ticket')+'</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600"></div><label>Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label>Applications</label><div class="apps-grid" id="t-apps">'+allApps.map(a=>'<div class="app-chip" onclick="this.classList.toggle(\'selected\')">'+a+'</div>').join('')+'</div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div>'+
 (parentId?'':'<label>Assignment</label><div style="display:flex;gap:8px;margin-bottom:12px"><button onclick="document.getElementById(\'t-assign-opt\').value=\'auto\'; this.style.background=\'#e0e7ff\'; this.nextElementSibling.style.background=\'#f3f4f6\'; document.getElementById(\'t-assign-specific\').style.display=\'none\'; document.getElementById(\'t-assign-expl\').style.display=\'block\';" class="btn" style="flex:1;background:#e0e7ff;border:1px solid #c7d2fe">⚖️ Auto (Balanced)</button><button onclick="document.getElementById(\'t-assign-opt\').value=\'specific\'; this.style.background=\'#e0e7ff\'; this.previousElementSibling.style.background=\'#f3f4f6\'; document.getElementById(\'t-assign-specific\').style.display=\'block\'; document.getElementById(\'t-assign-expl\').style.display=\'none\';" class="btn" style="flex:1;background:#f3f4f6;border:1px solid #d1d5db">👤 Specific Person</button></div><input type="hidden" id="t-assign-opt" value="auto"><div id="t-assign-expl">'+getAssignmentExplanation()+'</div><select id="t-assign-specific" style="margin-bottom:12px; display:none;">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select>')+'<div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddTicket(\''+parentId+'\')">Create</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h);document.getElementById('t-title').focus()}
 function addCustomApp(){const i=document.getElementById('t-newapp');const n=i.value.trim();if(!n)return;if(!state.customApps.includes(n))state.customApps.push(n);document.getElementById('t-apps').insertAdjacentHTML('beforeend','<div class="app-chip selected" onclick="this.classList.toggle(\'selected\')">'+n+'</div>');i.value=''}
@@ -868,16 +885,19 @@ function findDedicatedAssignee(title, apps) {
     return null;
 }
 
-function doAddTicket(parentId){
+function doAddTicket(parentId) {
     if (parentId === 'null') parentId = null;
-    const title=document.getElementById('t-title').value.trim();
-    const sel=[...document.querySelectorAll('#t-apps .app-chip.selected')].map(el=>el.textContent);
-    if(!title){alert('Ticket number required');return}
-    if(sel.length===0){alert('Select at least one application');return}
+    const title = document.getElementById('t-title').value.trim();
+    const sel = [...document.querySelectorAll('#t-apps .app-chip.selected')].map(el => el.textContent);
+    
+    if (!title) { alert('Ticket number required'); return; }
+    if (sel.length === 0) { alert('Select at least one application'); return; }
     
     let assignee = null;
     if (parentId) {
-        assignee = state.tickets.find(t=>t.id===parentId).assignee;
+        // Kukunin ang assignee mula sa parent ticket kung child ticket ito
+        const parentTicket = state.tickets.find(t => t.id === parentId);
+        assignee = parentTicket ? parentTicket.assignee : getNextAssignee();
     } else {
         const assignOpt = document.getElementById('t-assign-opt').value;
         if (assignOpt === 'specific') {
@@ -886,6 +906,27 @@ function doAddTicket(parentId){
             assignee = findDedicatedAssignee(title, sel) || getNextAssignee();
         }
     }
+
+    // Pagbuo ng bagong ticket object
+    const newTicket = {
+        id: Date.now().toString(), // o base sa iyong ticket generation logic
+        title: title,
+        apps: sel,
+        parentId: parentId, // Dito naka-link ang parent ticket
+        assignee: assignee,
+        status: 'Open',
+        createdAt: new Date().toISOString()
+    };
+
+    // I-push sa state at i-save
+    state.tickets.push(newTicket);
+    addLog('Ticket Created', title + (parentId ? ' (Child of ' + parentId + ')' : ''));
+    
+    // Siguraduhin na may tawag sa iyong save at render function
+    saveState();
+    closeModal();
+    render();
+}
     
     if(!assignee){alert('No available members');return}
     
