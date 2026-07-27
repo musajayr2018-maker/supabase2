@@ -108,35 +108,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab" onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab" onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab" onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab" onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab" onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab" onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">13</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5" class="">13</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981" class="">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3 class="">Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3 class="">⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Carlo Balanay'; render();"><span class="workload-label">John Carlo Balanay</span><div class="workload-track"><div class="workload-fill" style="width:100%;background:#ef4444"></div></div><span class="workload-value">3 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Junealyn'; render();"><span class="workload-label">Junealyn</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Janhh Joshua Solomon'; render();"><span class="workload-label">Janhh Joshua Solomon</span><div class="workload-track"><div class="workload-fill" style="width:100%;background:#ef4444"></div></div><span class="workload-value">3 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola Concubierta'; render();"><span class="workload-label">Paola Concubierta</span><div class="workload-track"><div class="workload-fill" style="width:0%;background:#10b981"></div></div><span class="workload-value">0 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Rendy Mendoza'; render();"><span class="workload-label">John Rendy Mendoza</span><div class="workload-track"><div class="workload-fill" style="width:100%;background:#ef4444"></div></div><span class="workload-value">3 tix</span></div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Maria Jenica Cantores'; render();"><span class="workload-label">Maria Jenica Cantores</span><div class="workload-track"><div class="workload-fill" style="width:100%;background:#ef4444"></div></div><span class="workload-value">3 tix</span></div></div><div class="card"><h3 class="">📅 Monthly Output (Per Member)</h3><div class="workload-row">
-            <span class="workload-label">John Rendy Mendoza</span>
-            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">4 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">John Carlo Balanay</span>
-            <div class="workload-track"><div class="workload-fill" style="width:75%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">3 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Janhh Joshua Solomon</span>
-            <div class="workload-track"><div class="workload-fill" style="width:75%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">3 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Maria Jenica Cantores</span>
-            <div class="workload-track"><div class="workload-fill" style="width:75%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">3 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Kyle Bunhan</span>
-            <div class="workload-track"><div class="workload-fill" style="width:25%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">1 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Junealyn</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Paola Concubierta</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px" class="">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JT</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-28</div><button class="btn btn-sm btn-secondary" onclick="unblock('JT')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem" class="">Paola Concubierta</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px" class="">📅 2026-07-28</div><button class="btn btn-sm btn-secondary" onclick="unblock('Paola Concubierta')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Junealyn</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-28</div><button class="btn btn-sm btn-secondary" onclick="unblock('Junealyn')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">John Rendy Mendoza</div><div style="color:var(--text-muted)">2026-07-29</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600" class="">John Rendy Mendoza</div><div style="color:var(--text-muted)">2026-07-30</div><div style="font-weight:600;color:var(--accent-color)">VL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600" class="">John Carlo Balanay</div><div style="color:var(--text-muted)" class="">2026-07-30</div><div style="font-weight:600;color:var(--accent-color)" class="">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">John Rendy Mendoza</div><div style="color:var(--text-muted)" class="">2026-07-31</div><div style="font-weight:600;color:var(--accent-color)">VL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">John Carlo Balanay</div><div style="color:var(--text-muted)">2026-07-31</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip">John Carlo Balanay (3)</span><span class="member-chip blocked">⏸️ Junealyn (0)</span><span class="member-chip">Janhh Joshua Solomon (3)</span><span class="member-chip blocked">⏸️ Paola Concubierta (0)</span><span class="member-chip">John Rendy Mendoza (3)</span><span class="member-chip">Kyle Bunhan (1)</span><span class="member-chip active">Maria Jenica Cantores (3)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab" onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab active" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:16px"><div><h3 style="margin:0 0 4px;font-size:1.05rem;font-weight:700">🎯 Dedicated Task Assignments</h3><p style="margin:0;font-size:0.78rem;color:#6b7280" class="">Assign specific tasks to a dedicated person. If they're on leave, task goes to the backup chain.</p></div><button class="btn btn-primary btn-sm" onclick="showAddDedicated()">+ Add Rule</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;margin-bottom:10px;overflow:hidden"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#f8fafc;border-bottom:1px solid #e5e7eb"><span style="font-size:0.85rem;font-weight:600;color:#1f2937">📋 "BT"</span><div style="display:flex;gap:4px"><button class="btn btn-sm btn-secondary" onclick="editDedicated(0)">✏️</button><button class="btn btn-sm btn-danger" onclick="deleteDedicated(0)">🗑️</button></div></div><div style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="padding:4px 10px;border-radius:12px;background:#dbeafe;color:#1d4ed8;font-size:0.8rem;font-weight:600">👤 Kyle Bunhan</span><span style="font-size:0.72rem;color:#9ca3af"> (No backups)</span></div><div style="margin-top:8px;font-size:0.72rem;color:#7c3aed;background:#f5f3ff;padding:4px 8px;border-radius:4px;border:1px solid #ddd6fe" class="">🔒 Exclusive — Kyle Bunhan only receives dedicated tasks, not regular rotation</div></div></div><div style="border:1px solid #e5e7eb;border-radius:8px;margin-bottom:10px;overflow:hidden"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#f8fafc;border-bottom:1px solid #e5e7eb"><span style="font-size:0.85rem;font-weight:600;color:#1f2937">📋 "Purchase Order"</span><div style="display:flex;gap:4px"><button class="btn btn-sm btn-secondary" onclick="editDedicated(1)">✏️</button><button class="btn btn-sm btn-danger" onclick="deleteDedicated(1)">🗑️</button></div></div><div style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="padding:4px 10px;border-radius:12px;background:#dbeafe;color:#1d4ed8;font-size:0.8rem;font-weight:600">👤 Kyle Bunhan</span><span style="font-size:0.72rem;color:#9ca3af"> (No backups)</span></div><div style="margin-top:8px;font-size:0.72rem;color:#7c3aed;background:#f5f3ff;padding:4px 8px;border-radius:4px;border:1px solid #ddd6fe" class="">🔒 Exclusive — Kyle Bunhan only receives dedicated tasks, not regular rotation</div></div></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -243,14 +215,29 @@ function getNextAssignee(){
     const jsDay = new Date().getDay();
     const dayIndex = jsDay === 0 ? 6 : jsDay - 1;
     
-    // Identify who is assigned to dedicated tasks today (Normalized)
-    const dedicatedNames = new Set((state.dedicatedRules || [])
-        .filter(r => r.activeDays && r.activeDays[dayIndex] === true)
-        .map(r => (r.assignee || "").trim().toLowerCase()));
+    // Identify who is assigned to dedicated tasks today
+    const isWeekend = (jsDay === 0 || jsDay === 6); // 0=Sun, 6=Sat
+    const rulesForToday = (state.dedicatedRules || [])
+        .filter(r => r.activeDays && r.activeDays[dayIndex] === true);
+    
+    // Always exclude the primary dedicated assignee
+    const primaryNames = new Set(rulesForToday.map(r => (r.assignee || "").trim().toLowerCase()));
+    
+    // Backup assignees are excluded from rotation ONLY on weekdays
+    let backupNames = new Set();
+    if (!isWeekend) {
+        rulesForToday.forEach(r => {
+            if(Array.isArray(r.backups)) {
+                r.backups.forEach(b => backupNames.add((b || "").trim().toLowerCase()));
+            }
+        });
+    }
 
     const av = state.members.filter(m => {
         const mClean = (m || "").trim().toLowerCase();
-        return !isMemberBlocked(m) && !dedicatedNames.has(mClean);
+        // Remove primary (always) and backups (only on weekdays)
+        const isExcluded = primaryNames.has(mClean) || backupNames.has(mClean);
+        return !isMemberBlocked(m) && !isExcluded;
     });
     
     if(av.length===0) return '';
@@ -327,13 +314,15 @@ function renderDashboard(tfd,ac,na,today){
     const dayIndex = jsDay === 0 ? 6 : jsDay - 1;
     // Use a safe check for activeDays in case the rule is older
     // Identify dedicated members for today
-    const dedicatedRulesForToday = (state.dedicatedRules || [])
+    // Only apply dedicated rules if it's a weekday (0-Sunday, 6-Saturday)
+    // Assuming 0 is Sunday, 6 is Saturday. DayIndex matches logic for M-F being 0-4
+    const isWeekend = (dayIndex === 5 || dayIndex === 6); // 5=Sat, 6=Sun
+    
+    const dedicatedRulesForToday = isWeekend ? [] : (state.dedicatedRules || [])
         .filter(r => r.activeDays && r.activeDays[dayIndex] === true);
     
     // Create List of names to exclude
     const dedicatedNamesArray = dedicatedRulesForToday.map(r => (r.assignee || "").trim().toLowerCase());
-    
-    console.log("DEBUG: Final dedicated names to exclude:", dedicatedNamesArray);
         
     // Filter list for the rotation logic
     const activeMembersForRotation = state.members.filter(m => {
@@ -825,20 +814,54 @@ function doAddDedicated(){const pattern=document.getElementById('d-pattern').val
 function editDedicated(idx){
     const r=state.dedicatedRules[idx];
     if(!r) return;
-    deleteDedicated(idx);
+    // Open modal with existing data for editing
     showAddDedicated(r.backups || []);
     setTimeout(()=>{
         document.getElementById('d-pattern').value=r.taskPattern;
         document.getElementById('d-assignee').value=r.assignee;
         document.getElementById('d-desc').value=r.description||'';
-        document.getElementById('d-exclusive').checked=r.exclusiveOnly!==false;
+        document.getElementById('d-exclusive').checked=r.exclusiveOnly===true;
         
         const dayChecks=document.querySelectorAll('.d-day');
         const days=r.activeDays||[true,true,true,true,true,true,true];
         dayChecks.forEach((c,i)=>{c.checked=days[i]});
+        
+        // Change button to update mode
+        const btn = document.querySelector('.modal-actions .btn-primary');
+        if(btn) {
+            btn.textContent = 'Update Rule';
+            btn.onclick = () => doUpdateDedicated(idx);
+        }
     }, 100);
 }
-function deleteDedicated(idx){if(!confirm('Delete this dedicated task rule?'))return;state.dedicatedRules.splice(idx,1);addLog('Dedicated Rule Removed','Rule #'+(idx+1)+' deleted');saveState();render()}
+
+function doUpdateDedicated(idx){
+    const pattern=document.getElementById('d-pattern').value.trim();
+    const assignee=document.getElementById('d-assignee').value;
+    const desc=document.getElementById('d-desc').value.trim();
+    const exclusive=document.getElementById('d-exclusive').checked;
+    const dayChecks=document.querySelectorAll('.d-day');
+    const activeDays=[];
+    dayChecks.forEach(c=>{activeDays.push(c.checked)});
+    
+    if(!pattern){alert('Task pattern required');return}
+    
+    state.dedicatedRules[idx] = { ...state.dedicatedRules[idx], taskPattern:pattern, assignee, backups:window.tempBackups, description:desc, exclusiveOnly:exclusive, activeDays};
+    
+    addLog('Dedicated Rule Updated','"'+pattern+'" updated');
+    saveState();
+    closeModal();
+    render();
+    showToast('Rule updated');
+}
+
+function deleteDedicated(idx){
+    if(!confirm('Delete this dedicated task rule?')) return;
+    state.dedicatedRules.splice(idx,1);
+    addLog('Dedicated Rule Removed','Rule deleted');
+    saveState();
+    render();
+}
 function doLogin(){const e=document.getElementById('login-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email');return}state.loggedIn=true;state.currentUser=e;localStorage.setItem('rotaguard-user',e);render()}
 function doLogout(){localStorage.removeItem('rotaguard-user');state.loggedIn=false;state.currentUser='';render()}
 function toggleDark(){state.darkMode=!state.darkMode;localStorage.setItem('rotaguard-dark',state.darkMode);render()}
@@ -991,7 +1014,15 @@ function doAddTicket(parentId){
         if (assignOpt === 'specific') {
             assignee = document.getElementById('t-assign-specific').value;
         } else {
-            assignee = findDedicatedAssignee(title, sel) || getNextAssignee();
+            // Check if it's weekend (0=Sun, 6=Sat)
+            const jsDay = new Date().getDay();
+            const isWeekend = (jsDay === 0 || jsDay === 6);
+            
+            if (isWeekend) {
+                assignee = getNextAssignee();
+            } else {
+                assignee = findDedicatedAssignee(title, sel) || getNextAssignee();
+            }
         }
     }
     
