@@ -108,7 +108,23 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3></div><div class="card"><div class="members-bar"></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()" disabled="">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()" disabled="">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab" onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab" onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="242342">242342</option><option value="Paola">Paola</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">1 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Tickets</th></tr></thead><tbody><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <qb-highlighter  style="display: none;"><qb-div spellcheck="false" class="qb-highlighter__wrapper" style="width: 342.097px !important; height: 16.8889px !important; transform: none !important; transform-origin: 171.049px 8.44444px !important; zoom: 1 !important;"><qb-div class="qb-highlighter__scroll-element" style="top: 0px !important; left: 0px !important; width: 342px !important; height: 16.8889px !important;"></qb-div></qb-div></qb-highlighter><div style="font-size:0.85rem" class="  ablefocused"  data-qb-tmp-id="lt-532243" spellcheck="false" data-gramm="false">242342</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400" class="">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem" class="">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem" class="">Paola</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400" class="">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -152,46 +168,112 @@ function formatDate(d){return new Date(d+'T00:00:00').toLocaleDateString('en-US'
 function getLocalISO(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')+'T'+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')}
 async function loadState() {
     try {
-        const { data, error } = await supabaseClient
-            .from('rotaguard_state')
-            .select('*')
-            .eq('id', 1)
-            .single();
-
-        if (!error && data && data.payload) {
-            Object.assign(state, data.payload);
-            // Siguraduhin na laging array ang dedicatedRules
-            state.dedicatedRules = state.dedicatedRules || [];
-            state.activeTab = 'dashboard';
-            state.viewDate = getTodayStr();
+        // Load Tickets
+        const { data: tickets } = await supabaseClient.from('tickets').select('*');
+        if (tickets) {
+            state.tickets = tickets.map(t => ({
+                ...t, id: Number(t.id), parentId: t.parentid, actionType: t.actiontype, createdAt: t.createdat, assignedBy: t.assignedby
+            }));
         }
+        // Load Members
+        const { data: members } = await supabaseClient.from('members').select('*');
+        if (members) state.members = members.map(m => m.name);
+
+        // Load Leaves
+        const { data: leaves } = await supabaseClient.from('leaves').select('*');
+        if (leaves) state.leaves = leaves;
+
+        // Load Logs
+        const { data: logs } = await supabaseClient.from('app_logs').select('*');
+        if (logs) state.logs = logs;
 
         const u = localStorage.getItem('rotaguard-user');
         if (u) {
             state.loggedIn = true;
             state.currentUser = u;
         }
-
-        state.darkMode =
-            localStorage.getItem('rotaguard-dark') === 'true';
-
+        state.darkMode = localStorage.getItem('rotaguard-dark') === 'true';
     } catch (e) {
-        console.error(e);
+        console.error("Load state error:", e);
+    }
+}
+
+// Bagong function para sa Row-based saving
+async function dbInsertTicket(t) {
+    try {
+        // Convert camelCase to database snake_case
+        const dbTicket = {
+            id: parseInt(t.id),
+            parentid: t.parentId ? parseInt(t.parentId) : null,
+            title: t.title,
+            actiontype: t.actionType,
+            assignee: t.assignee,
+            priority: t.priority,
+            status: t.status,
+            createdat: t.createdAt,
+            applications: t.applications,
+            notes: t.notes,
+            assignedby: t.assignedBy
+        };
+        
+        const { error } = await supabaseClient
+            .from('tickets')
+            .insert([dbTicket]);
+        
+        if (error) {
+            console.error("Supabase Actual Error:", JSON.stringify(error, null, 2));
+        } else {
+            console.log("Successfully inserted row in tickets table!");
+        }
+    } catch (err) {
+        console.error("Insert Catch Error:", err);
+    }
+}
+
+async function dbUpdateTicket(id, updates) {
+    try {
+        const { error } = await supabaseClient
+            .from('tickets')
+            .update(updates)
+            .eq('id', id);
+        
+        if (error) {
+            console.error("Update Error:", error);
+            alert("Error saving to database! Changes were locally applied but NOT saved to server.");
+            return false;
+        }
+        console.log("Successfully updated row in tickets table!");
+        return true;
+    } catch (err) {
+        console.error(err);
+        return false;
+    }
+}
+
+async function dbDeleteTicket(id) {
+    try {
+        const { error } = await supabaseClient
+            .from('tickets')
+            .delete()
+            .eq('id', id);
+            
+        if (error) console.error("Delete Error:", error);
+    } catch (err) {
+        console.error(err);
     }
 }
 async function saveState() {
     try {
         const payload = {
             members: state.members,
-            tickets: state.tickets,
             leaves: state.leaves,
             rotationIndex: state.rotationIndex,
             customApps: state.customApps,
             logs: state.logs,
-            memberEmails: state.memberEmails,
-            maxTicketsPerDay: state.maxTicketsPerDay,
-            memberTicketCaps: state.memberTicketCaps,
-            dedicatedRules: state.dedicatedRules
+            memberEmails: state.memberEmails || {},
+            maxTicketsPerDay: state.maxTicketsPerDay || 0,
+            memberTicketCaps: state.memberTicketCaps || {},
+            dedicatedRules: state.dedicatedRules || []
         };
 
         const { error } = await supabaseClient
@@ -202,15 +284,48 @@ async function saveState() {
                 updated_at: new Date().toISOString()
             });
 
-        if (error) console.error(error);
-
+        if (error) console.error("Save Error:", error);
     } catch (err) {
-        console.error(err);
+        console.error("General Error during saveState:", err);
     }
 }
-function addLog(a,d){state.logs.unshift({id:Date.now().toString(),timestamp:new Date().toISOString(),action:a,details:d});if(state.logs.length>200)state.logs=state.logs.slice(0,200)}
+
+async function addLog(a, d) {
+    const logEntry = {
+        timestamp: new Date().toISOString(),
+        action: a,
+        details: d
+    };
+    
+    // Add to local state
+    state.logs.unshift(logEntry);
+    if(state.logs.length > 200) state.logs = state.logs.slice(0, 200);
+    
+    // Insert to Supabase 'app_logs' table
+    try {
+        const { error } = await supabaseClient
+            .from('app_logs')
+            .insert([logEntry]);
+            
+        if (error) console.error("Error saving log:", error);
+    } catch (err) {
+        console.error("Log error:", err);
+    }
+    
+    render();
+}
 function isMemberBlocked(m){const today=getTodayStr();const now=new Date();const ct=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');return state.leaves.some(l=>{if(l.memberId!==m)return false;if(l.type==='Skip'){if(l.startDate!==today)return false;return l.skipStartTime&&l.skipEndTime?ct>=l.skipStartTime&&ct<=l.skipEndTime:false}if(l.startDate<=today&&l.endDate>=today){if(l.blockFromTime&&l.startDate===today)return ct>=l.blockFromTime;return true}return false})}
-function getDayBalance(m){const today=getTodayStr();return state.tickets.filter(t=>t.assignee===m&&t.createdAt.startsWith(today)&&!t.removedReason).reduce((s,t)=>s+(t.applications||[]).length,0)}
+function getDayBalance(m){
+    const today = getTodayStr();
+    // Sum of assigned tickets (Main + Child) that are currently assigned to this member
+    // Tickets routed away (either to a group or another person) will have a different 'assignee', 
+    // so they are automatically excluded from this member's count.
+    return state.tickets.filter(t => 
+        t.assignee === m && 
+        t.createdAt.startsWith(today) && 
+        !t.removedReason
+    ).length;
+}
 function getNextAssignee(){
     const jsDay = new Date().getDay();
     const dayIndex = jsDay === 0 ? 6 : jsDay - 1;
@@ -251,7 +366,9 @@ function getNextAssignee(){
     if(cands.length>1) return cands[state.rotationIndex%cands.length];
     return cands[0]||''
 }
-function getTicketsForDate(){return state.tickets.filter(t=>t.createdAt.startsWith(state.viewDate))}
+function getTicketsForDate(){
+    return state.tickets.filter(t => t.createdAt && t.createdAt.startsWith(state.viewDate));
+}
 function getFilteredTickets(){
     let pool=state.searchQuery?state.tickets:getTicketsForDate();
     let r=pool.filter(t=>!t.removedReason);
@@ -395,7 +512,33 @@ function toggleActions(el){
     actions.style.display = actions.style.display === 'flex' ? 'none' : 'flex';
 }
 
-function renderTicketCard(t){const time=new Date(t.createdAt).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});const cls=t.status==='Completed'?'completed':'';const isMember = state.members.includes(state.currentUser) || Object.values(state.memberEmails).includes(state.currentUser); return '<div class="ticket-card '+cls+'"><div onclick="showTicketDetails(\''+t.id+'\')"><div class="title">'+escHtml(t.title)+' '+(t.actionType ? '<span style="font-size:0.7rem; color: #6366f1; background: #e0e7ff; padding: 2px 6px; border-radius: 4px;">'+t.actionType+'</span>' : '')+'</div><div class="assignee">\u{1F464} '+t.assignee+'</div><div class="meta">'+time+' \u2022 '+(t.applications||[]).join(', ')+'</div><div class="meta" style="font-size:0.65rem; color:#6b7280;">Assigned by: '+escHtml(t.assignedBy||'System')+'</div></div><div class="actions" onclick="event.stopPropagation()" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;align-items:center"><button class="btn btn-secondary btn-sm" onclick="toggleActions(this)">⋮ Actions</button><div style="display:none;flex-wrap:wrap;gap:4px">'+(t.status==='Open'?'<button class="btn btn-success btn-sm" onclick="completeTicket(\''+t.id+'\')">✅ Done</button>':'')+'<button class="btn btn-secondary btn-sm" onclick="showRouteToGroup(\''+t.id+'\')">🔀 Route to Group</button>'+(isMember ? '<button class="btn btn-secondary btn-sm" onclick="takeOwnership(\''+t.id+'\')">🙋 Take Ownership</button>' : '')+'<button class="btn btn-secondary btn-sm" onclick="showRouteToMember(\''+t.id+'\')">🔄 Reassign</button><button class="btn btn-secondary btn-sm" onclick="showEditTicket(\''+t.id+'\')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="removeTicket(\''+t.id+'\')">🗑️ Remove</button></div></div></div>'}
+function renderTicketCard(t){
+    const time=new Date(t.createdAt).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    const cls=t.status==='Completed'?'completed':'';
+    const isMember = state.members.includes(state.currentUser) || Object.values(state.memberEmails).includes(state.currentUser);
+    
+    // Count children for progress
+    const children = state.tickets.filter(c => c.parentId == t.id);
+    const completedTasks = children.filter(c => c.status === 'Completed').length;
+    
+    return `<div class="ticket-card ${cls}">
+        <div onclick="showTicketDetails('${t.id}')">
+            <div class="title">🎫 ${escHtml(t.title)} ✏️ ✕</div>
+            <div class="assignee" style="font-size:0.75rem">👤 Assigned to: ${t.assignee}</div>
+            <div class="meta" style="font-size:0.7rem">📅 ${t.createdAt.split('T')[0]} ${time} • ${t.status}</div>
+            ${children.length > 0 ? `<div style="font-size:0.7rem; margin-top:4px; font-weight:600; color: #4f46e5;">📋 Tasks — ${completedTasks}/${children.length} completed</div>` : ''}
+        </div>
+        <div class="actions" onclick="event.stopPropagation()" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;align-items:center">
+            <button class="btn btn-secondary btn-sm" onclick="toggleActions(this)">⋮ Actions</button>
+            <div style="display:none;flex-wrap:wrap;gap:4px">
+                ${t.status==='Open'?'<button class="btn btn-success btn-sm" onclick="completeTicket(\''+t.id+'\')">✅ Done</button>':''}
+                <button class="btn btn-secondary btn-sm" onclick="showRouteToGroup(\''+t.id+'\')">🔀 Route</button>
+                ${isMember ? '<button class="btn btn-secondary btn-sm" onclick="takeOwnership(\''+t.id+'\')">🙋 Owner</button>' : ''}
+                <button class="btn btn-secondary btn-sm" onclick="showEditTicket(\''+t.id+'\')">✏️ Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="removeTicket(\''+t.id+'\')">🗑️ Remove</button>
+            </div>
+        </div>
+    </div>`}
 function renderDoneTickets() {
     state.filterMember = state.filterMember || 'all';
     state.doneViewMode = state.doneViewMode || 'grouped';
@@ -609,30 +752,28 @@ function renderPerformance() {
 
     h += '<h3>Detailed Productivity per Member</h3>';
     h += '<table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;">';
-    h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Parent</th><th style="padding:10px">Child</th><th style="padding:10px">Group Route</th><th style="padding:10px">Member Route</th><th style="padding:10px">Removed</th><th style="padding:10px; font-weight:bold">Net</th><th style="padding:10px; font-weight:bold">Eff. %</th></tr>';
+    h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Parent</th><th style="padding:10px">Child</th><th style="padding:10px">Routed</th><th style="padding:10px">Removed</th><th style="padding:10px; font-weight:bold">Net</th><th style="padding:10px; font-weight:bold">Eff. %</th></tr>';
     
     state.members.forEach(m => {
         const parents = state.tickets.filter(t => t.assignee === m && !t.parentId && !t.removedReason).length;
         const children = state.tickets.filter(t => t.assignee === m && t.parentId && !t.removedReason).length;
-        const group = getMemberLogs(m, 'Routed to Group');
-        const member = getMemberLogs(m, 'Routed to Member');
-        const removed = getMemberLogs(m, 'Removed');
         
-        // Net calculation: All Assigned - (Routed + Removed)
+        // Count logs using flexible matching
+        const routed = state.logs.filter(l => l.details.includes(m) && l.action.toLowerCase().includes('routed')).length;
+        const removed = state.logs.filter(l => l.details.includes(m) && l.action.toLowerCase().includes('removed')).length;
+        
         const totalAssigned = parents + children;
-        const totalDeductions = group + member + removed;
-        const netTotal = totalAssigned - totalDeductions;
+        const netTotal = totalAssigned - routed - removed;
         const effPercent = totalAssigned > 0 ? Math.round((netTotal / totalAssigned) * 100) : 0;
         
         h += `<tr style="border-bottom:1px solid #eee">
             <td style="padding:10px"><strong>${m}</strong></td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'parent')">${parents}</td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'child')">${children}</td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'group')">${group}</td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'member')">${member}</td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5; text-decoration:underline" onclick="showPerformanceDetail('${m}', 'removed')">${removed}</td>
+            <td style="padding:10px;">${parents}</td>
+            <td style="padding:10px;">${children}</td>
+            <td style="padding:10px;">${routed}</td>
+            <td style="padding:10px;">${removed}</td>
             <td style="padding:10px; font-weight:bold">${netTotal}</td>
-            <td style="padding:10px; font-weight:bold; color: ${effPercent < 50 ? '#dc2626' : '#059669'}; cursor:pointer; text-decoration:underline" onclick="showMemberSummary('${m}')">${effPercent}%</td>
+            <td style="padding:10px; font-weight:bold; color: ${effPercent < 50 ? '#dc2626' : '#059669'}">${effPercent}%</td>
         </tr>`;
     });
     h += '</table></div>';
@@ -870,7 +1011,34 @@ function setTab(t){state.activeTab=t;render()}
 function goDate(o){const d=new Date(state.viewDate+'T00:00:00');d.setDate(d.getDate()+o);state.viewDate=d.toISOString().split('T')[0];render()}
 function goToday(){state.viewDate=getTodayStr();render()}
 function showAddMember(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>+ Add Team Member</h3><label>Name</label><input type="text" id="m-name" placeholder="e.g. Juan Dela Cruz"><label>Email (optional)</label><input type="email" id="m-email" placeholder="e.g. juan@company.com"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddMember()">Add</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h);document.getElementById('m-name').focus()}
-function doAddMember(){const n=document.getElementById('m-name').value.trim();const e=document.getElementById('m-email').value.trim();if(!n){alert('Name required');return}if(state.members.includes(n)){alert('Already exists');return}state.members.push(n);if(e)state.memberEmails[n]=e;addLog('Member Added',n+(e?' ('+e+')':''));saveState();closeModal();render()}
+async function doAddMember(){
+    const n = document.getElementById('m-name').value.trim();
+    const e = document.getElementById('m-email').value.trim();
+    if(!n){alert('Name required');return}
+    
+    // Log the action for debugging
+    console.log("Attempting to insert member:", { name: n, email: e });
+    
+    const { data, error } = await supabaseClient
+        .from('members')
+        .insert([{ name: n, email: e }]);
+        
+    if(error){ 
+        console.error("Supabase Error adding member:", error); 
+        alert("Failed to add member: " + JSON.stringify(error.message)); 
+        return; 
+    }
+    
+    state.members.push(n);
+    if(e) state.memberEmails[n]=e;
+    
+    // Refresh members list from DB to be safe
+    const { data: members } = await supabaseClient.from('members').select('*');
+    if (members) state.members = members.map(m => m.name);
+    
+    render();
+    closeModal();
+}
 
 function doLogin(){const e=document.getElementById('login-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email');return}state.loggedIn=true;state.currentUser=e;localStorage.setItem('rotaguard-user',e);render()}
 function doLogout(){localStorage.removeItem('rotaguard-user');state.loggedIn=false;state.currentUser='';render()}
@@ -881,18 +1049,36 @@ function showEditMember(name){const em=state.memberEmails[name]||'';const h='<di
 function showEditTicket(id){
     const t=state.tickets.find(x=>x.id===id);
     const isChild = !!t.parentId;
-    const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Editing: '+escHtml(t.title)+'</h3>'+(isChild?'<div style="background:rgba(239, 68, 68, 0.1);color:#b91c1c;padding:8px;border-radius:4px;margin-bottom:10px;font-size:0.8rem;font-weight:bold">CHILD TICKET MODE</div>':'')+'<label>Ticket Title</label><input type="text" id="t-edit-title" value="'+escHtml(t.title)+'"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doEditTicket(\''+id+'\')">Update Ticket</button></div></div></div>';
+    const h=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal-content">
+            <h3>Editing: ${escHtml(t.title)}</h3>
+            ${isChild?'<div style="background:rgba(239, 68, 68, 0.1);color:#b91c1c;padding:8px;border-radius:4px;margin-bottom:10px;font-size:0.8rem;font-weight:bold">CHILD TICKET MODE</div>':''}
+            <label>Ticket Title</label>
+            <input type="text" id="t-edit-title" value="${escHtml(t.title)}">
+            <label>Ticket Number</label>
+            <input type="text" id="t-edit-number" value="${escHtml(t.ticketNumber || '')}" placeholder="Enter specific ticket number">
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="doEditTicket('${id}')">Update Ticket</button>
+            </div>
+        </div>
+    </div>`;
     document.getElementById('app').insertAdjacentHTML('beforeend',h);
 }
 
-function doEditTicket(id){
+async function doEditTicket(id){
     const t=state.tickets.find(x=>x.id===id);
     const oldTitle = t.title;
-    const newTitle=document.getElementById('t-edit-title').value.trim();
+    const newTitle = document.getElementById('t-edit-title').value.trim();
+    const newNumber = document.getElementById('t-edit-number').value.trim();
+    
     if(newTitle){
-        t.title=newTitle;
+        t.title = newTitle;
+        t.ticketNumber = newNumber;
+        
+        await dbUpdateTicket(id, { title: newTitle, ticketNumber: newNumber });
+        
         addLog((t.parentId ? 'Child Ticket Edited' : 'Ticket Edited'), (t.parentId ? '[Child] ' : '') + oldTitle +' \u2192 '+newTitle);
-        saveState();
         closeModal();
         render();
         showToast('Ticket updated successfully');
@@ -1031,27 +1217,45 @@ function doAddTicket(parentId){
     
     const actionType = document.getElementById('t-action').value;
     
-    // Create Parent Ticket
-    const pId = Date.now().toString();
-    state.tickets.push({
-        id: pId,
-        parentId: parentId || null,
-        title,
-        actionType,
-        assignee,
-        priority: 'Medium',
-        status: 'Open',
-        createdAt: getLocalISO(),
-        applications: sel,
-        notes: '',
-        assignedBy: state.currentUser
-    });
+    if (parentId) {
+        // Just create generic child ticket
+        const childTicket = {
+            id: Date.now().toString(),
+            parentId: parentId,
+            title: title + " (" + sel.join(', ') + ")",
+            actionType,
+            assignee,
+            priority: 'Medium',
+            status: 'Open',
+            createdAt: new Date().toISOString(),
+            applications: sel,
+            notes: '',
+            assignedBy: state.currentUser
+        };
+        state.tickets.push(childTicket);
+        dbInsertTicket(childTicket);
+    } else {
+        // Main Logic: 1st App = Parent, Others = Children
+        const pId = Date.now().toString();
+        const parentTicket = {
+            id: pId,
+            parentId: null,
+            title: title + " - " + sel[0], // Main ticket title uses 1st app
+            actionType,
+            assignee,
+            priority: 'Medium',
+            status: 'Open',
+            createdAt: new Date().toISOString(),
+            applications: [sel[0]],
+            notes: '',
+            assignedBy: state.currentUser
+        };
+        state.tickets.push(parentTicket);
+        dbInsertTicket(parentTicket);
 
-    // If multiple apps selected, auto-create child tickets for subsequent apps (skip first one)
-    if (!parentId && sel.length > 1) {
-        // Start loop from index 1 (the 2nd app)
+        // Auto-create children for 2nd and 3rd+ apps
         for (let i = 1; i < sel.length; i++) {
-            state.tickets.push({
+            const childTicket = {
                 id: (Date.now() + i).toString(),
                 parentId: pId,
                 title: sel[i],
@@ -1059,11 +1263,13 @@ function doAddTicket(parentId){
                 assignee: assignee, 
                 priority: 'Medium',
                 status: 'Open',
-                createdAt: getLocalISO(),
+                createdAt: new Date().toISOString(),
                 applications: [sel[i]],
                 notes: '',
                 assignedBy: state.currentUser
-            });
+            };
+            state.tickets.push(childTicket);
+            dbInsertTicket(childTicket);
         }
     }
 
@@ -1071,7 +1277,6 @@ function doAddTicket(parentId){
     
     addLog(parentId ? 'Child Ticket Created' : 'Parent Ticket Created', (parentId ? '[Child] ' : '') + '"' + title + '" -> ' + assignee + ' (' + sel.length + ' apps)');
     
-    saveState();
     closeModal();
     render();
     showToast(title + ' Created');
@@ -1158,8 +1363,27 @@ function doRouteTicket(id){
         showToast('Ticket routed to '+newAssignee);
     }
 }
-function completeTicket(id){const t=state.tickets.find(x=>x.id===id);if(!t)return;t.status='Completed';t.completedAt=new Date().toISOString();addLog((t.parentId ? 'Child Ticket Completed' : 'Ticket Completed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'"');saveState();render()}
-function removeTicket(id){const r=prompt('Reason for removal?');if(!r)return;const t=state.tickets.find(x=>x.id===id);if(!t)return;t.removedReason=r;t.status='Completed';addLog((t.parentId ? 'Child Ticket Removed' : 'Ticket Removed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'" - '+r);saveState();render()}
+async function completeTicket(id){
+    const t = state.tickets.find(x => x.id === id);
+    if(!t) return;
+    t.status = 'Completed';
+    t.completedAt = new Date().toISOString();
+    await dbUpdateTicket(id, { status: t.status, completedAt: t.completedAt });
+    addLog((t.parentId ? 'Child Ticket Completed' : 'Ticket Completed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'"');
+    render();
+}
+
+async function removeTicket(id){
+    const r = prompt('Reason for removal?');
+    if(!r) return;
+    const t = state.tickets.find(x => x.id === id);
+    if(!t) return;
+    t.removedReason = r;
+    t.status = 'Completed';
+    await dbUpdateTicket(id, { removedReason: r, status: 'Completed' });
+    addLog((t.parentId ? 'Child Ticket Removed' : 'Ticket Removed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'" - '+r);
+    render();
+}
 function showBlock(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>\u23F8\uFE0F Block / Skip Member</h3><label>Member</label><select id="b-member">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><label>Type</label><select id="b-type" onchange="toggleBlockFields()"><option value="Day Off">Day Off</option><option value="VL">Vacation Leave</option><option value="SL">Sick Leave</option><option value="Skip">Skip (Time Range)</option></select><div id="b-dates"><label>Start Date</label><input type="date" id="b-start" value="'+getTodayStr()+'"><label>End Date</label><input type="date" id="b-end" value="'+getTodayStr()+'"></div><div id="b-time" class="hidden"><label>Skip From</label><input type="time" id="b-sfrom" value="08:00"><label>Skip Until</label><input type="time" id="b-sto" value="12:00"></div><label>Remarks (optional)</label><input type="text" id="b-remarks" placeholder="Reason..."><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-warning" onclick="doBlock()">Block</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
 function toggleBlockFields(){const t=document.getElementById('b-type').value;document.getElementById('b-dates').className=t==='Skip'?'hidden':'';document.getElementById('b-time').className=t==='Skip'?'':'hidden'}
 function doBlock(){
@@ -1254,10 +1478,11 @@ function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt
 })();
 
 function getMemberLogs(member, actionType) {
+    // Exact match for actionType string expected
     return state.logs.filter(l => 
         l.details && 
         l.details.includes(member) && 
-        l.action.toLowerCase().includes(actionType.toLowerCase())
+        l.action === actionType
     ).length;
 }
 
@@ -1317,4 +1542,5 @@ function showDailyHealthModal() {
 document.addEventListener('visibilitychange',()=>{if(document.hidden)saveState()});
 </script>
 
-  <qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
+  <qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar>
+<qb-toolbar  id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
