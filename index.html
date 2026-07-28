@@ -115,173 +115,43 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab" onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab" onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="jan rhey">jan rhey</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">8 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">jan rhey</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">3 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767716')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  23232 - Active Directory 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">13</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">11</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='jan rhey'; render();">
+            <span class="workload-label">jan rhey </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:100%;background:#ef4444"></div>
             </div>
-            <div style="font-size:0.7rem; color:#4338ca" class="">👤 jan rhey</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 07:56 PM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767716')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785239767716')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785239767716')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785239767716')">🗑️ Remove</button>
-        </div>
-    </div><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785252319390')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  TEST TICKET - Active Directory 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
+            <span class="workload-value">6 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
+            <span class="workload-label">KYLE </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:50%;background:#10b981"></div>
             </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 jan rhey</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 11:25 PM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785252319390')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785252319390')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785252319390')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785252319390')">🗑️ Remove</button>
-        </div>
-    </div><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785252386133')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  test2 - Email Account 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
+            <span class="workload-value">3 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
+            <span class="workload-label">JUNEALYN </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:33.33333333333333%;background:#10b981"></div>
             </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 jan rhey</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 11:26 PM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785252386133')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785252386133')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785252386133')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785252386133')">🗑️ Remove</button>
-        </div>
-    </div></div>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">KYLE</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">3 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785240358055')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  23123123 (Active Directory, Purchase Order) 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
-            </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 KYLE</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 08:05 PM • Open</div>
-            
-            <div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#db2777;">📌 Promoted from Parent: 1785239767716</div>
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785240358055')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785240358055')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785240358055')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785240358055')">🗑️ Remove</button>
-        </div>
-    </div><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767718')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  Email Account 
-                <span style="font-size:0.65rem; color: #6366f1;">Task</span>
-            </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 KYLE</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 07:56 PM • Open</div>
-            
-            <div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#db2777;">📌 Promoted from Parent: 1785239767716</div>
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767718')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785239767718')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785239767718')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785239767718')">🗑️ Remove</button>
-        </div>
-    </div><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785252238374')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600" class="">
-                🎫  test ticket - bt 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
-            </div>
-            <div style="font-size:0.7rem; color:#4338ca" class="">👤 KYLE</div>
-            <div style="font-size:0.65rem; color:#6b7280" class="">📅 2026-07-28 11:23 PM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785252238374')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785252238374')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785252238374')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785252238374')">🗑️ Remove</button>
-        </div>
-    </div></div>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">JUNEALYN</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">2 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785240690272')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  423 - CBIS 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
-            </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 JUNEALYN</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 08:11 PM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785240690272')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785240690272')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785240690272')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785240690272')">🗑️ Remove</button>
-        </div>
-    </div><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785240699197')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  2342 - Peoplesoft 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
-            </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 JUNEALYN</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 08:11 PM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785240699197')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785240699197')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785240699197')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785240699197')">🗑️ Remove</button>
-        </div>
-    </div></div>
-                    </td>
-                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button><div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Create Ticket</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600"></div><label>Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label>Applications</label><div class="apps-grid" id="t-apps" onclick="updateAssignmentExplanation()"><div class="app-chip" onclick="this.classList.toggle('selected')">Active Directory</div><div class="app-chip" onclick="this.classList.toggle('selected')">Email Account</div><div class="app-chip" onclick="this.classList.toggle('selected')">Phoenix</div><div class="app-chip" onclick="this.classList.toggle('selected')">Peoplesoft</div><div class="app-chip" onclick="this.classList.toggle('selected')">8x8</div><div class="app-chip" onclick="this.classList.toggle('selected')">CBIS</div><div class="app-chip" onclick="this.classList.toggle('selected')">Astra</div><div class="app-chip" onclick="this.classList.toggle('selected')">Adobe</div><div class="app-chip" onclick="this.classList.toggle('selected')">Purchase Order</div></div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div><label class="">Assignment</label><div style="display:flex;gap:8px;margin-bottom:12px"><button onclick="document.getElementById('t-assign-opt').value='auto'; this.style.background='#e0e7ff'; this.nextElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='none'; document.getElementById('t-assign-expl').style.display='block'; updateAssignmentExplanation();" class="btn" style="flex:1;background:#e0e7ff;border:1px solid #c7d2fe">⚖️ Auto (Balanced)</button><button onclick="document.getElementById('t-assign-opt').value='specific'; this.style.background='#e0e7ff'; this.previousElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='block'; document.getElementById('t-assign-expl').style.display='none';" class="btn" style="flex:1;background:#f3f4f6;border:1px solid #d1d5db">👤 Specific Person</button></div><input type="hidden" id="t-assign-opt" value="auto"><div id="t-assign-expl"><div style="font-size:0.75rem; color:#4338ca; background:#e0e7ff; padding:8px; border-radius:6px; margin-bottom:8px;">
-        <div style="font-weight:700; margin-bottom:4px" class="">📊 Why jan rhey? (⚖️ Day Balance)</div>
-        <div style="margin-left:4px" class="">
-            • <strong>jan rhey</strong>: 3 tasks today (3 tickets) (lowest today)<br>
+            <span class="workload-value">2 tix</span>
+        </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
+            <span class="workload-label">jan rhey</span>
+            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">6 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">KYLE</span>
+            <div class="workload-track"><div class="workload-fill" style="width:66.66666666666666%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">JUNEALYN</span>
+            <div class="workload-track"><div class="workload-fill" style="width:50%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">3 tix</span>
+        </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JUNEALYN</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-28</div><button class="btn btn-sm btn-secondary" onclick="unblock('JUNEALYN')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">KYLE</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-28</div><button class="btn btn-sm btn-secondary" onclick="unblock('KYLE')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-07-29</div><div style="font-weight:600;color:var(--accent-color)">SL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-07-29</div><div style="font-weight:600;color:var(--accent-color)">Unpaid Leave</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">jan rhey</div><div style="color:var(--text-muted)">2026-07-29</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-07-30</div><div style="font-weight:600;color:var(--accent-color)" class="">VL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-07-30</div><div style="font-weight:600;color:var(--accent-color)">SL</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip active">jan rhey (6)</span><span class="member-chip blocked">⏸️ KYLE (4)</span><span class="member-chip blocked">⏸️ JUNEALYN (3)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div><div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Create Ticket</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600"></div><label>Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label class="">Applications</label><div class="apps-grid" id="t-apps" onclick="updateAssignmentExplanation()"><div class="app-chip" onclick="this.classList.toggle('selected')">Active Directory</div><div class="app-chip   ablefocused selected" onclick="this.classList.toggle('selected')"  data-qb-tmp-id="lt-988321" spellcheck="false" data-gramm="false">Email Account</div><div class="app-chip" onclick="this.classList.toggle('selected')">Phoenix</div><div class="app-chip" onclick="this.classList.toggle('selected')">Peoplesoft</div><div class="app-chip" onclick="this.classList.toggle('selected')">8x8</div><div class="app-chip" onclick="this.classList.toggle('selected')">CBIS</div><div class="app-chip" onclick="this.classList.toggle('selected')">Astra</div><div class="app-chip" onclick="this.classList.toggle('selected')">Adobe</div><div class="app-chip" onclick="this.classList.toggle('selected')">Purchase Order</div></div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div><label class="">Assignment</label><div style="display:flex;gap:8px;margin-bottom:12px"><button onclick="document.getElementById('t-assign-opt').value='auto'; this.style.background='#e0e7ff'; this.nextElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='none'; document.getElementById('t-assign-expl').style.display='block'; updateAssignmentExplanation();" class="btn" style="flex:1;background:#e0e7ff;border:1px solid #c7d2fe">⚖️ Auto (Balanced)</button><button onclick="document.getElementById('t-assign-opt').value='specific'; this.style.background='#e0e7ff'; this.previousElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='block'; document.getElementById('t-assign-expl').style.display='none';" class="btn" style="flex:1;background:#f3f4f6;border:1px solid #d1d5db">👤 Specific Person</button></div><input type="hidden" id="t-assign-opt" value="auto"><div id="t-assign-expl"><div style="font-size:0.75rem; color:#4338ca; background:#e0e7ff; padding:8px; border-radius:6px; margin-bottom:8px;">
+        <div style="font-weight:700; margin-bottom:4px">📊 Why jan rhey? (⚖️ Day Balance)</div>
+        <div style="margin-left:4px">
+            • <strong>jan rhey</strong>: 6 tasks today (6 tickets) (lowest today)<br>
             • Others:<br>
             
-        </div><div style="margin-top:4px; margin-left:4px" class="">⏸️ Skipped: KYLE, JUNEALYN (on leave/blocked)</div><div style="margin-top:6px; font-weight:600; color:#059669" class="">✅ Fewest daily tasks (apps + child tickets) gets the next ticket</div>
+        </div><div style="margin-top:4px; margin-left:4px">⏸️ Skipped: KYLE, JUNEALYN (on leave/blocked)</div><div style="margin-top:6px; font-weight:600; color:#059669">✅ Fewest daily tasks (apps + child tickets) gets the next ticket</div>
     </div></div><select id="t-assign-specific" style="margin-bottom:12px; display:none;"><option value="jan rhey">jan rhey</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option></select><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddTicket('null')">Create</button></div></div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
