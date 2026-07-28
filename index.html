@@ -108,43 +108,39 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab" onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab" onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="Paola">Paola</option><option value="JUNEALYN">JUNEALYN</option><option value="kYLE">kYLE</option><option value="John carlo">John carlo</option><option value="Jenica">Jenica</option><option value="Rendy">Rendy</option><option value="Joshua">Joshua</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">2 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody><tr style="background:#fff">
+<div id="app"><div class="header"><h1 class="">🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;" class="">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab" onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab" onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab" onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="Paola">Paola</option><option value="JUNEALYN">JUNEALYN</option><option value="kYLE">kYLE</option><option value="John carlo">John carlo</option><option value="Jenica">Jenica</option><option value="Rendy">Rendy</option><option value="Joshua">Joshua</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)" class="">1 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Tickets</th></tr></thead><tbody><tr style="background:#fff">
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
                         <div style="font-size:0.85rem" class="">Paola</div>
                         <div style="font-size:0.75rem;color:#666;font-weight:400" class="">1 tickets</div>
                     </td>
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card">
-        <div onclick="showTicketDetails('1785211469122')">
-            <div class="title">🎫 test ticket - Active Directory ✏️ ✕</div>
-            <div class="assignee" style="font-size:0.75rem">👤 Assigned to: Paola</div>
-            <div class="meta " style="font-size:0.7rem">📅 2026-07-28 12:04 PM • Open</div>
-            <div style="font-size:0.7rem; margin-top:4px; font-weight:600; color: #4f46e5;">📋 Tasks — 0/2 completed</div>
+                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785212597114')">
+        <div>
+            <div style="font-size:0.9rem; font-weight:600" class="">🎫  123123 - Active Directory <span style="font-size:0.7rem;" class="">Creation</span></div>
+            <div style="font-size:0.75rem; color:#4338ca" class="">👤 Assigned to: Paola</div>
+            <div style="font-size:0.7rem; color:#6b7280" class="">📅 2026-07-28 12:23 PM • Open</div>
+            <div style="font-size:0.75rem; margin-top:5px; font-weight:600; color:#4f46e5;">📋 Tasks — 0/2 completed</div>
         </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;align-items:center">
-            <button class="btn btn-secondary btn-sm" onclick="toggleActions(this)">⋮ Actions</button>
-            <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                <button class="btn btn-success btn-sm" onclick="completeTicket('1785211469122')">✅ Done</button>
-                <button class="btn btn-secondary btn-sm" onclick="showRouteToGroup(''+t.id+'')">🔀 Route</button>
-                
-                <button class="btn btn-secondary btn-sm" onclick="showEditTicket(''+t.id+'')">✏️ Edit</button>
-                <button class="btn btn-danger btn-sm" onclick="removeTicket(''+t.id+'')">🗑️ Remove</button>
-            </div>
+        <div class="actions" onclick="event.stopPropagation()" style="margin-top:8px;">
+            <button class="btn btn-success btn-sm" onclick="completeTicket('1785212597114')">✅ Done</button>
+            <button class="btn btn-secondary btn-sm" onclick="showRouteToMember('1785212597114')">🔄 Reassign</button>
+            <button class="btn btn-secondary btn-sm" onclick="showEditTicket('1785212597114')">✏️ Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="removeTicket('1785212597114')">🗑️ Remove</button>
         </div>
     </div></div>
                     </td>
                 </tr><tr style="background:#fff">
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem" class="">JUNEALYN</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400" class="">0 tickets</div>
+                        <div style="font-size:0.85rem">JUNEALYN</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
                     </td>
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem" class="">No pending tasks</span>
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
                     </td>
                 </tr><tr style="background:#fff">
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem" class="">kYLE</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400" class="">0 tickets</div>
+                        <div style="font-size:0.85rem">kYLE</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
                     </td>
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
                         <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
@@ -159,11 +155,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
                     </td>
                 </tr><tr style="background:#fff">
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">Jenica</div>
+                        <div style="font-size:0.85rem" class="">Jenica</div>
                         <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
                     </td>
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                        <span style="color:#ccc;font-size:0.8rem" class="">No pending tasks</span>
                     </td>
                 </tr><tr style="background:#fff">
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
@@ -575,28 +571,23 @@ function toggleActions(el){
 function renderTicketCard(t){
     const time=new Date(t.createdAt).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
     const cls=t.status==='Completed'?'completed':'';
-    const isMember = state.members.includes(state.currentUser) || Object.values(state.memberEmails).includes(state.currentUser);
     
     // Count children for progress
     const children = state.tickets.filter(c => c.parentId == t.id);
     const completedTasks = children.filter(c => c.status === 'Completed').length;
     
-    return `<div class="ticket-card ${cls}">
-        <div onclick="showTicketDetails('${t.id}')">
-            <div class="title">🎫 ${escHtml(t.title)} ✏️ ✕</div>
-            <div class="assignee" style="font-size:0.75rem">👤 Assigned to: ${t.assignee}</div>
-            <div class="meta" style="font-size:0.7rem">📅 ${t.createdAt.split('T')[0]} ${time} • ${t.status}</div>
-            ${children.length > 0 ? `<div style="font-size:0.7rem; margin-top:4px; font-weight:600; color: #4f46e5;">📋 Tasks — ${completedTasks}/${children.length} completed</div>` : ''}
+    return `<div class="ticket-card ${cls}" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('${t.id}')">
+        <div>
+            <div style="font-size:0.9rem; font-weight:600">🎫 ${escHtml(t.ticketNumber || '')} ${escHtml(t.title)} <span style="font-size:0.7rem;">${t.actionType || ''}</span></div>
+            <div style="font-size:0.75rem; color:#4338ca">👤 Assigned to: ${t.assignee}</div>
+            <div style="font-size:0.7rem; color:#6b7280">📅 ${t.createdAt ? t.createdAt.split('T')[0] : 'N/A'} ${time} • ${t.status}</div>
+            ${children.length > 0 ? `<div style="font-size:0.75rem; margin-top:5px; font-weight:600; color:#4f46e5;">📋 Tasks — ${completedTasks}/${children.length} completed</div>` : ''}
         </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;align-items:center">
-            <button class="btn btn-secondary btn-sm" onclick="toggleActions(this)">⋮ Actions</button>
-            <div style="display:none;flex-wrap:wrap;gap:4px">
-                ${t.status==='Open'?'<button class="btn btn-success btn-sm" onclick="completeTicket(\''+t.id+'\')">✅ Done</button>':''}
-                <button class="btn btn-secondary btn-sm" onclick="showRouteToGroup(\''+t.id+'\')">🔀 Route</button>
-                ${isMember ? '<button class="btn btn-secondary btn-sm" onclick="takeOwnership(\''+t.id+'\')">🙋 Owner</button>' : ''}
-                <button class="btn btn-secondary btn-sm" onclick="showEditTicket(\''+t.id+'\')">✏️ Edit</button>
-                <button class="btn btn-danger btn-sm" onclick="removeTicket(\''+t.id+'\')">🗑️ Remove</button>
-            </div>
+        <div class="actions" onclick="event.stopPropagation()" style="margin-top:8px;">
+            ${t.status==='Open' ? `<button class="btn btn-success btn-sm" onclick="completeTicket('${t.id}')">✅ Done</button>` : ''}
+            <button class="btn btn-secondary btn-sm" onclick="showRouteToMember('${t.id}')">🔄 Reassign</button>
+            <button class="btn btn-secondary btn-sm" onclick="showEditTicket('${t.id}')">✏️ Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="removeTicket('${t.id}')">🗑️ Remove</button>
         </div>
     </div>`}
 function renderDoneTickets() {
@@ -687,13 +678,15 @@ function renderTicketRow(t){
     </div>`;
 }
 function renderMembers() {
+    console.log("Rendering members. State emails object:", state.memberEmails);
     return `<div class="card">
         <h3>\u{1F465} Team Members (${state.members.length})</h3>
         <button class="btn btn-primary" onclick="showAddMember()" style="margin-bottom:16px">+ Add Member</button>
         <table style="width:100%;border-collapse:collapse">
             <tr style="text-align:left;color:var(--text-muted);font-size:0.8rem"><th>Name</th><th>Email</th><th>Actions</th></tr>
             ${state.members.map(m=>{
-                const em = state.memberEmails[m] || '-';
+                const em = state.memberEmails[m] || 'No Email';
+                console.log(`Checking email for ${m}:`, em);
                 return `<tr style="border-top:1px solid var(--border-color)">
                     <td style="padding:12px 0;font-weight:600">${m}</td>
                     <td style="padding:12px 0;color:var(--text-muted)">${em}</td>
@@ -1179,7 +1172,8 @@ async function doEditMember(oldName){
 }
 
 function showEditTicket(id){
-    const t=state.tickets.find(x=>x.id===id);
+    const t = state.tickets.find(x => String(x.id) === String(id));
+    if (!t) { console.error("Ticket not found:", id, "Available:", state.tickets.map(t=>t.id)); return; }
     const isChild = !!t.parentId;
     const h=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
         <div class="modal-content">
@@ -1199,7 +1193,8 @@ function showEditTicket(id){
 }
 
 async function doEditTicket(id){
-    const t=state.tickets.find(x=>x.id===id);
+    const t = state.tickets.find(x => x.id == id);
+    if (!t) return;
     const oldTitle = t.title;
     const newTitle = document.getElementById('t-edit-title').value.trim();
     const newNumber = document.getElementById('t-edit-number').value.trim();
@@ -1208,7 +1203,7 @@ async function doEditTicket(id){
         t.title = newTitle;
         t.ticketNumber = newNumber;
         
-        await dbUpdateTicket(id, { title: newTitle, ticketNumber: newNumber });
+        await dbUpdateTicket(id, { title: newTitle, ticketnumber: newNumber });
         
         addLog((t.parentId ? 'Child Ticket Edited' : 'Ticket Edited'), (t.parentId ? '[Child] ' : '') + oldTitle +' \u2192 '+newTitle);
         closeModal();
@@ -1434,10 +1429,29 @@ async function swapTicketHierarchy(childId, parentId) {
 }
 
 function showTicketDetails(id){
-    const t=state.tickets.find(x=>x.id===id);
-    if(!t)return;
-    const children=state.tickets.filter(x=>x.parentId == id);
-    const h=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+    const t = state.tickets.find(x => x.id == id);
+    if(!t) return;
+    const children = state.tickets.filter(x => x.parentId == id);
+    
+    // Explicitly stringify ID for safety
+    const tid = String(id);
+    
+    // Build child list manually to ensure 'this' context issues don't occur
+    let childrenHtml = children.map(c => `
+        <div style="font-size:0.85rem;padding:10px;border:1px solid #ddd;border-radius:8px;background:#f9f9f9; margin-bottom: 8px;">
+            <div style="font-weight:600">🎫 ${escHtml(c.ticketNumber || '')} 📋 ${escHtml(c.title)}</div>
+            <div style="font-size:0.75rem; color:#6b7280">${c.status} • ${c.assignee}</div>
+            <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:5px;">
+                ${c.status === 'Open' ? `<button class="btn btn-success btn-sm" onclick="completeTicket('${c.id}')">✅ Done</button>` : ''}
+                <button class="btn btn-secondary btn-sm" onclick="showRouteToMember('${c.id}')">🔄 Reassign</button>
+                <button class="btn btn-secondary btn-sm" onclick="showEditTicket('${c.id}')">✏️ Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="removeTicket('${c.id}')">🗑️ Remove</button>
+                <button class="btn btn-primary btn-sm" onclick="swapTicketHierarchy('${c.id}', '${tid}')">🔄 Swap</button>
+            </div>
+        </div>
+    `).join('');
+
+    const h = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
         <div class="modal-content">
             <h3>Ticket: ${escHtml(t.title)}</h3>
             <p><strong>App:</strong> ${(t.applications||[]).join(', ')}</p>
@@ -1445,24 +1459,19 @@ function showTicketDetails(id){
             <p><strong>Status:</strong> ${t.status}</p>
             <h4>Route Options</h4>
             <div style="display:flex;gap:8px;margin-bottom:15px">
-                <button class="btn btn-secondary" onclick="showEditTicket('${id}')">✏️ Edit Details</button>
+                <button class="btn btn-secondary" onclick="showEditTicket('${tid}')">✏️ Edit Details</button>
             </div>
             <div style="background:var(--bg-color);padding:15px;border-radius:12px;border:1px solid var(--border-color);margin-top:10px">
                 <h4>Child Tickets (${children.length})</h4>
                 <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:15px">
-                    ${children.map(c=>`
-                        <div style="font-size:0.85rem;padding:10px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);">
-                            <div><strong>${(c.status==='Completed'?'✅ Done ':'⏳ Pending ')}📋 ${c.title}</strong></div>
-                            <button class="btn btn-sm btn-primary" onclick="swapTicketHierarchy('${c.id}', '${t.id}')">🔄 Swap as Parent</button>
-                        </div>
-                    `).join('')}
+                    ${childrenHtml}
                 </div>
-                <button class="btn btn-primary btn-sm" onclick="showTicketModal('${id}')">+ Add Child Ticket</button>
+                <button class="btn btn-primary btn-sm" onclick="showTicketModal('${tid}')">+ Add Child Ticket</button>
             </div>
             <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div>
         </div>
     </div>`;
-    document.getElementById('app').insertAdjacentHTML('beforeend',h);
+    document.getElementById('app').insertAdjacentHTML('beforeend', h);
 }
 
 function showEditApplications(id){
@@ -1631,19 +1640,15 @@ function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt
     
 // Realtime subscription
     supabaseClient
-      .channel('schema-db-changes')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'rotaguard_state' },
-        (payload) => {
-          console.log('Change received!', payload);
-          // Only update if data actually changed
-          if (payload.new && payload.new.payload) {
-             Object.assign(state, payload.new.payload);
-             render();
-          }
-        }
-      )
+      .channel('all-db-changes')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'tickets' }, (payload) => {
+          console.log('Tickets changed:', payload);
+          loadState().then(() => render());
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'members' }, (payload) => {
+          console.log('Members changed:', payload);
+          loadState().then(() => render());
+      })
       .subscribe((status) => {
         console.log('Realtime subscription status:', status);
       });
@@ -1718,4 +1723,4 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)saveState()
 </script>
 
   <qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar>
-<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
+<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
