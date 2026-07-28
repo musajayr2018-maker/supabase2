@@ -108,84 +108,25 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="jan rhey">jan rhey</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">2 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">jan rhey</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767716')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600" class="">
-                🎫  23232 - Active Directory 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab active" onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card">
+    <h3>🕐 Availability Settings</h3>
+    <p style="font-size:0.85rem;color:#666;margin-bottom:16px;">Current blocks (Only active/past entries shown).</p>
+    <div style="margin-bottom:20px;">
+        <button class="btn btn-primary" onclick="showBlock()">+ Add New Block / Skip</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+        
+            <div style="border:1px solid var(--border-color);padding:16px;border-radius:8px;background:var(--bg-color)">
+                <div style="font-weight:bold;font-size:1.1rem;margin-bottom:8px">jan rhey</div>
+                <div style="margin-bottom:4px"><strong>Type:</strong> Day Off</div>
+                <div style="margin-bottom:4px"><strong>Date:</strong> 2026-07-28 </div>
+                
+                
+                <button class="btn btn-danger btn-sm" onclick="removeLeave('jan rhey','2026-07-28')">Remove</button>
             </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 jan rhey</div>
-            <div style="font-size:0.65rem; color:#6b7280" class="">📅 2026-07-28 07:56 PM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767716')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785239767716')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785239767716')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785239767716')">🗑️ Remove</button>
-        </div>
-    </div></div>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">KYLE</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">JUNEALYN</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767718')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  Email Account 
-                <span style="font-size:0.65rem; color: #6366f1;">Task</span>
-            </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 JUNEALYN</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 07:56 PM • Open</div>
-            
-            <div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#db2777;">📌 Promoted from Parent: 1785239767716</div>
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767718')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785239767718')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785239767718')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785239767718')">🗑️ Remove</button>
-        </div>
-    </div></div>
-                    </td>
-                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button><div class="modal-overlay" onclick="if(event.target===this)closeModal()">
-        <div class="modal-content">
-            <h3>Ticket: 23232 - Active Directory</h3>
-            <p><strong>App:</strong> Active Directory</p>
-            <p><strong>Assignee:</strong> jan rhey</p>
-            <p><strong>Status:</strong> Open</p>
-            <h4>Route Options</h4>
-            <div style="display:flex;gap:8px;margin-bottom:15px">
-                <button class="btn btn-secondary" onclick="showEditTicket('1785239767716')">✏️ Edit Details</button>
-            </div>
-            <div style="background:var(--bg-color);padding:15px;border-radius:12px;border:1px solid var(--border-color);margin-top:10px">
-                <h4>Child Tickets (0)</h4>
-                <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:15px">
-                    
-                </div>
-                <button class="btn btn-primary btn-sm" onclick="showTicketModal('1785239767716')">+ Add Child Ticket</button>
-            </div>
-            <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div>
-        </div>
-    </div><div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Add Child Ticket</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600"></div><label class="">Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label class="">Applications</label><div class="apps-grid" id="t-apps" onclick="updateAssignmentExplanation()"><div class="app-chip" onclick="this.classList.toggle('selected')">Active Directory</div><div class="app-chip" onclick="this.classList.toggle('selected')">Email Account</div><div class="app-chip" onclick="this.classList.toggle('selected')">Phoenix</div><div class="app-chip" onclick="this.classList.toggle('selected')">Peoplesoft</div><div class="app-chip" onclick="this.classList.toggle('selected')">8x8</div><div class="app-chip" onclick="this.classList.toggle('selected')">CBIS</div><div class="app-chip" onclick="this.classList.toggle('selected')">Astra</div><div class="app-chip" onclick="this.classList.toggle('selected')">Adobe</div><div class="app-chip selected" onclick="this.classList.toggle('selected')">Purchase Order</div></div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddTicket('1785239767716')">Create</button></div></div></div></div>
+        
+    </div>
+  </div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -245,7 +186,17 @@ async function loadState() {
 
         // Load Leaves
         const { data: leaves } = await supabaseClient.from('leaves').select('*');
-        if (leaves) state.leaves = leaves;
+        if (leaves) {
+            state.leaves = leaves.map(l => ({
+                ...l,
+                memberId: l.memberid || l.memberId,
+                startDate: l.startdate || l.startDate,
+                endDate: l.enddate || l.endDate,
+                blockFromTime: l.block_from_time || l.blockFromTime,
+                skipStartTime: l.skipstarttime || l.skipStartTime,
+                skipEndTime: l.skipendtime || l.skipEndTime
+            }));
+        }
 
         // Load Logs
         const { data: logs } = await supabaseClient.from('app_logs').select('*');
@@ -729,9 +680,68 @@ function schedPrev(){schedWeekOffset--;render()}
 function schedNext(){schedWeekOffset++;render()}
 function schedToday(){schedWeekOffset=0;render()}
 function schedCellClick(member,date){const today=getTodayStr();const existing=getLeaveForCell(member,date);if(existing){if(confirm('Remove '+existing.type+' for '+member+' on '+date+'?')){removeLeave(member,existing.startDate)}return}if(date<today){alert('Cannot add leave on past dates');return}showScheduleType(member,date)}
-function showScheduleType(member,date){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content" style="text-align:center"><h3>\u{1F4CB} Select Leave Type</h3><p style="font-size:0.85rem;color:#555;margin-bottom:16px"><strong>'+member+'</strong> \u2014 '+new Date(date+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})+'</p><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"><button class="btn" style="padding:12px;background:#e0e7ff;color:#4338ca;border:2px solid #c7d2fe;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'Day Off\')">\u{1F5D3}\uFE0F Day Off</button><button class="btn" style="padding:12px;background:#dbeafe;color:#1d4ed8;border:2px solid #93c5fd;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'VL\')">\u{1F3D6}\uFE0F VL (Vacation)</button><button class="btn" style="padding:12px;background:#fef3c7;color:#b45309;border:2px solid #fde68a;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'SL\')">\u{1F912} SL (Sick Leave)</button><button class="btn" style="padding:12px;background:#fee2e2;color:#dc2626;border:2px solid #fecaca;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'Unpaid Leave\')">\u{1F4B0} Unpaid Leave</button></div><button class="btn btn-secondary" onclick="closeModal()">Cancel</button></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
-function doScheduleAdd(member,date,type){state.leaves=state.leaves.filter(l=>!(l.memberId===member&&l.type!=='Skip'&&l.type!=='Skip by Tickets'&&l.startDate<=date&&l.endDate>=date));state.leaves.push({memberId:member,type:type,startDate:date,endDate:date,remarks:''});addLog('Leave Scheduled',member+' - '+type+' on '+date);saveState();closeModal();render();showToast(member+' \u2192 '+type)}
-function renderSchedule(){const today=getTodayStr();const dates=getWeekDates(schedWeekOffset);const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];const startLabel=fmtShort(dates[0]);const endLabel=new Date(dates[6]+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});let totalOffs=0;state.members.forEach(m=>{dates.forEach(d=>{if(getLeaveForCell(m,d))totalOffs++})});let h='<div class="card"><h3>\u{1F4C5} Weekly Schedule Board</h3><p style="font-size:0.78rem;color:#666;margin-bottom:12px">Click a cell to add/remove leave. Color-coded by type.</p>';h+='<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding:10px 14px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb"><div style="display:flex;gap:4px"><button class="btn btn-secondary btn-sm" onclick="schedPrev()">\u25C0 Prev</button><button class="btn btn-secondary btn-sm" onclick="schedToday()"'+(schedWeekOffset===0?' style="opacity:0.5"':'')+'>Today</button><button class="btn btn-secondary btn-sm" onclick="schedNext()">Next \u25B6</button></div><span style="font-size:0.95rem;font-weight:700">'+startLabel+' \u2014 '+endLabel+'</span><span style="font-size:0.78rem;font-weight:600;color:#4f46e5;background:#eef2ff;padding:4px 10px;border-radius:6px">\u{1F5D3}\uFE0F '+totalOffs+' off this week</span></div>';h+='<div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="text-align:left;padding:12px 14px;font-size:0.82rem;font-weight:700;color:#374151;background:#f3f4f6;border-bottom:2px solid #e5e7eb;min-width:120px">Member</th>';dates.forEach((d,i)=>{const isToday=d===today;h+='<th style="text-align:center;padding:10px 8px;font-size:0.75rem;font-weight:600;color:'+(isToday?'#4f46e5':'#6b7280')+';background:'+(isToday?'#eef2ff':'#f3f4f6')+';border-bottom:2px solid #e5e7eb;min-width:80px"><div style="font-size:0.82rem;font-weight:700">'+days[i]+'</div><div style="font-size:0.68rem;font-weight:400;color:#9ca3af;margin-top:2px">'+fmtShort(d)+'</div>'+(isToday?'<div style="font-size:0.5rem;color:#4f46e5;margin-top:2px">\u25CF</div>':'')+'</th>'});h+='</tr></thead><tbody>';if(state.members.length===0){h+='<tr><td colspan="8" style="text-align:center;padding:30px;color:#888;font-size:0.85rem">No members added yet.</td></tr>'}else{state.members.forEach(m=>{h+='<tr><td style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid #f3f4f6;background:#fff;min-width:120px"><div style="width:28px;height:28px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0">'+m[0].toUpperCase()+'</div><span style="font-size:0.85rem;font-weight:600;color:#1f2937;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">'+m+'</span></td>';dates.forEach(d=>{const leave=getLeaveForCell(m,d);const isToday=d===today;const isPast=d<today;const style=leave?getTypeStyle(leave.type):null;let cellBg=isToday?'#f8faff':'#fff';if(leave)cellBg=style.bg;if(isPast&&!leave)cellBg='#f9fafb';h+='<td style="text-align:center;padding:8px 4px;border-bottom:1px solid #f3f4f6;cursor:'+(isPast&&!leave?'not-allowed':'pointer')+';background:'+cellBg+';vertical-align:middle;transition:all 0.15s'+(isPast&&!leave?';opacity:0.6':'')+'" onclick="schedCellClick(\''+m+'\',\''+d+'\')">';if(leave){h+='<div style="display:flex;flex-direction:column;align-items:center;gap:2px"><span style="font-size:0.72rem;font-weight:700;color:'+style.color+'">'+style.label+'</span><span style="font-size:0.82rem;color:#10b981;font-weight:700">\u2713</span></div>'}else{h+='<div style="display:flex;align-items:center;justify-content:center;height:36px"><span style="font-size:1.2rem;color:#d1d5db;font-weight:300">'+(isPast?'\u{1F512}':'+')+'</span></div>'}h+='</td>'});h+='</tr>'})}h+='</tbody></table></div>';h+='<div style="display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap;padding:10px 14px;background:#f9fafb;border-radius:8px"><span style="font-size:0.75rem;font-weight:600;color:#555">Legend:</span><span style="font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;background:#e0e7ff;color:#4338ca">Day Off</span><span style="font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;background:#dbeafe;color:#1d4ed8">VL</span><span style="font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;background:#fef3c7;color:#b45309">SL</span><span style="font-size:0.7rem;font-weight:600;padding:3px 8px;border-radius:4px;background:#fee2e2;color:#dc2626">Unpaid</span><span style="font-size:0.7rem;font-weight:600;color:#10b981;margin-left:auto">\u2713 = Saved \u2022 Click to add/remove</span></div>';h+='</div>';return h}
+function showScheduleType(member,date){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content" style="text-align:center"><h3>\u{1F4CB} Select Leave Type</h3><p style="font-size:0.85rem;color:#555;margin-bottom:16px"><strong>'+member+'</strong> \u2014 '+new Date(date+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})+'</p><div style="margin-bottom:12px; text-align:left"><label>Block From Time (Optional)</label><input type="time" id="s-block-time" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px"></div><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"><button class="btn" style="padding:12px;background:#e0e7ff;color:#4338ca;border:2px solid #c7d2fe;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'Day Off\')">\u{1F5D3}\uFE0F Day Off</button><button class="btn" style="padding:12px;background:#dbeafe;color:#1d4ed8;border:2px solid #93c5fd;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'VL\')">\u{1F3D6}\uFE0F VL (Vacation)</button><button class="btn" style="padding:12px;background:#fef3c7;color:#b45309;border:2px solid #fde68a;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'SL\')">\u{1F912} SL (Sick Leave)</button><button class="btn" style="padding:12px;background:#fee2e2;color:#dc2626;border:2px solid #fecaca;font-size:0.9rem;font-weight:600" onclick="doScheduleAdd(\''+member+'\',\''+date+'\',\'Unpaid Leave\')">\u{1F4B0} Unpaid Leave</button></div><button class="btn btn-secondary" onclick="closeModal()">Cancel</button></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+async function doScheduleAdd(member,date,type){
+    const bTimeInput = document.getElementById('s-block-time');
+    const bTime = bTimeInput ? bTimeInput.value : '';
+    
+    // Remove old leave locally (Optimistic UI)
+    state.leaves=state.leaves.filter(l=>!(l.memberId===member&&l.type!=='Skip'&&l.type!=='Skip by Tickets'&&l.startDate<=date&&l.endDate>=date));
+    
+    const newLeave = {memberId:member,type:type,startDate:date,endDate:date,remarks:'', block_from_time: bTime};
+    
+    const { error } = await supabaseClient.from('leaves').insert([newLeave]);
+    if (error) {
+        console.error("Supabase Error detailing:", error);
+        alert("Error saving leave: " + error.message);
+        return;
+    }
+    
+    state.leaves.push(newLeave);
+    addLog('Leave Scheduled',member+' - '+type+' on '+date);
+    closeModal();
+    render();
+    showToast(member+' \u2192 '+type);
+}
+function renderSchedule(){
+    // Sort leaves by date
+    const sortedLeaves = [...state.leaves].sort((a, b) => a.startDate.localeCompare(b.startDate));
+    
+    let h = '<div class="card"><h3>📅 Schedule & Leave Management</h3>';
+    h += '<button class="btn btn-primary" onclick="showBlock()" style="margin-bottom: 12px;">+ Add New Schedule/Leave</button>';
+    
+    h += `<div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size: 0.85rem;">
+            <thead>
+                <tr style="background:#f3f4f6; text-align:left">
+                    <th style="padding:10px">Member</th>
+                    <th style="padding:10px">Date</th>
+                    <th style="padding:10px">Type</th>
+                    <th style="padding:10px">Block From (Shift End)</th>
+                    <th style="padding:10px">Actions</th>
+                </tr>
+            </thead>
+            <tbody>`;
+            
+    if (sortedLeaves.length === 0) {
+        h += '<tr><td colspan="5" style="padding:20px; text-align:center; color:#999;">No scheduled leaves/blocks found.</td></tr>';
+    } else {
+        sortedLeaves.forEach(l => {
+            h += `<tr style="border-bottom:1px solid #eee">
+                <td style="padding:10px"><strong>${escHtml(l.memberId)}</strong></td>
+                <td style="padding:10px">${escHtml(l.startDate)}</td>
+                <td style="padding:10px"><span style="background:#e0e7ff; padding:2px 6px; border-radius:4px">${escHtml(l.type)}</span></td>
+                <td style="padding:10px">${escHtml(l.blockFromTime || '-')}</td>
+                <td style="padding:10px">
+                    <button class="btn btn-danger btn-sm" onclick="removeLeave('${escHtml(l.memberId)}','${escHtml(l.startDate)}')">Delete</button>
+                </td>
+            </tr>`;
+        });
+    }
+    
+    h += '</tbody></table></div></div>';
+    return h;
+}
 
 function renderApps() {
     const allApps = [...DEFAULT_APPS, ...state.customApps];
@@ -1653,14 +1663,18 @@ async function removeTicket(id){
     render();
     showToast('Ticket marked as removed');
 }
-function showBlock(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>\u23F8\uFE0F Block / Skip Member</h3><label>Member</label><select id="b-member">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><label>Type</label><select id="b-type" onchange="toggleBlockFields()"><option value="Day Off">Day Off</option><option value="VL">Vacation Leave</option><option value="SL">Sick Leave</option><option value="Skip">Skip (Time Range)</option></select><div id="b-dates"><label>Start Date</label><input type="date" id="b-start" value="'+getTodayStr()+'"><label>End Date</label><input type="date" id="b-end" value="'+getTodayStr()+'"></div><div id="b-time" class="hidden"><label>Skip From</label><input type="time" id="b-sfrom" value="08:00"><label>Skip Until</label><input type="time" id="b-sto" value="12:00"></div><label>Remarks (optional)</label><input type="text" id="b-remarks" placeholder="Reason..."><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-warning" onclick="doBlock()">Block</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
-function toggleBlockFields(){const t=document.getElementById('b-type').value;document.getElementById('b-dates').className=t==='Skip'?'hidden':'';document.getElementById('b-time').className=t==='Skip'?'':'hidden'}
+function showBlock(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>\u23F8\uFE0F Block / Skip Member</h3><label>Member</label><select id="b-member">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><label>Type</label><select id="b-type" onchange="toggleBlockFields()"><option value="Day Off">Day Off</option><option value="VL">Vacation Leave</option><option value="SL">Sick Leave</option><option value="Skip">Skip (Time Range)</option></select><div id="b-dates"><label>Start Date</label><input type="date" id="b-start" value="'+getTodayStr()+'"><label>End Date</label><input type="date" id="b-end" value="'+getTodayStr()+'"></div><div id="b-block-from"><label>Block From Time (Optional)</label><input type="time" id="b-from-time" value=""></div><div id="b-time" class="hidden"><label>Skip From</label><input type="time" id="b-sfrom" value="08:00"><label>Skip Until</label><input type="time" id="b-sto" value="12:00"></div><label>Remarks (optional)</label><input type="text" id="b-remarks" placeholder="Reason..."><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-warning" onclick="doBlock()">Block</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+function toggleBlockFields(){const t=document.getElementById('b-type').value;document.getElementById('b-dates').className=t==='Skip'?'hidden':'';document.getElementById('b-block-from').className=t==='Skip'?'hidden':'';document.getElementById('b-time').className=t==='Skip'?'':'hidden'}
 function doBlock(){
     const m=document.getElementById('b-member').value;
     const t=document.getElementById('b-type').value;
     const rm=document.getElementById('b-remarks').value.trim();
     const start = document.getElementById('b-start').value;
     const end = document.getElementById('b-end').value;
+    
+    // SAFE GETTER: Kung walang element, empty string ang balik
+    const bFromElement = document.getElementById('b-from-time');
+    const blockFromVal = bFromElement ? bFromElement.value : '';
     
     // Validation
     const today = getTodayStr();
@@ -1669,13 +1683,14 @@ function doBlock(){
         return;
     }
     
-    let rec={memberId:m,type:t,remarks:rm,startDate:start,endDate:end};
+    let rec={memberId:m,type:t,remarks:rm,startDate:start,endDate:end,blockFromTime: blockFromVal};
     
     if(t==='Skip'){
         rec.skipStartTime=document.getElementById('b-sfrom').value;
         rec.skipEndTime=document.getElementById('b-sto').value;
         rec.startDate = today;
         rec.endDate = today;
+        delete rec.blockFromTime; // Skip uses its own time
         if (rec.skipEndTime <= rec.skipStartTime) {
             alert('Invalid Time: End time must be after start time.');
             return;
@@ -1689,8 +1704,16 @@ function doBlock(){
     closeModal();
     render();
 }
-function unblock(m){state.leaves=state.leaves.filter(l=>l.memberId!==m);addLog('Member Unblocked',m);saveState();render()}
-function removeLeave(m,sd){state.leaves=state.leaves.filter(l=>!(l.memberId===m&&l.startDate===sd));addLog('Leave Removed',m);saveState();render()}
+async function unblock(m){
+    await supabaseClient.from('leaves').delete().eq('memberId', m);
+    addLog('Member Unblocked',m);
+    render();
+}
+async function removeLeave(m,sd){
+    await supabaseClient.from('leaves').delete().eq('memberId', m).eq('startDate', sd);
+    addLog('Leave Removed',m);
+    render();
+}
 function exportCSV(){const t=getTicketsForDate();let c='Time,Title,Assignee,Applications,Status,Removed\n';t.forEach(x=>{const tm=new Date(x.createdAt).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});c+=tm+',"'+x.title+'",'+x.assignee+',"'+(x.applications||[]).join('; ')+'",'+x.status+',"'+(x.removedReason||'')+'"\n'});dlFile('rotaguard-'+state.viewDate+'.csv',c,'text/csv')}
 function exportJSON(){const d={exportedAt:new Date().toISOString(),members:state.members,memberEmails:state.memberEmails,tickets:state.tickets,leaves:state.leaves,logs:state.logs,customApps:state.customApps,rotationIndex:state.rotationIndex,dedicatedRules:state.dedicatedRules||[]};dlFile('rotaguard-backup-'+getTodayStr()+'.json',JSON.stringify(d,null,2),'application/json')}
 function dlFile(fn,content,mime){const b=new Blob([content],{type:mime});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u)}
