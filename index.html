@@ -115,44 +115,37 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">13</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">11</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='jan rhey'; render();">
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Wed, Jul 29, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Wed, Jul 29, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5" class="">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981" class="">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3 class="">Eff.</h3><div style="font-size:1.5rem;font-weight:700" class="">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3 class="">⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='jan rhey'; render();">
             <span class="workload-label">jan rhey </span>
             <div class="workload-track">
                 <div class="workload-fill" style="width:100%;background:#ef4444"></div>
             </div>
-            <span class="workload-value">6 tix</span>
+            <span class="workload-value">0 tix</span>
         </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
-            <span class="workload-label">KYLE </span>
+            <span class="workload-label">KYLE 🎯</span>
             <div class="workload-track">
-                <div class="workload-fill" style="width:50%;background:#10b981"></div>
+                <div class="workload-fill" style="width:14.285714285714285%;background:#a855f7"></div>
             </div>
-            <span class="workload-value">3 tix</span>
+            <span class="workload-value">0 tix</span>
         </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
             <span class="workload-label">JUNEALYN </span>
             <div class="workload-track">
-                <div class="workload-fill" style="width:33.33333333333333%;background:#10b981"></div>
+                <div class="workload-fill" style="width:28.57142857142857%;background:#10b981"></div>
             </div>
-            <span class="workload-value">2 tix</span>
+            <span class="workload-value">0 tix</span>
         </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
             <span class="workload-label">jan rhey</span>
             <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">6 tix</span>
+            <span class="workload-value">19 tix</span>
         </div><div class="workload-row">
             <span class="workload-label">KYLE</span>
-            <div class="workload-track"><div class="workload-fill" style="width:66.66666666666666%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">4 tix</span>
+            <div class="workload-track"><div class="workload-fill" style="width:31.57894736842105%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">6 tix</span>
         </div><div class="workload-row">
             <span class="workload-label">JUNEALYN</span>
-            <div class="workload-track"><div class="workload-fill" style="width:50%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">3 tix</span>
-        </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JUNEALYN</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-28</div><button class="btn btn-sm btn-secondary" onclick="unblock('JUNEALYN')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">KYLE</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-28</div><button class="btn btn-sm btn-secondary" onclick="unblock('KYLE')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-07-29</div><div style="font-weight:600;color:var(--accent-color)">SL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-07-29</div><div style="font-weight:600;color:var(--accent-color)">Unpaid Leave</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">jan rhey</div><div style="color:var(--text-muted)">2026-07-29</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-07-30</div><div style="font-weight:600;color:var(--accent-color)" class="">VL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-07-30</div><div style="font-weight:600;color:var(--accent-color)">SL</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip active">jan rhey (6)</span><span class="member-chip blocked">⏸️ KYLE (4)</span><span class="member-chip blocked">⏸️ JUNEALYN (3)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div><div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Create Ticket</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600"></div><label>Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label class="">Applications</label><div class="apps-grid" id="t-apps" onclick="updateAssignmentExplanation()"><div class="app-chip" onclick="this.classList.toggle('selected')">Active Directory</div><div class="app-chip   ablefocused selected" onclick="this.classList.toggle('selected')"  data-qb-tmp-id="lt-988321" spellcheck="false" data-gramm="false">Email Account</div><div class="app-chip" onclick="this.classList.toggle('selected')">Phoenix</div><div class="app-chip" onclick="this.classList.toggle('selected')">Peoplesoft</div><div class="app-chip" onclick="this.classList.toggle('selected')">8x8</div><div class="app-chip" onclick="this.classList.toggle('selected')">CBIS</div><div class="app-chip" onclick="this.classList.toggle('selected')">Astra</div><div class="app-chip" onclick="this.classList.toggle('selected')">Adobe</div><div class="app-chip" onclick="this.classList.toggle('selected')">Purchase Order</div></div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div><label class="">Assignment</label><div style="display:flex;gap:8px;margin-bottom:12px"><button onclick="document.getElementById('t-assign-opt').value='auto'; this.style.background='#e0e7ff'; this.nextElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='none'; document.getElementById('t-assign-expl').style.display='block'; updateAssignmentExplanation();" class="btn" style="flex:1;background:#e0e7ff;border:1px solid #c7d2fe">⚖️ Auto (Balanced)</button><button onclick="document.getElementById('t-assign-opt').value='specific'; this.style.background='#e0e7ff'; this.previousElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='block'; document.getElementById('t-assign-expl').style.display='none';" class="btn" style="flex:1;background:#f3f4f6;border:1px solid #d1d5db">👤 Specific Person</button></div><input type="hidden" id="t-assign-opt" value="auto"><div id="t-assign-expl"><div style="font-size:0.75rem; color:#4338ca; background:#e0e7ff; padding:8px; border-radius:6px; margin-bottom:8px;">
-        <div style="font-weight:700; margin-bottom:4px">📊 Why jan rhey? (⚖️ Day Balance)</div>
-        <div style="margin-left:4px">
-            • <strong>jan rhey</strong>: 6 tasks today (6 tickets) (lowest today)<br>
-            • Others:<br>
-            
-        </div><div style="margin-top:4px; margin-left:4px">⏸️ Skipped: KYLE, JUNEALYN (on leave/blocked)</div><div style="margin-top:6px; font-weight:600; color:#059669">✅ Fewest daily tasks (apps + child tickets) gets the next ticket</div>
-    </div></div><select id="t-assign-specific" style="margin-bottom:12px; display:none;"><option value="jan rhey">jan rhey</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option></select><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddTicket('null')">Create</button></div></div></div></div>
+            <div class="workload-track"><div class="workload-fill" style="width:31.57894736842105%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">6 tix</span>
+        </div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-07-30</div><div style="font-weight:600;color:var(--accent-color)">VL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-07-30</div><div style="font-weight:600;color:var(--accent-color)">SL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-07-31</div><div style="font-weight:600;color:var(--accent-color)">Unpaid Leave</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-07-31</div><div style="font-weight:600;color:var(--accent-color)">VL</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip">jan rhey (0)</span><span class="member-chip">KYLE (0)</span><span class="member-chip active">JUNEALYN (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -372,19 +365,26 @@ async function addLog(a, d) {
 }
 function isMemberBlocked(m){const today=getTodayStr();const now=new Date();const ct=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');return state.leaves.some(l=>{if(l.memberId!==m)return false;if(l.type==='Skip'){if(l.startDate!==today)return false;return l.skipStartTime&&l.skipEndTime?ct>=l.skipStartTime&&ct<=l.skipEndTime:false}if(l.startDate<=today&&l.endDate>=today){if(l.blockFromTime&&l.startDate===today)return ct>=l.blockFromTime;return true}return false})}
 function getDayBalance(m) {
-    const today = getTodayStr();
-    // Count only OPEN tickets (Main + Child) assigned to this member today.
-    // Tickets routed away (either to a group or another person) will have a different 'assignee', 
-    // so they are automatically deducted from this member's count.
-    const tickets = state.tickets.filter(t => 
-        t.assignee === m && 
-        t.createdAt && t.createdAt.startsWith(today) && 
-        t.status === 'Open' &&
-        !t.removedreason
-    );
-    
-    // Debug output
-    console.log(`Day Balance Debug for ${m}:`, tickets.length, tickets.map(t => t.title));
+    const dateToCheck = state.viewDate;
+    const mClean = (m || "").trim().toLowerCase();
+
+    const tickets = state.tickets.filter(t => {
+        const tAssignee = (t.assignee || "").trim().toLowerCase();
+        if (!t.createdAt) return false;
+        
+        // Force UTC+8 (Taipei/Manila Time) offset matches getTicketsForDate()
+        const dateObj = new Date(t.createdAt);
+        const taipeiTime = new Date(dateObj.getTime() + (8 * 60 * 60 * 1000));
+        const tDate = taipeiTime.toISOString().substring(0, 10);
+        
+        const hasRemovedReason = (t.removedreason || t.removedReason);
+        const matchAssignee = tAssignee === mClean;
+        const matchDate = tDate === dateToCheck;
+        const matchStatus = t.status === 'Open';
+        const notRemoved = !hasRemovedReason;
+        
+        return matchAssignee && matchDate && matchStatus && notRemoved;
+    });
     
     return tickets.length;
 }
@@ -429,23 +429,33 @@ function getNextAssignee(){
     return cands[0]||''
 }
 function getTicketsForDate(){
-    return state.tickets.filter(t => t.createdAt && t.createdAt.startsWith(state.viewDate));
+    return state.tickets.filter(t => {
+        if (!t.createdAt) return false;
+        // Force UTC+8 (Taipei/Manila Time) offset for consistency
+        const dateObj = new Date(t.createdAt);
+        // Shift time to UTC+8 manually to ensure 12:01 AM is counted as "today"
+        const taipeiTime = new Date(dateObj.getTime() + (8 * 60 * 60 * 1000));
+        const localDate = taipeiTime.toISOString().substring(0, 10);
+        return localDate === state.viewDate;
+    });
 }
 function getFilteredTickets(){
-    let pool=state.searchQuery?state.tickets:getTicketsForDate();
-    let r=pool.filter(t=>!t.removedreason);
+    // Show all non-removed tickets by default to ensure visibility
+    let r = state.tickets.filter(t => !t.removedreason);
     
-    // If NOT searching and not filtering by member, exclude children tickets from the main view
-    if(!state.searchQuery && state.filterMember === 'all') {
-        r = r.filter(t=>!t.parentId);
+    // Apply date filter ONLY if we are NOT searching
+    if (!state.searchQuery) {
+       r = getTicketsForDate().filter(t => !t.removedreason);
     }
-
-    if(state.filterMember!=='all')r=r.filter(t=>t.assignee===state.filterMember);
+    
+    if(state.filterMember !== 'all') {
+        r = r.filter(t => t.assignee === state.filterMember);
+    }
     if(state.searchQuery){
-        const q=state.searchQuery.toLowerCase();
-        r=r.filter(t=>t.title.toLowerCase().includes(q)||t.assignee.toLowerCase().includes(q)||(t.applications||[]).some(a=>a.toLowerCase().includes(q)))
+        const q = state.searchQuery.toLowerCase();
+        r = r.filter(t => t.title.toLowerCase().includes(q) || t.assignee.toLowerCase().includes(q) || (t.applications || []).some(a => a.toLowerCase().includes(q)))
     }
-    return r
+    return r;
 }
 function render(){
     const app=document.getElementById('app');
@@ -529,7 +539,7 @@ function renderDashboard(tfd,ac,na,today){
         const isDed = dedicatedNamesArray.includes(m.trim().toLowerCase());
         const p = (c / mx) * 100;
         const col = isDed ? '#a855f7' : (p >= 90 ? '#ef4444' : p >= 60 ? '#f59e0b' : '#10b981');
-        const tx = state.tickets.filter(t => t.assignee === m && t.createdAt.startsWith(today) && !t.removedreason).length;
+        const tx = c; // Use the balance from getDayBalance which respects viewDate
         
         h += `<div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='${m}'; render();">
             <span class="workload-label">${m} ${isDed ? '🎯' : ''}</span>
@@ -781,15 +791,19 @@ function renderSchedule(){
     });
     h += '</tr></thead><tbody>';
     
+    const today = getTodayStr();
     state.members.forEach(m => {
         h += `<tr>
             <td style="text-align:left; font-weight:600;">${escHtml(m)}</td>`;
         dates.forEach(d => {
+            const isPast = d < today;
             const leave = getLeaveForCell(m, d);
-            const style = leave ? getTypeStyle(leave.type) : {bg:'var(--sidebar-bg)',color:'var(--text-muted)',label:'-'};
+            const style = leave ? getTypeStyle(leave.type) : (isPast ? {bg:'#f1f5f9', color:'#cbd5e1', label:'🔒'} : {bg:'var(--sidebar-bg)',color:'var(--text-muted)',label:'•'});
+            const cellClick = isPast ? '' : `onclick="schedCellClick('${m}','${d}')"`;
+            const cursor = isPast ? 'default' : 'pointer';
             h += `<td>
-                <div onclick="schedCellClick('${m}','${d}')" class="schedule-cell" style="background:${style.bg}; color:${style.color};">
-                    ${leave ? style.label : '•'}
+                <div ${cellClick} class="schedule-cell" style="background:${style.bg}; color:${style.color}; cursor:${cursor}; font-size:0.7rem;">
+                    ${leave ? style.label : (isPast ? '🔒' : '•')}
                 </div>
             </td>`;
         });
