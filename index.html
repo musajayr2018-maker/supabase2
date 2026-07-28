@@ -108,27 +108,80 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">1</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">1</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='kyle joshua bunhan'; render();">
-            <span class="workload-label">kyle joshua bunhan 🎯</span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#a855f7"></div>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab" onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab" onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="Paola">Paola</option><option value="JUNEALYN">JUNEALYN</option><option value="kYLE">kYLE</option><option value="John carlo">John carlo</option><option value="Jenica">Jenica</option><option value="Rendy">Rendy</option><option value="Joshua">Joshua</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">2 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem" class="">Paola</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400" class="">1 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <div class="tickets-grid"><div class="ticket-card">
+        <div onclick="showTicketDetails('1785211469122')">
+            <div class="title">🎫 test ticket - Active Directory ✏️ ✕</div>
+            <div class="assignee" style="font-size:0.75rem">👤 Assigned to: Paola</div>
+            <div class="meta " style="font-size:0.7rem">📅 2026-07-28 12:04 PM • Open</div>
+            <div style="font-size:0.7rem; margin-top:4px; font-weight:600; color: #4f46e5;">📋 Tasks — 0/2 completed</div>
+        </div>
+        <div class="actions" onclick="event.stopPropagation()" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;align-items:center">
+            <button class="btn btn-secondary btn-sm" onclick="toggleActions(this)">⋮ Actions</button>
+            <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                <button class="btn btn-success btn-sm" onclick="completeTicket('1785211469122')">✅ Done</button>
+                <button class="btn btn-secondary btn-sm" onclick="showRouteToGroup(''+t.id+'')">🔀 Route</button>
+                
+                <button class="btn btn-secondary btn-sm" onclick="showEditTicket(''+t.id+'')">✏️ Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="removeTicket(''+t.id+'')">🗑️ Remove</button>
             </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
-            <span class="workload-label">Paola </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
-            <span class="workload-label">kyle joshua bunhan</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Paola</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><div class="members-bar"><span class="member-chip">kyle joshua bunhan (0)</span><span class="member-chip active">Paola (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div><div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>⏸️ Block / Skip Member</h3><label>Member</label><select id="b-member"><option value="kyle joshua bunhan">kyle joshua bunhan</option><option value="Paola">Paola</option></select><label class="">Type</label><select id="b-type" onchange="toggleBlockFields()"><option value="Day Off">Day Off</option><option value="VL">Vacation Leave</option><option value="SL">Sick Leave</option><option value="Skip">Skip (Time Range)</option></select><div id="b-dates" class="hidden"><label class="">Start Date</label><input type="date" id="b-start" value="2026-07-28"><label class="">End Date</label><input type="date" id="b-end" value="2026-07-28"></div><div id="b-time" class=""><label>Skip From</label><input type="time" id="b-sfrom" value="08:00"><label class="">Skip Until</label><input type="time" id="b-sto" value="12:00"></div><label>Remarks (optional)</label><input type="text" id="b-remarks" placeholder="Reason..."><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-warning" onclick="doBlock()">Block</button></div></div></div></div>
+        </div>
+    </div></div>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem" class="">JUNEALYN</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400" class="">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem" class="">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem" class="">kYLE</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400" class="">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">John carlo</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">Jenica</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">Rendy</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">Joshua</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -181,7 +234,10 @@ async function loadState() {
         }
         // Load Members
         const { data: members } = await supabaseClient.from('members').select('*');
-        if (members) state.members = members.map(m => m.name);
+        if (members) {
+            state.members = members.map(m => m.name);
+            members.forEach(m => state.memberEmails[m.name] = m.email);
+        }
 
         // Load Leaves
         const { data: leaves } = await supabaseClient.from('leaves').select('*');
@@ -620,8 +676,36 @@ else viewContent = '<div class="tickets-grid">'+f.map(t=>renderTicketCard(t)).jo
 
 return '<div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">\u25C0 Prev</button><div><span class="date-label">'+formatDate(state.viewDate)+'</span>'+(state.viewDate!==getTodayStr()?'<button class="today-btn" onclick="goToday()">Today</button>':'')+'</div><button class="btn btn-secondary btn-sm" onclick="goDate(1)"'+(state.viewDate>=getTodayStr()?' disabled':'')+'>Next \u25B6</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>\u{1F50D}</span><input type="text" placeholder="Search tickets..." value="'+escHtml(state.searchQuery)+'" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all"'+(state.filterMember==='all'?' selected':'')+'>All Members</option>'+state.members.map(m=>'<option value="'+m+'"'+(state.filterMember===m?' selected':'')+'>'+m+'</option>').join('')+'</select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card" '+(state.ticketsViewMode==='card'?'selected':'')+'>Cards</option><option value="list" '+(state.ticketsViewMode==='list'?'selected':'')+'>List</option><option value="table" '+(state.ticketsViewMode==='table'?'selected':'')+'>Table</option><option value="compact" '+(state.ticketsViewMode==='compact'?'selected':'')+'>Compact</option><option value="kanban" '+(state.ticketsViewMode==='kanban'?'selected':'')+'>Kanban</option><option value="detailed" '+(state.ticketsViewMode==='detailed'?'selected':'')+'>Detailed</option><option value="byMember" '+(state.ticketsViewMode==='byMember'?'selected':'')+'>By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">'+f.length+' tickets</span></div></div><div class="card">'+viewContent+(f.length===0?'<p style="color:#999;font-size:0.85rem">No tickets found</p>':'')+'</div>'}
 
-function renderTicketRow(t){const cls=t.status==='Completed'?'completed':'';return '<div class="ticket-card '+cls+'" onclick="showTicketDetails(\''+t.id+'\')" style="width:100%;display:flex;justify-content:space-between;align-items:center;cursor:pointer"><div style="flex:1"><div style="font-weight:600">'+escHtml(t.title)+'</div><div style="font-size:0.75rem;color:var(--text-muted)">'+t.assignee+' \u2022 '+t.status+'</div></div>'+(t.status==='Open'?'<div class="actions" onclick="event.stopPropagation()"><button class="btn btn-success" onclick="completeTicket(\''+t.id+'\')">\u2705</button></div>':'')+'</div>'}
-function renderMembers(){return '<div class="card"><h3>\u{1F465} Team Members ('+state.members.length+')</h3><button class="btn btn-primary" onclick="showAddMember()" style="margin-bottom:16px">+ Add Member</button><table style="width:100%;border-collapse:collapse"><tr style="text-align:left;color:var(--text-muted);font-size:0.8rem"><th>Name</th><th>Email</th><th>Actions</th></tr>'+state.members.map(m=>{const em=state.memberEmails[m]||'-';return '<tr style="border-top:1px solid var(--border-color)"><td style="padding:12px 0;font-weight:600">'+m+'</td><td style="padding:12px 0;color:var(--text-muted)">'+em+'</td><td style="padding:12px 0"><button class="btn btn-secondary btn-sm" onclick="showEditMember(\''+m+'\')">Edit</button> <button class="btn btn-danger btn-sm" onclick="removeMember(\''+m+'\')">Remove</button></td></tr>'}).join('')+'</table></div>'}
+function renderTicketRow(t){
+    const cls = t.status === 'Completed' ? 'completed' : '';
+    return `<div class="ticket-card ${cls}" onclick="showTicketDetails('${t.id}')" style="width:100%;display:flex;justify-content:space-between;align-items:center;cursor:pointer">
+        <div style="flex:1">
+            <div style="font-weight:600">${escHtml(t.title)}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">${t.assignee} • ${t.status}</div>
+        </div>
+        ${t.status==='Open' ? `<div class="actions" onclick="event.stopPropagation()"><button class="btn btn-success btn-sm" onclick="completeTicket('${t.id}')">✅ Done</button></div>` : ''}
+    </div>`;
+}
+function renderMembers() {
+    return `<div class="card">
+        <h3>\u{1F465} Team Members (${state.members.length})</h3>
+        <button class="btn btn-primary" onclick="showAddMember()" style="margin-bottom:16px">+ Add Member</button>
+        <table style="width:100%;border-collapse:collapse">
+            <tr style="text-align:left;color:var(--text-muted);font-size:0.8rem"><th>Name</th><th>Email</th><th>Actions</th></tr>
+            ${state.members.map(m=>{
+                const em = state.memberEmails[m] || '-';
+                return `<tr style="border-top:1px solid var(--border-color)">
+                    <td style="padding:12px 0;font-weight:600">${m}</td>
+                    <td style="padding:12px 0;color:var(--text-muted)">${em}</td>
+                    <td style="padding:12px 0">
+                        <button class="btn btn-secondary btn-sm" onclick="showEditMember('${m}')">Edit</button> 
+                        <button class="btn btn-danger btn-sm" onclick="removeMember('${m}')">Remove</button>
+                    </td>
+                </tr>`;
+            }).join('')}
+        </table>
+    </div>`;
+}
 var schedWeekOffset=0;
 function getWeekDates(offset){const now=new Date();const day=now.getDay();const diff=day===0?-6:1-day;const mon=new Date(now);mon.setDate(now.getDate()+diff+offset*7);const dates=[];for(let i=0;i<7;i++){const d=new Date(mon);d.setDate(mon.getDate()+i);dates.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'))}return dates}
 function fmtShort(d){return new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})}
@@ -1046,9 +1130,53 @@ async function doAddMember(){
 
 function doLogin(){const e=document.getElementById('login-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email');return}state.loggedIn=true;state.currentUser=e;localStorage.setItem('rotaguard-user',e);render()}
 function doLogout(){localStorage.removeItem('rotaguard-user');state.loggedIn=false;state.currentUser='';render()}
-function removeMember(n){if(!confirm('Remove '+n+'?'))return;state.members=state.members.filter(m=>m!==n);delete state.memberEmails[n];addLog('Member Removed',n);saveState();render()}
+async function removeMember(n){
+    if(!confirm('Remove '+n+'?')) return;
+    
+    // Delete from DB (Row-based)
+    await supabaseClient.from('members').delete().eq('name', n);
+    
+    state.members = state.members.filter(m=>m!==n);
+    delete state.memberEmails[n];
+    addLog('Member Removed',n);
+    saveState();
+    render();
+}
 
-function showEditMember(name){const em=state.memberEmails[name]||'';const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Edit Member</h3><label>Name</label><input type="text" id="m-edit-name" value="'+name+'"><label>Email</label><input type="email" id="m-edit-email" value="'+em+'"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doEditMember(\''+name+'\')">Save</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+function showEditMember(name){
+    const em=state.memberEmails[name]||'';
+    const h=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal-content">
+            <h3>Edit Member</h3>
+            <label>Name</label><input type="text" id="m-edit-name" value="${name}">
+            <label>Email</label><input type="email" id="m-edit-email" value="${em}">
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="doEditMember('${name}')">Save</button>
+            </div>
+        </div>
+    </div>`;
+    document.getElementById('app').insertAdjacentHTML('beforeend',h);
+}
+
+async function doEditMember(oldName){
+    const n = document.getElementById('m-edit-name').value.trim();
+    const e = document.getElementById('m-edit-email').value.trim();
+    
+    if(!n){alert('Name required');return}
+    
+    // Update DB
+    await supabaseClient
+        .from('members')
+        .update({ email: e })
+        .eq('name', n);
+        
+    state.memberEmails[n] = e;
+    addLog('Member Edited', n + ' (Email updated)');
+    saveState();
+    closeModal();
+    render();
+}
 
 function showEditTicket(id){
     const t=state.tickets.find(x=>x.id===id);
@@ -1286,11 +1414,54 @@ function doAddTicket(parentId){
     showToast(title + ' Created');
 }
 
+async function swapTicketHierarchy(childId, parentId) {
+    // childId needs to become parent, parentId needs to become child
+    const child = state.tickets.find(x => x.id == childId);
+    const parent = state.tickets.find(x => x.id == parentId);
+    
+    // Update DB hierarchy
+    await dbUpdateTicket(childId, { parentId: null });
+    await dbUpdateTicket(parentId, { parentId: childId });
+    
+    // Update local state
+    child.parentId = null;
+    parent.parentId = childId;
+    
+    addLog('Hierarchy Swapped', `Swapped ${child.title} with Parent ${parent.title}`);
+    render();
+    closeModal();
+    showToast("Hierarchy swapped successfully");
+}
+
 function showTicketDetails(id){
     const t=state.tickets.find(x=>x.id===id);
     if(!t)return;
-    const children=state.tickets.filter(x=>x.parentId===id);
-    const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Ticket: '+escHtml(t.title)+'</h3><p><strong>App:</strong> '+(t.applications||[]).join(', ')+'</p><p><strong>Assignee:</strong> '+t.assignee+'</p><p><strong>Status:</strong> '+t.status+'</p><h4>Route Options</h4><div style="display:flex;gap:8px;margin-bottom:15px"><button class="btn btn-secondary" onclick="showRouteToGroup(\''+id+'\')">Route to Group</button><button class="btn btn-secondary" onclick="showRouteToMember(\''+id+'\')">Route to Member</button></div><div style="background:var(--bg-color);padding:15px;border-radius:12px;border:1px solid var(--border-color);margin-top:10px"><h4>Child Tickets ('+children.length+')</h4><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:15px">'+children.map(c=>'<div style="font-size:0.85rem;padding:10px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);"><div><strong>'+(c.status==='Completed'?'✅ Done ':'⏳ Pending ')+'📋 '+c.title+'</strong></div><div style="font-size:0.75rem;color:#666;margin:4px 0">Apps: '+(c.applications||[]).join(', ')+'</div><div style="display:flex;gap:4px;flex-wrap:wrap">'+(c.status==='Open'?'<button class="btn btn-success btn-sm" onclick="completeTicket(\''+c.id+'\')">✅ Done</button>':'')+'<button class="btn btn-secondary btn-sm" onclick="showRouteToGroup(\''+c.id+'\')">🔀 Route to Group</button><button class="btn btn-secondary btn-sm" onclick="takeOwnership(\''+c.id+'\')">🙋 Take Ownership</button><button class="btn btn-secondary btn-sm" onclick="showRouteToMember(\''+c.id+'\')">🔄 Reassign</button><button class="btn btn-secondary btn-sm" onclick="showEditTicket(\''+c.id+'\')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="removeTicket(\''+c.id+'\')">🗑️ Remove</button></div></div>').join('')+'</div><button class="btn btn-primary btn-sm" onclick="showTicketModal(\''+id+'\')">+ Add Child Ticket</button></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div></div></div>';
+    const children=state.tickets.filter(x=>x.parentId == id);
+    const h=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal-content">
+            <h3>Ticket: ${escHtml(t.title)}</h3>
+            <p><strong>App:</strong> ${(t.applications||[]).join(', ')}</p>
+            <p><strong>Assignee:</strong> ${t.assignee}</p>
+            <p><strong>Status:</strong> ${t.status}</p>
+            <h4>Route Options</h4>
+            <div style="display:flex;gap:8px;margin-bottom:15px">
+                <button class="btn btn-secondary" onclick="showEditTicket('${id}')">✏️ Edit Details</button>
+            </div>
+            <div style="background:var(--bg-color);padding:15px;border-radius:12px;border:1px solid var(--border-color);margin-top:10px">
+                <h4>Child Tickets (${children.length})</h4>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:15px">
+                    ${children.map(c=>`
+                        <div style="font-size:0.85rem;padding:10px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);">
+                            <div><strong>${(c.status==='Completed'?'✅ Done ':'⏳ Pending ')}📋 ${c.title}</strong></div>
+                            <button class="btn btn-sm btn-primary" onclick="swapTicketHierarchy('${c.id}', '${t.id}')">🔄 Swap as Parent</button>
+                        </div>
+                    `).join('')}
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="showTicketModal('${id}')">+ Add Child Ticket</button>
+            </div>
+            <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div>
+        </div>
+    </div>`;
     document.getElementById('app').insertAdjacentHTML('beforeend',h);
 }
 
@@ -1338,7 +1509,7 @@ function doRouteGroup(id){
 }
 function showRouteToMember(id){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Route Ticket</h3><label>Select New Member</label><select id="t-route-assignee">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doRouteTicket(\''+id+'\')">Confirm Route</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
 
-function showRouteToGroup(id){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Route Ticket</h3><p><em>(Routing to groups not yet implemented)</em></p><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+// Duplicate function removed. Using the implementation above.
 
 function takeOwnership(id){
     const t=state.tickets.find(x=>x.id===id);
@@ -1368,11 +1539,11 @@ function doRouteTicket(id){
     }
 }
 async function completeTicket(id){
-    const t = state.tickets.find(x => x.id === id);
+    const t = state.tickets.find(x => x.id == id);
     if(!t) return;
     t.status = 'Completed';
-    t.completedAt = new Date().toISOString();
-    await dbUpdateTicket(id, { status: t.status, completedAt: t.completedAt });
+    t.completedat = new Date().toISOString();
+    await dbUpdateTicket(id, { status: t.status, completedat: t.completedat });
     addLog((t.parentId ? 'Child Ticket Completed' : 'Ticket Completed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'"');
     render();
 }
@@ -1380,11 +1551,11 @@ async function completeTicket(id){
 async function removeTicket(id){
     const r = prompt('Reason for removal?');
     if(!r) return;
-    const t = state.tickets.find(x => x.id === id);
+    const t = state.tickets.find(x => x.id == id);
     if(!t) return;
-    t.removedReason = r;
+    t.removedreason = r;
     t.status = 'Completed';
-    await dbUpdateTicket(id, { removedReason: r, status: 'Completed' });
+    await dbUpdateTicket(id, { removedreason: t.removedreason, status: 'Completed' });
     addLog((t.parentId ? 'Child Ticket Removed' : 'Ticket Removed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'" - '+r);
     render();
 }
