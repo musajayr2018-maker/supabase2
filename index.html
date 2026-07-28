@@ -108,77 +108,42 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3 class="">Total</h3><div style="font-size:1.5rem;font-weight:700" class="">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3 class="">⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
-            <span class="workload-label">Paola </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
-            <span class="workload-label">JUNEALYN </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">1 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='kYLE'; render();">
-            <span class="workload-label">kYLE </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John carlo'; render();">
-            <span class="workload-label">John carlo </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Jenica'; render();">
-            <span class="workload-label">Jenica </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Rendy'; render();">
-            <span class="workload-label">Rendy </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Joshua'; render();">
-            <span class="workload-label">Joshua </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
-            <span class="workload-label">Paola</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">JUNEALYN</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">kYLE</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">John carlo</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Jenica</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Rendy</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Joshua</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><div class="members-bar"><span class="member-chip active">Paola (0)</span><span class="member-chip">JUNEALYN (1)</span><span class="member-chip">kYLE (0)</span><span class="member-chip">John carlo (0)</span><span class="member-chip">Jenica (0)</span><span class="member-chip">Rendy (0)</span><span class="member-chip">Joshua (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab active" onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><h3>📈 Performance Metrics Overview</h3><div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:20px;"><div style="background:#fefce8; padding:16px; border-radius:8px; border:1px solid #fde68a;">
+            <div style="font-size:0.8rem; color:#854d0e; font-weight:600">Parent Tickets</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#713f12">1</div>
+          </div>
+          <div style="background:#f0fdfa; padding:16px; border-radius:8px; border:1px solid #99f6e4;">
+            <div style="font-size:0.8rem; color:#115e59; font-weight:600">Child Tickets</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#134e4a">0</div>
+          </div>
+          <div style="background:#eff6ff; padding:16px; border-radius:8px; border:1px solid #bfdbfe;">
+            <div style="font-size:0.8rem; color:#1e40af; font-weight:600">Total Group Routes</div>
+            <div style="font-size:1.5rem; font-weight:700; color:#1e3a8a">0</div>
+          </div></div><h3>Detailed Productivity per Member</h3><table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;"><tbody><tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Parent</th><th style="padding:10px">Child</th><th style="padding:10px">Routed</th><th style="padding:10px">Removed</th><th style="padding:10px; font-weight:bold">Net</th><th style="padding:10px; font-weight:bold">Eff. %</th></tr><tr style="border-bottom:1px solid #eee">
+            <td style="padding:10px"><strong>jan rhey</strong></td>
+            <td style="padding:10px;">0</td>
+            <td style="padding:10px;">0</td>
+            <td style="padding:10px;">2</td>
+            <td style="padding:10px;">0</td>
+            <td style="padding:10px; font-weight:bold">-2</td>
+            <td style="padding:10px; font-weight:bold; color: #dc2626">0%</td>
+        </tr><tr style="border-bottom:1px solid #eee">
+            <td style="padding:10px"><strong>KYLE</strong></td>
+            <td style="padding:10px;">0</td>
+            <td style="padding:10px;">0</td>
+            <td style="padding:10px;">3</td>
+            <td style="padding:10px;">0</td>
+            <td style="padding:10px; font-weight:bold">-3</td>
+            <td style="padding:10px; font-weight:bold; color: #dc2626">0%</td>
+        </tr><tr style="border-bottom:1px solid #eee">
+            <td style="padding:10px"><strong>JUNEALYN</strong></td>
+            <td style="padding:10px;">1</td>
+            <td style="padding:10px;">0</td>
+            <td style="padding:10px;">0</td>
+            <td style="padding:10px;">1</td>
+            <td style="padding:10px; font-weight:bold">0</td>
+            <td style="padding:10px; font-weight:bold; color: #dc2626">0%</td>
+        </tr></tbody></table></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -381,7 +346,7 @@ function getDayBalance(m) {
         t.assignee === m && 
         t.createdAt && t.createdAt.startsWith(today) && 
         t.status === 'Open' &&
-        !t.removedReason
+        !t.removedreason
     );
     
     // Debug output
@@ -434,7 +399,7 @@ function getTicketsForDate(){
 }
 function getFilteredTickets(){
     let pool=state.searchQuery?state.tickets:getTicketsForDate();
-    let r=pool.filter(t=>!t.removedReason);
+    let r=pool.filter(t=>!t.removedreason);
     
     // If NOT searching and not filtering by member, exclude children tickets from the main view
     if(!state.searchQuery && state.filterMember === 'all') {
@@ -466,9 +431,9 @@ function renderMain(){const today=getTodayStr();const tfd=getTicketsForDate();co
 function renderDashboard(tfd,ac,na,today){
     // Exclude child tickets from stats: t.parentId === null
     const allTix = state.tickets.filter(t => t.createdAt.startsWith(today) && !t.parentId);
-    const openTix = allTix.filter(t => t.status === 'Open' && !t.removedReason).length;
-    const doneTix = allTix.filter(t => t.status === 'Completed').length;
-    const removedTix = allTix.filter(t => t.removedReason).length;
+    const openTix = allTix.filter(t => t.status === 'Open' && !t.removedreason).length;
+    const doneTix = allTix.filter(t => t.status === 'Completed' && !t.removedreason).length;
+    const removedTix = allTix.filter(t => t.removedreason).length;
     const completionRate = (allTix.length - removedTix) > 0 ? Math.round((doneTix / (allTix.length - removedTix)) * 100) : 0;
 
     const currentMonth = today.substring(0, 7);
@@ -521,7 +486,7 @@ function renderDashboard(tfd,ac,na,today){
         const isDed = dedicatedNamesArray.includes(m.trim().toLowerCase());
         const p = (c / mx) * 100;
         const col = isDed ? '#a855f7' : (p >= 90 ? '#ef4444' : p >= 60 ? '#f59e0b' : '#10b981');
-        const tx = state.tickets.filter(t => t.assignee === m && t.createdAt.startsWith(today) && !t.removedReason).length;
+        const tx = state.tickets.filter(t => t.assignee === m && t.createdAt.startsWith(today) && !t.removedreason).length;
         
         h += `<div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='${m}'; render();">
             <span class="workload-label">${m} ${isDed ? '🎯' : ''}</span>
@@ -608,7 +573,7 @@ function renderDoneTickets() {
     state.doneViewMode = state.doneViewMode || 'grouped';
     
     // Filter by completed status, then by member if selected
-    let doneTickets = state.tickets.filter(t => t.status === 'Completed' && !t.removedReason);
+    let doneTickets = state.tickets.filter(t => t.status === 'Completed' && !t.removedreason);
     if(state.filterMember !== 'all') doneTickets = doneTickets.filter(t => t.assignee === state.filterMember);
     doneTickets.sort((a,b) => new Date(b.completedAt || 0) - new Date(a.completedAt || 0));
 
@@ -695,11 +660,11 @@ function renderMembers() {
     return `<div class="card">
         <h3>\u{1F465} Team Members (${state.members.length})</h3>
         <button class="btn btn-primary" onclick="showAddMember()" style="margin-bottom:16px">+ Add Member</button>
+        ${state.members.length === 0 ? '<p style="text-align:center; padding:20px; color:var(--text-muted)">No team members found.</p>' : `
         <table style="width:100%;border-collapse:collapse">
             <tr style="text-align:left;color:var(--text-muted);font-size:0.8rem"><th>Name</th><th>Email</th><th>Actions</th></tr>
             ${state.members.map(m=>{
                 const em = state.memberEmails[m] || 'No Email';
-                console.log(`Checking email for ${m}:`, em);
                 return `<tr style="border-top:1px solid var(--border-color)">
                     <td style="padding:12px 0;font-weight:600">${m}</td>
                     <td style="padding:12px 0;color:var(--text-muted)">${em}</td>
@@ -709,7 +674,7 @@ function renderMembers() {
                     </td>
                 </tr>`;
             }).join('')}
-        </table>
+        </table>`}
     </div>`;
 }
 var schedWeekOffset=0;
@@ -848,26 +813,29 @@ function renderPerformance() {
     h += '<table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;">';
     h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Parent</th><th style="padding:10px">Child</th><th style="padding:10px">Routed</th><th style="padding:10px">Removed</th><th style="padding:10px; font-weight:bold">Net</th><th style="padding:10px; font-weight:bold">Eff. %</th></tr>';
     
+    // Create a list of titles for removed tickets to exclude from logs
+    const removedTickets = state.tickets.filter(t => t.removedreason);
+    const removedTitles = removedTickets.map(t => t.title);
+
     state.members.forEach(m => {
-        const parents = state.tickets.filter(t => t.assignee === m && !t.parentId && !t.removedReason).length;
-        const children = state.tickets.filter(t => t.assignee === m && t.parentId && !t.removedReason).length;
+        // Calculate ONLY active (Open) tickets currently held by this member
+        const parents = state.tickets.filter(t => t.assignee === m && !t.parentId && !t.removedreason && t.status === 'Open').length;
+        const children = state.tickets.filter(t => t.assignee === m && t.parentId && !t.removedreason && t.status === 'Open').length;
         
-        // Count logs using flexible matching
-        const routed = state.logs.filter(l => l.details.includes(m) && l.action.toLowerCase().includes('routed')).length;
-        const removed = state.logs.filter(l => l.details.includes(m) && l.action.toLowerCase().includes('removed')).length;
+        // For Active workload view, routed/removed are 0
+        const removed = 0;
+        const routed = 0;
         
-        const totalAssigned = parents + children;
-        const netTotal = totalAssigned - routed - removed;
-        const effPercent = totalAssigned > 0 ? Math.round((netTotal / totalAssigned) * 100) : 0;
+        const netTotal = parents + children;
         
         h += `<tr style="border-bottom:1px solid #eee">
             <td style="padding:10px"><strong>${m}</strong></td>
-            <td style="padding:10px;">${parents}</td>
-            <td style="padding:10px;">${children}</td>
-            <td style="padding:10px;">${routed}</td>
-            <td style="padding:10px;">${removed}</td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'parent')">${parents}</td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'child')">${children}</td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'routed')">${routed}</td>
+            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'removed')">${removed}</td>
             <td style="padding:10px; font-weight:bold">${netTotal}</td>
-            <td style="padding:10px; font-weight:bold; color: ${effPercent < 50 ? '#dc2626' : '#059669'}">${effPercent}%</td>
+            <td style="padding:10px; font-weight:bold; color: #059669">N/A</td>
         </tr>`;
     });
     h += '</table></div>';
@@ -880,13 +848,14 @@ function showPerformanceDetail(member, type) {
     let isLog = false;
     
     if (type === 'parent') {
-        data = state.tickets.filter(t => t.assignee === member && !t.parentId && !t.removedReason);
+        data = state.tickets.filter(t => t.assignee === member && !t.parentId && !t.removedreason && t.status === 'Open');
     } else if (type === 'child') {
-        data = state.tickets.filter(t => t.assignee === member && t.parentId && !t.removedReason);
-    } else {
+        data = state.tickets.filter(t => t.assignee === member && t.parentId && !t.removedreason && t.status === 'Open');
+    } else if (type === 'removed') {
+        data = state.tickets.filter(t => t.assignee === member && t.removedreason);
+    } else if (type === 'routed') {
         isLog = true;
-        let action = type === 'group' ? 'Routed to Group' : type === 'member' ? 'Routed to Member' : 'Removed';
-        data = state.logs.filter(l => l.details && l.details.includes(member) && l.action.includes(action));
+        data = state.logs.filter(l => l.details && l.details.includes(member) && l.action.toLowerCase().includes('routed'));
     }
 
     const dataJson = encodeURIComponent(JSON.stringify(data));
@@ -1106,32 +1075,44 @@ function goDate(o){const d=new Date(state.viewDate+'T00:00:00');d.setDate(d.getD
 function goToday(){state.viewDate=getTodayStr();render()}
 function showAddMember(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>+ Add Team Member</h3><label>Name</label><input type="text" id="m-name" placeholder="e.g. Juan Dela Cruz"><label>Email (optional)</label><input type="email" id="m-email" placeholder="e.g. juan@company.com"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddMember()">Add</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h);document.getElementById('m-name').focus()}
 async function doAddMember(){
-    const n = document.getElementById('m-name').value.trim();
-    const e = document.getElementById('m-email').value.trim();
-    if(!n){alert('Name required');return}
-    
-    // Log the action for debugging
-    console.log("Attempting to insert member:", { name: n, email: e });
-    
-    const { data, error } = await supabaseClient
-        .from('members')
-        .insert([{ name: n, email: e }]);
+    alert("Function triggered!"); // DEBUG: Para malaman kung gumagana yung button
+    try {
+        const n = document.getElementById('m-name').value.trim();
+        const e = document.getElementById('m-email').value.trim();
+        if(!n){alert('Name required'); return;}
         
-    if(error){ 
-        console.error("Supabase Error adding member:", error); 
-        alert("Failed to add member: " + JSON.stringify(error.message)); 
-        return; 
+        console.log("Subukan mag-ADD ng member:", { name: n, email: e }); 
+        
+        if (!supabaseClient) {
+            alert("Error: Supabase client is not initialized!");
+            return;
+        }
+
+        const { data, error } = await supabaseClient
+            .from('members')
+            .insert([{ name: n, email: e }]);
+            
+        if(error){ 
+            console.error("Supabase Error detailing:", error);
+            alert("Error sa Supabase: " + error.message); 
+            return; 
+        }
+        
+        alert("Success! Member added.");
+        
+        // Force refresh from Database para siguradong sync
+        const { data: refreshedMembers } = await supabaseClient.from('members').select('*');
+        if (refreshedMembers) {
+            state.members = refreshedMembers.map(m => m.name);
+            refreshedMembers.forEach(m => state.memberEmails[m.name] = m.email);
+            render();
+        }
+        
+        closeModal();
+    } catch (err) {
+        console.error("Catch block:", err);
+        alert("System error: " + err.message);
     }
-    
-    state.members.push(n);
-    if(e) state.memberEmails[n]=e;
-    
-    // Refresh members list from DB to be safe
-    const { data: members } = await supabaseClient.from('members').select('*');
-    if (members) state.members = members.map(m => m.name);
-    
-    render();
-    closeModal();
 }
 
 function doLogin(){const e=document.getElementById('login-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email');return}state.loggedIn=true;state.currentUser=e;localStorage.setItem('rotaguard-user',e);render()}
@@ -1568,7 +1549,6 @@ async function doRouteTicket(id) {
     
     if(t) {
         const oldAssignee = t.assignee;
-        t.assignee = newAssignee;
         
         // Update DB
         const success = await dbUpdateTicket(id, { assignee: newAssignee });
@@ -1576,13 +1556,21 @@ async function doRouteTicket(id) {
         if (success) {
             addLog((t.parentId ? 'Child Ticket Routed' : 'Ticket Routed'), 
                 (t.parentId ? '[Child] ' : '') + t.title + ' routed from ' + oldAssignee + ' to ' + newAssignee + ' | ' + justification);
+            
+            // FORCE FETCH REFRESH (Para siguradong updated ang UI kahit may delay sa realtime)
+            const { data: refreshedTickets } = await supabaseClient.from('tickets').select('*');
+            if (refreshedTickets) {
+                state.tickets = refreshedTickets.map(ticket => ({
+                    ...ticket, id: Number(ticket.id), parentId: ticket.parentid, 
+                    actionType: ticket.actiontype, createdAt: ticket.createdat, assignedBy: ticket.assignedby
+                }));
+            }
+            
             closeModal(); 
             closeModal(); 
-            render();
-            showToast('Ticket routed to ' + newAssignee);
+            render(); // Redraw
+            showToast('Ticket routed successfully to ' + newAssignee);
         } else {
-            t.assignee = oldAssignee;
-            render();
             alert("Failed to update database.");
         }
     } else {
@@ -1604,11 +1592,15 @@ async function removeTicket(id){
     if(!r) return;
     const t = state.tickets.find(x => x.id == id);
     if(!t) return;
+    
+    // Mark as removed, don't delete from DB so performance metrics stay accurate
     t.removedreason = r;
-    t.status = 'Completed';
-    await dbUpdateTicket(id, { removedreason: t.removedreason, status: 'Completed' });
+    t.status = 'Removed'; 
+    await dbUpdateTicket(id, { removedreason: r, status: 'Removed' });
+    
     addLog((t.parentId ? 'Child Ticket Removed' : 'Ticket Removed'),(t.parentId ? '[Child] ' : '')+'"'+t.title+'" - '+r);
     render();
+    showToast('Ticket marked as removed');
 }
 function showBlock(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>\u23F8\uFE0F Block / Skip Member</h3><label>Member</label><select id="b-member">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><label>Type</label><select id="b-type" onchange="toggleBlockFields()"><option value="Day Off">Day Off</option><option value="VL">Vacation Leave</option><option value="SL">Sick Leave</option><option value="Skip">Skip (Time Range)</option></select><div id="b-dates"><label>Start Date</label><input type="date" id="b-start" value="'+getTodayStr()+'"><label>End Date</label><input type="date" id="b-end" value="'+getTodayStr()+'"></div><div id="b-time" class="hidden"><label>Skip From</label><input type="time" id="b-sfrom" value="08:00"><label>Skip Until</label><input type="time" id="b-sto" value="12:00"></div><label>Remarks (optional)</label><input type="text" id="b-remarks" placeholder="Reason..."><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-warning" onclick="doBlock()">Block</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
 function toggleBlockFields(){const t=document.getElementById('b-type').value;document.getElementById('b-dates').className=t==='Skip'?'hidden':'';document.getElementById('b-time').className=t==='Skip'?'':'hidden'}
