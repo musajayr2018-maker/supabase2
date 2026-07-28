@@ -108,42 +108,82 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab active" onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><h3>📈 Performance Metrics Overview</h3><div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:20px;"><div style="background:#fefce8; padding:16px; border-radius:8px; border:1px solid #fde68a;">
-            <div style="font-size:0.8rem; color:#854d0e; font-weight:600">Parent Tickets</div>
-            <div style="font-size:1.5rem; font-weight:700; color:#713f12">1</div>
-          </div>
-          <div style="background:#f0fdfa; padding:16px; border-radius:8px; border:1px solid #99f6e4;">
-            <div style="font-size:0.8rem; color:#115e59; font-weight:600">Child Tickets</div>
-            <div style="font-size:1.5rem; font-weight:700; color:#134e4a">0</div>
-          </div>
-          <div style="background:#eff6ff; padding:16px; border-radius:8px; border:1px solid #bfdbfe;">
-            <div style="font-size:0.8rem; color:#1e40af; font-weight:600">Total Group Routes</div>
-            <div style="font-size:1.5rem; font-weight:700; color:#1e3a8a">0</div>
-          </div></div><h3>Detailed Productivity per Member</h3><table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;"><tbody><tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Parent</th><th style="padding:10px">Child</th><th style="padding:10px">Routed</th><th style="padding:10px">Removed</th><th style="padding:10px; font-weight:bold">Net</th><th style="padding:10px; font-weight:bold">Eff. %</th></tr><tr style="border-bottom:1px solid #eee">
-            <td style="padding:10px"><strong>jan rhey</strong></td>
-            <td style="padding:10px;">0</td>
-            <td style="padding:10px;">0</td>
-            <td style="padding:10px;">2</td>
-            <td style="padding:10px;">0</td>
-            <td style="padding:10px; font-weight:bold">-2</td>
-            <td style="padding:10px; font-weight:bold; color: #dc2626">0%</td>
-        </tr><tr style="border-bottom:1px solid #eee">
-            <td style="padding:10px"><strong>KYLE</strong></td>
-            <td style="padding:10px;">0</td>
-            <td style="padding:10px;">0</td>
-            <td style="padding:10px;">3</td>
-            <td style="padding:10px;">0</td>
-            <td style="padding:10px; font-weight:bold">-3</td>
-            <td style="padding:10px; font-weight:bold; color: #dc2626">0%</td>
-        </tr><tr style="border-bottom:1px solid #eee">
-            <td style="padding:10px"><strong>JUNEALYN</strong></td>
-            <td style="padding:10px;">1</td>
-            <td style="padding:10px;">0</td>
-            <td style="padding:10px;">0</td>
-            <td style="padding:10px;">1</td>
-            <td style="padding:10px; font-weight:bold">0</td>
-            <td style="padding:10px; font-weight:bold; color: #dc2626">0%</td>
-        </tr></tbody></table></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="jan rhey">jan rhey</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">3 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">jan rhey</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767716')">
+        <div style="margin-bottom: 6px;">
+            <div style="font-size:0.85rem; font-weight:600" class="">
+                🎫  23232 - Active Directory 
+                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
+            </div>
+            <div style="font-size:0.7rem; color:#4338ca" class="">👤 jan rhey</div>
+            <div style="font-size:0.65rem; color:#6b7280" class="">📅 2026-07-28 07:56 PM • Open</div>
+            
+            
+        </div>
+        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
+            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767716')">✅ Done</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785239767716')">🔄 Reassign</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785239767716')">✏️ Edit</button>
+            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785239767716')">🗑️ Remove</button>
+        </div>
+    </div></div>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">KYLE</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767719')">
+        <div style="margin-bottom: 6px;">
+            <div style="font-size:0.85rem; font-weight:600" class="">
+                🎫  Phoenix 
+                <span style="font-size:0.65rem; color: #6366f1;" class="">Task</span>
+            </div>
+            <div style="font-size:0.7rem; color:#4338ca" class="">👤 KYLE</div>
+            <div style="font-size:0.65rem; color:#6b7280" class="">📅 2026-07-28 07:56 PM • Open</div>
+            
+            
+        </div>
+        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
+            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767719')">✅ Done</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785239767719')">🔄 Reassign</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785239767719')">✏️ Edit</button>
+            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785239767719')">🗑️ Remove</button>
+        </div>
+    </div></div>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">JUNEALYN</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767718')">
+        <div style="margin-bottom: 6px;">
+            <div style="font-size:0.85rem; font-weight:600" class="">
+                🎫  Email Account 
+                <span style="font-size:0.65rem; color: #6366f1;">Task</span>
+            </div>
+            <div style="font-size:0.7rem; color:#4338ca" class="">👤 JUNEALYN</div>
+            <div style="font-size:0.65rem; color:#6b7280" class="">📅 2026-07-28 07:56 PM • Open</div>
+            
+            <div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#db2777;" class="">📌 Promoted from Parent: 1785239767716</div>
+        </div>
+        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
+            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767718')">✅ Done</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785239767718')">🔄 Reassign</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785239767718')">✏️ Edit</button>
+            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785239767718')">🗑️ Remove</button>
+        </div>
+    </div></div>
+                    </td>
+                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -559,6 +599,7 @@ function renderTicketCard(t) {
             <div style="font-size:0.7rem; color:#4338ca">👤 ${t.assignee}</div>
             <div style="font-size:0.65rem; color:#6b7280">📅 ${t.createdAt ? t.createdAt.split('T')[0] : 'N/A'} ${time} • ${t.status}</div>
             ${children.length > 0 ? `<div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#4f46e5;">📋 Tasks — ${completedTasks}/${children.length} completed</div>` : ''}
+            ${t.notes && t.notes.includes("(Promoted from Parent:") ? `<div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#db2777;">📌 ${escHtml(t.notes.split('(')[1].replace(')', ''))}</div>` : ''}
         </div>
         <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
             ${t.status === 'Open' ? `<button class="btn btn-success" style="${btnStyle}" onclick="completeTicket('${t.id}')">✅ Done</button>` : ''}
@@ -1550,14 +1591,22 @@ async function doRouteTicket(id) {
     if(t) {
         const oldAssignee = t.assignee;
         
+        // LOGIC: If it's a child, we promote it to Parent by setting parentId: null
+        const updatePayload = { assignee: newAssignee };
+        if (t.parentId) {
+            updatePayload.parentid = null; // Promoted to parent
+            // Add a note about the former parent for tracking
+            updatePayload.notes = (t.notes || '') + " (Promoted from Parent: " + t.parentId + ")";
+        }
+        
         // Update DB
-        const success = await dbUpdateTicket(id, { assignee: newAssignee });
+        const success = await dbUpdateTicket(id, updatePayload);
         
         if (success) {
-            addLog((t.parentId ? 'Child Ticket Routed' : 'Ticket Routed'), 
-                (t.parentId ? '[Child] ' : '') + t.title + ' routed from ' + oldAssignee + ' to ' + newAssignee + ' | ' + justification);
+            addLog((t.parentId ? 'Child Ticket Promoted & Routed' : 'Ticket Routed'), 
+                (t.parentId ? '[Promotion] ' : '') + t.title + ' -> ' + newAssignee + ' | ' + justification);
             
-            // FORCE FETCH REFRESH (Para siguradong updated ang UI kahit may delay sa realtime)
+            // FORCE FETCH REFRESH
             const { data: refreshedTickets } = await supabaseClient.from('tickets').select('*');
             if (refreshedTickets) {
                 state.tickets = refreshedTickets.map(ticket => ({
@@ -1566,10 +1615,9 @@ async function doRouteTicket(id) {
                 }));
             }
             
-            closeModal(); 
-            closeModal(); 
+            closeModal(); closeModal(); 
             render(); // Redraw
-            showToast('Ticket routed successfully to ' + newAssignee);
+            showToast('Ticket ' + (t.parentId ? 'promoted and ' : '') + 'routed to ' + newAssignee);
         } else {
             alert("Failed to update database.");
         }
