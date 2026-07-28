@@ -108,7 +108,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="jan rhey">jan rhey</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">3 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody><tr style="background:#fff">
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="jan rhey">jan rhey</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">2 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody><tr style="background:#fff">
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
                         <div style="font-size:0.85rem">jan rhey</div>
                         <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
@@ -120,7 +120,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
                 🎫  23232 - Active Directory 
                 <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
             </div>
-            <div style="font-size:0.7rem; color:#4338ca" class="">👤 jan rhey</div>
+            <div style="font-size:0.7rem; color:#4338ca">👤 jan rhey</div>
             <div style="font-size:0.65rem; color:#6b7280" class="">📅 2026-07-28 07:56 PM • Open</div>
             
             
@@ -136,27 +136,10 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
                 </tr><tr style="background:#fff">
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
                         <div style="font-size:0.85rem">KYLE</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
                     </td>
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767719')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600" class="">
-                🎫  Phoenix 
-                <span style="font-size:0.65rem; color: #6366f1;" class="">Task</span>
-            </div>
-            <div style="font-size:0.7rem; color:#4338ca" class="">👤 KYLE</div>
-            <div style="font-size:0.65rem; color:#6b7280" class="">📅 2026-07-28 07:56 PM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767719')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785239767719')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785239767719')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785239767719')">🗑️ Remove</button>
-        </div>
-    </div></div>
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
                     </td>
                 </tr><tr style="background:#fff">
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
@@ -164,16 +147,16 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
                         <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
                     </td>
                     <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767718')">
+                        <div class="tickets-grid"><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785239767718')">
         <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600" class="">
+            <div style="font-size:0.85rem; font-weight:600">
                 🎫  Email Account 
                 <span style="font-size:0.65rem; color: #6366f1;">Task</span>
             </div>
-            <div style="font-size:0.7rem; color:#4338ca" class="">👤 JUNEALYN</div>
-            <div style="font-size:0.65rem; color:#6b7280" class="">📅 2026-07-28 07:56 PM • Open</div>
+            <div style="font-size:0.7rem; color:#4338ca">👤 JUNEALYN</div>
+            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-28 07:56 PM • Open</div>
             
-            <div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#db2777;" class="">📌 Promoted from Parent: 1785239767716</div>
+            <div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#db2777;">📌 Promoted from Parent: 1785239767716</div>
         </div>
         <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
             <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785239767718')">✅ Done</button>
@@ -183,7 +166,26 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
         </div>
     </div></div>
                     </td>
-                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
+                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button><div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal-content">
+            <h3>Ticket: 23232 - Active Directory</h3>
+            <p><strong>App:</strong> Active Directory</p>
+            <p><strong>Assignee:</strong> jan rhey</p>
+            <p><strong>Status:</strong> Open</p>
+            <h4>Route Options</h4>
+            <div style="display:flex;gap:8px;margin-bottom:15px">
+                <button class="btn btn-secondary" onclick="showEditTicket('1785239767716')">✏️ Edit Details</button>
+            </div>
+            <div style="background:var(--bg-color);padding:15px;border-radius:12px;border:1px solid var(--border-color);margin-top:10px">
+                <h4>Child Tickets (0)</h4>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:15px">
+                    
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="showTicketModal('1785239767716')">+ Add Child Ticket</button>
+            </div>
+            <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Close</button></div>
+        </div>
+    </div><div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Add Child Ticket</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600"></div><label class="">Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label class="">Applications</label><div class="apps-grid" id="t-apps" onclick="updateAssignmentExplanation()"><div class="app-chip" onclick="this.classList.toggle('selected')">Active Directory</div><div class="app-chip" onclick="this.classList.toggle('selected')">Email Account</div><div class="app-chip" onclick="this.classList.toggle('selected')">Phoenix</div><div class="app-chip" onclick="this.classList.toggle('selected')">Peoplesoft</div><div class="app-chip" onclick="this.classList.toggle('selected')">8x8</div><div class="app-chip" onclick="this.classList.toggle('selected')">CBIS</div><div class="app-chip" onclick="this.classList.toggle('selected')">Astra</div><div class="app-chip" onclick="this.classList.toggle('selected')">Adobe</div><div class="app-chip selected" onclick="this.classList.toggle('selected')">Purchase Order</div></div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddTicket('1785239767716')">Create</button></div></div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -1357,7 +1359,8 @@ function doAddTicket(parentId){
     
     let assignee = null;
     if (parentId) {
-        assignee = state.tickets.find(t=>t.id===parentId).assignee;
+        const parentTicket = state.tickets.find(t => String(t.id) === String(parentId));
+        assignee = parentTicket ? parentTicket.assignee : state.members[0];
     } else {
         const assignOpt = document.getElementById('t-assign-opt').value;
         if (assignOpt === 'specific') {
@@ -1805,4 +1808,4 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)saveState()
 </script>
 
   <qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar>
-<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
+<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="top" data-lpop-hoverable="" data-lpop-animation-disabled="" data-lpop-pill-right="" data-lpop-extended-selection="" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 353.104px !important; top: 467.333px !important; height: 14.6667px !important;"><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
