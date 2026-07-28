@@ -106,78 +106,79 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 .hidden{display:none!important}
 @media(max-width:768px){.header h1{font-size:1rem}.ticket-card{width:100%}.container{padding:10px}.workload-label{min-width:60px;font-size:0.65rem}}
 </style>
-<meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
+<meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1 class="">🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;" class="">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab" onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab" onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab" onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="Paola">Paola</option><option value="JUNEALYN">JUNEALYN</option><option value="kYLE">kYLE</option><option value="John carlo">John carlo</option><option value="Jenica">Jenica</option><option value="Rendy">Rendy</option><option value="Joshua">Joshua</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)" class="">1 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Tickets</th></tr></thead><tbody><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem" class="">Paola</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400" class="">1 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785212597114')">
-        <div>
-            <div style="font-size:0.9rem; font-weight:600" class="">🎫  123123 - Active Directory <span style="font-size:0.7rem;" class="">Creation</span></div>
-            <div style="font-size:0.75rem; color:#4338ca" class="">👤 Assigned to: Paola</div>
-            <div style="font-size:0.7rem; color:#6b7280" class="">📅 2026-07-28 12:23 PM • Open</div>
-            <div style="font-size:0.75rem; margin-top:5px; font-weight:600; color:#4f46e5;">📋 Tasks — 0/2 completed</div>
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="margin-top:8px;">
-            <button class="btn btn-success btn-sm" onclick="completeTicket('1785212597114')">✅ Done</button>
-            <button class="btn btn-secondary btn-sm" onclick="showRouteToMember('1785212597114')">🔄 Reassign</button>
-            <button class="btn btn-secondary btn-sm" onclick="showEditTicket('1785212597114')">✏️ Edit</button>
-            <button class="btn btn-danger btn-sm" onclick="removeTicket('1785212597114')">🗑️ Remove</button>
-        </div>
-    </div></div>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">JUNEALYN</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">kYLE</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">John carlo</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem" class="">Jenica</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem" class="">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">Rendy</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">Joshua</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Tue, Jul 28, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">◀ Prev</button><div><span class="date-label">Tue, Jul 28, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3 class="">Total</h3><div style="font-size:1.5rem;font-weight:700" class="">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3 class="">⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
+            <span class="workload-label">Paola </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
+            <span class="workload-label">JUNEALYN </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">1 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='kYLE'; render();">
+            <span class="workload-label">kYLE </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John carlo'; render();">
+            <span class="workload-label">John carlo </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Jenica'; render();">
+            <span class="workload-label">Jenica </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Rendy'; render();">
+            <span class="workload-label">Rendy </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Joshua'; render();">
+            <span class="workload-label">Joshua </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
+            <span class="workload-label">Paola</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">JUNEALYN</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">kYLE</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">John carlo</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Jenica</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Rendy</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Joshua</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div></div><div class="card"><div class="members-bar"><span class="member-chip active">Paola (0)</span><span class="member-chip">JUNEALYN (1)</span><span class="member-chip">kYLE (0)</span><span class="member-chip">John carlo (0)</span><span class="member-chip">Jenica (0)</span><span class="member-chip">Rendy (0)</span><span class="member-chip">Joshua (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -371,16 +372,22 @@ async function addLog(a, d) {
     render();
 }
 function isMemberBlocked(m){const today=getTodayStr();const now=new Date();const ct=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');return state.leaves.some(l=>{if(l.memberId!==m)return false;if(l.type==='Skip'){if(l.startDate!==today)return false;return l.skipStartTime&&l.skipEndTime?ct>=l.skipStartTime&&ct<=l.skipEndTime:false}if(l.startDate<=today&&l.endDate>=today){if(l.blockFromTime&&l.startDate===today)return ct>=l.blockFromTime;return true}return false})}
-function getDayBalance(m){
+function getDayBalance(m) {
     const today = getTodayStr();
-    // Sum of assigned tickets (Main + Child) that are currently assigned to this member
+    // Count only OPEN tickets (Main + Child) assigned to this member today.
     // Tickets routed away (either to a group or another person) will have a different 'assignee', 
-    // so they are automatically excluded from this member's count.
-    return state.tickets.filter(t => 
+    // so they are automatically deducted from this member's count.
+    const tickets = state.tickets.filter(t => 
         t.assignee === m && 
-        t.createdAt.startsWith(today) && 
+        t.createdAt && t.createdAt.startsWith(today) && 
+        t.status === 'Open' &&
         !t.removedReason
-    ).length;
+    );
+    
+    // Debug output
+    console.log(`Day Balance Debug for ${m}:`, tickets.length, tickets.map(t => t.title));
+    
+    return tickets.length;
 }
 function getNextAssignee(){
     const jsDay = new Date().getDay();
@@ -1522,7 +1529,21 @@ function doRouteGroup(id){
         showToast('Ticket routed to ' + group);
     }
 }
-function showRouteToMember(id){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Route Ticket</h3><label>Select New Member</label><select id="t-route-assignee">'+state.members.map(m=>'<option value="'+m+'">'+m+'</option>').join('')+'</select><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doRouteTicket(\''+id+'\')">Confirm Route</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h)}
+function showRouteToMember(id) {
+    console.log("SHOW ROUTE CALLED FOR ID:", id);
+    const h = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal-content">
+            <h3>Route Ticket</h3>
+            <label>Select New Member</label>
+            <select id="t-route-assignee">${state.members.map(m => `<option value="${m}">${m}</option>`).join('')}</select>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="doRouteTicket('${id}')">Confirm Route</button>
+            </div>
+        </div>
+    </div>`;
+    document.getElementById('app').insertAdjacentHTML('beforeend', h);
+}
 
 // Duplicate function removed. Using the implementation above.
 
@@ -1537,20 +1558,35 @@ function takeOwnership(id){
     showToast('You took ownership of ticket');
 }
 
-function doRouteTicket(id){
-    const newAssignee=document.getElementById('t-route-assignee').value;
+async function doRouteTicket(id) {
+    const newAssignee = document.getElementById('t-route-assignee').value;
     const justification = prompt("Enter justification for routing:");
     if (!justification) { alert("Justification is required."); return; }
     
-    const t=state.tickets.find(x=>x.id===id);
-    if(t){
-        t.assignee=newAssignee;
-        addLog((t.parentId ? 'Child Ticket Routed' : 'Ticket Routed'), (t.parentId ? '[Child] ' : '') + t.title+' routed to '+newAssignee + ' | ' + justification);
-        saveState();
-        closeModal();
-        closeModal();
-        render();
-        showToast('Ticket routed to '+newAssignee);
+    // Convert to String for safe comparison
+    const t = state.tickets.find(x => String(x.id) === String(id));
+    
+    if(t) {
+        const oldAssignee = t.assignee;
+        t.assignee = newAssignee;
+        
+        // Update DB
+        const success = await dbUpdateTicket(id, { assignee: newAssignee });
+        
+        if (success) {
+            addLog((t.parentId ? 'Child Ticket Routed' : 'Ticket Routed'), 
+                (t.parentId ? '[Child] ' : '') + t.title + ' routed from ' + oldAssignee + ' to ' + newAssignee + ' | ' + justification);
+            closeModal(); 
+            closeModal(); 
+            render();
+            showToast('Ticket routed to ' + newAssignee);
+        } else {
+            t.assignee = oldAssignee;
+            render();
+            alert("Failed to update database.");
+        }
+    } else {
+        alert("Error: Ticket not found.");
     }
 }
 async function completeTicket(id){
