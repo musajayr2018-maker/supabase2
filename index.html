@@ -185,6 +185,10 @@ function doLogin(){
 
 let state={loggedIn:false,currentUser:'',darkMode:false,members:[],tickets:[],leaves:[],rotationIndex:0,customApps:[],logs:[],memberEmails:{},maxTicketsPerDay:0,memberTicketCaps:{},dedicatedRules:[],activeTab:'dashboard',viewDate:getTodayStr(),filterMember:'all',searchQuery:'',ticketsViewMode:'byMember'};
 function getTodayStr(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')}
+function getLocalDate(isoString) {
+    const d = new Date(isoString);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
 function formatDate(d){return new Date(d+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})}
 function getLocalISO(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')+'T'+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')}
 async function loadState() {
@@ -494,7 +498,7 @@ function renderDashboard(tfd,ac,na,today){
         }
     });
     
-    let h='<div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">\u25C0 Prev</button><div><span class="date-label">'+formatDate(state.viewDate)+'</span>'+(state.viewDate!==today?'<button class="today-btn" onclick="goToday()">Today</button>':'')+'</div><button class="btn btn-secondary btn-sm" onclick="goDate(1)"'+(state.viewDate>=today?' disabled':'')+'>Next \u25B6</button></div></div>';
+    let h='<div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">\u25C0 Prev</button><div><span class="date-label">'+formatDate(state.viewDate)+'</span>'+(state.viewDate!==today?'<button class="today-btn" onclick="goToday()">Today</button>':'')+'</div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)"'+(state.viewDate>=today?' disabled':'')+'>Next \u25B6</button></div></div>';
     
     h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;">';
     h+='<div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">'+allTix.length+'</div></div>';
@@ -697,7 +701,7 @@ else if(state.ticketsViewMode==='byMember') {
 }
 else viewContent = '<div class="tickets-grid">'+f.map(t=>renderTicketCard(t)).join('')+'</div>';
 
-return '<div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1)">\u25C0 Prev</button><div><span class="date-label">'+formatDate(state.viewDate)+'</span>'+(state.viewDate!==getTodayStr()?'<button class="today-btn" onclick="goToday()">Today</button>':'')+'</div><button class="btn btn-secondary btn-sm" onclick="goDate(1)"'+(state.viewDate>=getTodayStr()?' disabled':'')+'>Next \u25B6</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>\u{1F50D}</span><input type="text" placeholder="Search tickets..." value="'+escHtml(state.searchQuery)+'" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all"'+(state.filterMember==='all'?' selected':'')+'>All Members</option>'+state.members.map(m=>'<option value="'+m+'"'+(state.filterMember===m?' selected':'')+'>'+m+'</option>').join('')+'</select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card" '+(state.ticketsViewMode==='card'?'selected':'')+'>Cards</option><option value="list" '+(state.ticketsViewMode==='list'?'selected':'')+'>List</option><option value="table" '+(state.ticketsViewMode==='table'?'selected':'')+'>Table</option><option value="compact" '+(state.ticketsViewMode==='compact'?'selected':'')+'>Compact</option><option value="kanban" '+(state.ticketsViewMode==='kanban'?'selected':'')+'>Kanban</option><option value="detailed" '+(state.ticketsViewMode==='detailed'?'selected':'')+'>Detailed</option><option value="byMember" '+(state.ticketsViewMode==='byMember'?'selected':'')+'>By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">'+f.length+' tickets</span></div></div><div class="card">'+viewContent+(f.length===0?'<p style="color:#999;font-size:0.85rem">No tickets found</p>':'')+'</div>'}
+return '<div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">\u25C0 Prev</button><div><span class="date-label">'+formatDate(state.viewDate)+'</span>'+(state.viewDate!==getTodayStr()?'<button class="today-btn" onclick="goToday()">Today</button>':'')+'</div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)"'+(state.viewDate>=getTodayStr()?' disabled':'')+'>Next \u25B6</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>\u{1F50D}</span><input type="text" placeholder="Search tickets..." value="'+escHtml(state.searchQuery)+'" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all"'+(state.filterMember==='all'?' selected':'')+'>All Members</option>'+state.members.map(m=>'<option value="'+m+'"'+(state.filterMember===m?' selected':'')+'>'+m+'</option>').join('')+'</select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card" '+(state.ticketsViewMode==='card'?'selected':'')+'>Cards</option><option value="list" '+(state.ticketsViewMode==='list'?'selected':'')+'>List</option><option value="table" '+(state.ticketsViewMode==='table'?'selected':'')+'>Table</option><option value="compact" '+(state.ticketsViewMode==='compact'?'selected':'')+'>Compact</option><option value="kanban" '+(state.ticketsViewMode==='kanban'?'selected':'')+'>Kanban</option><option value="detailed" '+(state.ticketsViewMode==='detailed'?'selected':'')+'>Detailed</option><option value="byMember" '+(state.ticketsViewMode==='byMember'?'selected':'')+'>By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">'+f.length+' tickets</span></div></div><div class="card">'+viewContent+(f.length===0?'<p style="color:#999;font-size:0.85rem">No tickets found</p>':'')+'</div>'}
 
 function renderTicketRow(t){
     const cls = t.status === 'Completed' ? 'completed' : '';
@@ -1196,7 +1200,17 @@ function doLogin(){const e=document.getElementById('login-email').value.trim();i
 function doLogout(){localStorage.removeItem('rotaguard-user');state.loggedIn=false;state.currentUser='';render()}
 function toggleDark(){state.darkMode=!state.darkMode;localStorage.setItem('rotaguard-dark',state.darkMode);render()}
 function setTab(t){state.activeTab=t;render()}
-function goDate(o){const d=new Date(state.viewDate+'T00:00:00');d.setDate(d.getDate()+o);state.viewDate=d.toISOString().split('T')[0];render()}
+function goDate(o, event) {
+    if (event) { event.stopPropagation(); event.preventDefault(); }
+    const [yyyy, mm, dd] = state.viewDate.split('-').map(Number);
+    const d = new Date(yyyy, mm - 1, dd);
+    d.setDate(d.getDate() + o);
+    const newY = d.getFullYear();
+    const newM = String(d.getMonth() + 1).padStart(2, '0');
+    const newD = String(d.getDate()).padStart(2, '0');
+    state.viewDate = `${newY}-${newM}-${newD}`;
+    render();
+}
 function goToday(){state.viewDate=getTodayStr();render()}
 function showAddMember(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>+ Add Team Member</h3><label>Name</label><input type="text" id="m-name" placeholder="e.g. Juan Dela Cruz"><label>Email (optional)</label><input type="email" id="m-email" placeholder="e.g. juan@company.com"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddMember()">Add</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h);document.getElementById('m-name').focus()}
 async function doAddMember(){
