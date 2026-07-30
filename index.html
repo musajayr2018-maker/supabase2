@@ -1355,7 +1355,7 @@ function showPerformanceDetail(member, type) {
         data = state.logs.filter(l => l.details && l.details.includes(member) && l.action.toLowerCase().includes('routed') && !l.details.includes('Group:'));
     } else if (type === 'grouped') {
         isLog = true;
-        data = state.logs.filter(l => l.action.toLowerCase().includes('routed') && l.details.includes('Group:'));
+        data = state.logs.filter(l => l.details && l.details.includes(member) && l.action.toLowerCase().includes('routed') && l.details.includes('Group:'));
     }
 
     const dataJson = encodeURIComponent(JSON.stringify(data));
