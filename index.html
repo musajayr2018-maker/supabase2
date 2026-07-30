@@ -118,18 +118,18 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Fri, Jul 31, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Fri, Jul 31, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
-            <span class="workload-label">KYLE </span>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Fri, Jul 31, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab" onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab" onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab" onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Fri, Jul 31, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700" class="">2</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3 class="">Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">2</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3 class="">⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
+            <span class="workload-label">KYLE 🎯</span>
             <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+                <div class="workload-fill" style="width:0%;background:#a855f7"></div>
             </div>
             <span class="workload-value">0 tix</span>
         </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
             <span class="workload-label">JUNEALYN </span>
             <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+                <div class="workload-fill" style="width:20%;background:#10b981"></div>
             </div>
-            <span class="workload-value">0 tix</span>
+            <span class="workload-value">1 tix</span>
         </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
             <span class="workload-label">Paola </span>
             <div class="workload-track">
@@ -139,9 +139,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
         </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOSHUA'; render();">
             <span class="workload-label">JOSHUA </span>
             <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+                <div class="workload-fill" style="width:20%;background:#10b981"></div>
             </div>
-            <span class="workload-value">0 tix</span>
+            <span class="workload-value">1 tix</span>
         </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOHN CARLO'; render();">
             <span class="workload-label">JOHN CARLO </span>
             <div class="workload-track">
@@ -160,17 +160,17 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
                 <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
             </div>
             <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
+        </div></div><div class="card"><h3 class="">📅 Monthly Output (Per Member)</h3><div class="workload-row">
             <span class="workload-label">JUNEALYN</span>
             <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">4 tix</span>
+            <span class="workload-value">5 tix</span>
         </div><div class="workload-row">
             <span class="workload-label">JOSHUA</span>
             <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">4 tix</span>
+            <span class="workload-value">5 tix</span>
         </div><div class="workload-row">
             <span class="workload-label">Ma.Jenica</span>
-            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <div class="workload-track"><div class="workload-fill" style="width:80%;background:var(--accent-color)"></div></div>
             <span class="workload-value">4 tix</span>
         </div><div class="workload-row">
             <span class="workload-label">KYLE</span>
@@ -188,7 +188,17 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
             <span class="workload-label">John Rendy</span>
             <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
             <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Paola</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('Paola')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JOHN CARLO</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('JOHN CARLO')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">John Rendy</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('John Rendy')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">KYLE</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('KYLE')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip blocked">⏸️ KYLE (0)</span><span class="member-chip active">JUNEALYN (0)</span><span class="member-chip blocked">⏸️ Paola (0)</span><span class="member-chip">JOSHUA (0)</span><span class="member-chip blocked">⏸️ JOHN CARLO (0)</span><span class="member-chip">Ma.Jenica (0)</span><span class="member-chip blocked">⏸️ John Rendy (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
+        </div></div><div class="card"><h3 class="">🎯 Active Dedicated Rules</h3><div style="padding:6px 0; border-bottom:1px solid var(--border-color); font-size: 0.8rem; display:flex; justify-content:space-between;">
+                <span><strong>Purchase Order</strong></span>
+                <span style="color:var(--accent-color)" class="">KYLE</span>
+              </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Paola</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px" class="">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('Paola')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JOHN CARLO</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('JOHN CARLO')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">John Rendy</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px" class="">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('John Rendy')">Unblock</button></div></div></div><div class="card"><h3 class="">📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600" class="">JUNEALYN</div><div style="color:var(--text-muted)" class="">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)" class="">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600" class="">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip">KYLE (0)</span><span class="member-chip">JUNEALYN (0)</span><span class="member-chip blocked">⏸️ Paola (0)</span><span class="member-chip">JOSHUA (0)</span><span class="member-chip blocked">⏸️ JOHN CARLO (0)</span><span class="member-chip active">Ma.Jenica (0)</span><span class="member-chip blocked">⏸️ John Rendy (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket" >+</button></div><div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Create Ticket</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600"></div><label>Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label>Applications</label><div class="apps-grid" id="t-apps" onclick="updateAssignmentExplanation()"><div class="app-chip" onclick="this.classList.toggle('selected')">Active Directory</div><div class="app-chip" onclick="this.classList.toggle('selected')">Email Account</div><div class="app-chip" onclick="this.classList.toggle('selected')">Phoenix</div><div class="app-chip" onclick="this.classList.toggle('selected')">Peoplesoft</div><div class="app-chip" onclick="this.classList.toggle('selected')">8x8</div><div class="app-chip" onclick="this.classList.toggle('selected')">CBIS</div><div class="app-chip" onclick="this.classList.toggle('selected')">Astra</div><div class="app-chip" onclick="this.classList.toggle('selected')">Adobe</div><div class="app-chip" onclick="this.classList.toggle('selected')">Purchase Order</div></div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div><label>Assignment</label><div style="display:flex;gap:8px;margin-bottom:12px"><button onclick="document.getElementById('t-assign-opt').value='auto'; this.style.background='#e0e7ff'; this.nextElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='none'; document.getElementById('t-assign-expl').style.display='block'; updateAssignmentExplanation();" class="btn" style="flex:1;background:#e0e7ff;border:1px solid #c7d2fe">⚖️ Auto (Balanced)</button><button onclick="document.getElementById('t-assign-opt').value='specific'; this.style.background='#e0e7ff'; this.previousElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='block'; document.getElementById('t-assign-expl').style.display='none';" class="btn" style="flex:1;background:#f3f4f6;border:1px solid #d1d5db">👤 Specific Person</button></div><input type="hidden" id="t-assign-opt" value="auto"><div id="t-assign-expl"><div style="font-size:0.75rem; color:#4338ca; background:#e0e7ff; padding:8px; border-radius:6px; margin-bottom:8px;">
+        <div style="font-weight:700; margin-bottom:4px" class="" >📊 Why Ma.Jenica? (⚖️ Day Balance)</div>
+        <div style="margin-left:4px" class="">
+            • <strong class="">Ma.Jenica</strong>: 0 tasks today (0 tickets) (lowest today)<br>
+            • Others:<br>
+            &nbsp;&nbsp; JUNEALYN: 1 (1 tix)<br>&nbsp;&nbsp; JOSHUA: 1 (1 tix)
+        </div><div style="margin-top:4px; margin-left:4px" class="">⏸️ Skipped: Paola, JOHN CARLO, John Rendy (on leave/blocked)</div><div style="margin-top:6px; font-weight:600; color:#059669" class="">✅ Fewest daily tasks (apps + child tickets) gets the next ticket</div>
+    </div></div><select id="t-assign-specific" style="margin-bottom:12px; display:none;"><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option><option value="Paola">Paola</option><option value="JOSHUA">JOSHUA</option><option value="JOHN CARLO">JOHN CARLO</option><option value="Ma.Jenica">Ma.Jenica</option><option value="John Rendy">John Rendy</option></select><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddTicket('null')">Create</button></div></div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -288,14 +298,25 @@ async function loadState() {
         if (logs) state.logs = logs;
 
         // Load System State (Dedicated rules, etc.)
-        const { data: stateData } = await supabaseClient.from('rotaguard_state').select('payload').eq('id', 1).single();
-        if(stateData && stateData.payload) {
+        console.log("Fetching state data...");
+        const { data: stateData, error: stateError } = await supabaseClient
+            .from('rotaguard_state')
+            .select('payload')
+            .eq('id', 1)
+            .single();
+
+        if (stateError) {
+            console.error("LoadState Error:", stateError);
+        } else if (stateData && stateData.payload) {
+            console.log("State loaded successfully:", stateData.payload);
             const p = stateData.payload;
             state.dedicatedRules = p.dedicatedRules || [];
             state.customApps = p.customApps || [];
             state.rotationIndex = p.rotationIndex || 0;
             state.memberTicketCaps = p.memberTicketCaps || {};
             state.memberEmails = { ...state.memberEmails, ...p.memberEmails };
+        } else {
+            console.warn("No stateData found.");
         }
 
         const u = localStorage.getItem('rotaguard-user');
@@ -399,6 +420,7 @@ async function saveState() {
             dedicatedRules: state.dedicatedRules || []
         };
 
+        console.log("Attempting to save state...");
         const { error } = await supabaseClient
             .from('rotaguard_state')
             .upsert({
@@ -407,7 +429,12 @@ async function saveState() {
                 updated_at: new Date().toISOString()
             });
 
-        if (error) console.error("Save Error:", error);
+        if (error) {
+            console.error("Supabase Save Error Details:", error);
+            alert("Save Failed: " + error.message);
+        } else {
+            console.log("State saved successfully!");
+        }
     } catch (err) {
         console.error("General Error during saveState:", err);
     }
@@ -683,6 +710,21 @@ function renderDashboard(tfd,ac,na,today){
     
     
 
+    
+    // Active Dedicated Rules Section
+    h += '<div class="card"><h3>🎯 Active Dedicated Rules</h3>';
+    if(state.dedicatedRules && state.dedicatedRules.length > 0) {
+    state.dedicatedRules.forEach(r => {
+        h += `<div style="padding:6px 0; border-bottom:1px solid var(--border-color); font-size: 0.8rem; display:flex; justify-content:space-between;">
+                <span><strong>${escHtml(r.taskPattern)}</strong></span>
+                <span style="color:var(--accent-color)">${escHtml(r.assignee)}</span>
+              </div>`;
+    });
+    } else {
+    h += '<p style="font-size:0.8rem; color:var(--text-muted)">No active dedicated rules.</p>';
+    }
+    h += '</div>';
+    
     if(lvs.length>0){h+='<div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">\u23F8\uFE0F Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px">';lvs.forEach(l=>{const colors=l.type==='VL'?{bg:'#dbeafe',text:'#1d4ed8'}:l.type==='SL'?{bg:'#fef3c7',text:'#b45309'}:l.type==='Unpaid Leave'?{bg:'#fee2e2',text:'#dc2626'}:l.type==='Skip'?{bg:'#fef9c3',text:'#a16207'}:{bg:'#e0e7ff',text:'#4338ca'};h+='<div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">'+escHtml(l.memberId)+'</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:'+colors.bg+';color:'+colors.text+'">'+(l.type==='Skip'?'\u23ED\uFE0F Skip':l.type)+'</span></div>';if(l.type==='Skip'){h+='<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">\u{1F550} '+escHtml(l.skipStartTime||'')+' \u2013 '+escHtml(l.skipEndTime||'')+' on '+l.startDate+'</div>'}else{h+='<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">\u{1F4C5} '+l.startDate+(l.startDate!==l.endDate?' \u2192 '+l.endDate:'')+'</div>'}if(l.remarks){h+='<div style="font-size:0.8rem;color:var(--text-muted);font-style:italic;margin-bottom:8px">\u{1F4AC} '+escHtml(l.remarks)+'</div>'}h+='<button class="btn btn-sm btn-secondary" onclick="unblock(\''+escHtml(l.memberId)+'\')">Unblock</button></div>'});h+='</div></div>'}
     
     // Upcoming Leaves
@@ -1711,9 +1753,14 @@ function getAssignmentExplanation() {
             ${active.slice(1, 4).map(c => `&nbsp;&nbsp; ${c.name}: ${c.load} (${c.tixCount} tix)`).join('<br>')}
         </div>`;
     
-    const skipped = calculations.filter(c => c.isBlocked);
-    if(skipped.length > 0) {
-        msg += `<div style="margin-top:4px; margin-left:4px">⏸️ Skipped: ${skipped.map(c => c.name).join(', ')} (on leave/blocked)</div>`;
+    const skippedBlocked = calculations.filter(c => c.isBlocked);
+    const skippedDedicated = calculations.filter(c => c.isDedicated);
+    
+    if(skippedBlocked.length > 0 || skippedDedicated.length > 0) {
+        msg += `<div style="margin-top:6px; margin-left:4px; font-size: 0.7rem; color: #666;">`;
+        if(skippedBlocked.length > 0) msg += `⏸️ Blocked/Leave: ${skippedBlocked.map(c => c.name).join(', ')}<br>`;
+        if(skippedDedicated.length > 0) msg += `🎯 Dedicated Assigned: ${skippedDedicated.map(c => c.name).join(', ')}<br>`;
+        msg += `</div>`;
     }
     msg += `<div style="margin-top:6px; font-weight:600; color:#059669">✅ Fewest daily tasks (apps + child tickets) gets the next ticket</div>
     </div>`;
