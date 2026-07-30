@@ -115,234 +115,77 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Thu, Jul 30, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab active" onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;"><h3>📅 Weekly Schedule Board</h3><div style="display:flex;gap:4px">
-        <button class="btn btn-secondary btn-sm" onclick="schedPrev()">◀ Prev</button>
-        <button class="btn btn-secondary btn-sm" onclick="schedToday()">Today</button>
-        <button class="btn btn-secondary btn-sm" onclick="schedNext()">Next ▶</button>
-    </div></div><div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">Click to toggle • Drag across days for bulk select • Shift+click for range select</div><div style="font-weight:600; margin-bottom:12px;">Jul 27 — Aug 2, 2026 <span style="font-weight:400; color:var(--text-muted);">🗓️ 17 off this week</span></div><div style="overflow-x:auto;"><table class="schedule-table"><thead><tr><th>Member</th><th>27 Mon</th><th>28 Tue</th><th>29 Wed</th><th>30 Thu</th><th>31 Fri</th><th>1 Sat</th><th>2 Sun</th></tr></thead><tbody><tr>
-            <td style="text-align:left; font-weight:600;">KYLE</td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('KYLE','2026-07-30')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('KYLE','2026-07-31')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('KYLE','2026-08-01')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('KYLE','2026-08-02')" class="schedule-cell" style="background:#e0e7ff; color:#4338ca; cursor:pointer; font-size:0.7rem;">
-                    OFF
-                </div>
-            </td></tr><tr>
-            <td style="text-align:left; font-weight:600;" class="">JUNEALYN</td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JUNEALYN','2026-07-30')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JUNEALYN','2026-07-31')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JUNEALYN','2026-08-01')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JUNEALYN','2026-08-02')" class="schedule-cell" style="background:#e0e7ff; color:#4338ca; cursor:pointer; font-size:0.7rem;">
-                    OFF
-                </div>
-            </td></tr><tr>
-            <td style="text-align:left; font-weight:600;">Paola</td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('Paola','2026-07-30')" class="schedule-cell" style="background:#e0e7ff; color:#4338ca; cursor:pointer; font-size:0.7rem;">
-                    OFF
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('Paola','2026-07-31')" class="schedule-cell" style="background:#e0e7ff; color:#4338ca; cursor:pointer; font-size:0.7rem;">
-                    OFF
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('Paola','2026-08-01')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('Paola','2026-08-02')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td></tr><tr>
-            <td style="text-align:left; font-weight:600;">JOSHUA</td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JOSHUA','2026-07-30')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JOSHUA','2026-07-31')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JOSHUA','2026-08-01')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JOSHUA','2026-08-02')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td></tr><tr>
-            <td style="text-align:left; font-weight:600;">JOHN CARLO</td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JOHN CARLO','2026-07-30')" class="schedule-cell" style="background:#e0e7ff; color:#4338ca; cursor:pointer; font-size:0.7rem;">
-                    OFF
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JOHN CARLO','2026-07-31')" class="schedule-cell" style="background:#e0e7ff; color:#4338ca; cursor:pointer; font-size:0.7rem;">
-                    OFF
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JOHN CARLO','2026-08-01')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('JOHN CARLO','2026-08-02')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td></tr><tr>
-            <td style="text-align:left; font-weight:600;">Ma.Jenica</td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('Ma.Jenica','2026-07-30')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('Ma.Jenica','2026-07-31')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('Ma.Jenica','2026-08-01')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('Ma.Jenica','2026-08-02')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td></tr><tr>
-            <td style="text-align:left; font-weight:600;">John Rendy</td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div class="schedule-cell" style="background:#f1f5f9; color:#cbd5e1; cursor:default; font-size:0.7rem;">
-                    🔒
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('John Rendy','2026-07-30')" class="schedule-cell" style="background:#dbeafe; color:#1d4ed8; cursor:pointer; font-size:0.7rem;">
-                    VL
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('John Rendy','2026-07-31')" class="schedule-cell" style="background:#dbeafe; color:#1d4ed8; cursor:pointer; font-size:0.7rem;">
-                    VL
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('John Rendy','2026-08-01')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td><td>
-                <div onclick="schedCellClick('John Rendy','2026-08-02')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
-                    •
-                </div>
-            </td></tr></tbody></table></div><div style="margin-top:16px; font-size:0.75rem;"><span style="color:var(--text-muted)">Legend: Day Off VL SL Unpaid ✓ = S</span></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button><div class="modal-overlay">
-        <div class="modal-content" style="text-align:center">
-            <h3>📋 What type of leave?</h3>
-            <p style="font-size:0.85rem;color:#555;margin-bottom:16px"><strong>KYLE</strong> — Friday, Jul 31</p>
-            
-            <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
-                <div style="margin-bottom:8px; padding:10px; border:1px dashed #6d28d9; border-radius:8px; background:#f5f3ff; text-align: left;">
-                    <div style="font-weight: 600; color: #6d28d9; margin-bottom: 4px; font-size: 0.8rem;">🌙 Night Shift Block</div>
-                    <label style="font-size: 0.7rem; color: #4b5563;" class="">Block from (HH:MM):</label>
-                    
-                    <button class="btn btn-primary " style="width:100%" onclick="doNightShiftAdd('KYLE','2026-07-31')">Save Night Shift</button>
-                </div>
-                <button class="btn" style="padding:12px;background:#f1f5f9;border:1px solid #cbd5e1" onclick="doScheduleAdd('KYLE','2026-07-31','Day Off')">🗓️ Day Off</button>
-                <button class="btn" style="padding:12px;background:#f1f5f9;border:1px solid #cbd5e1" onclick="doScheduleAdd('KYLE','2026-07-31','VL')">🏖️ VL (Vacation)</button>
-                <button class="btn" style="padding:12px;background:#f1f5f9;border:1px solid #cbd5e1" onclick="doScheduleAdd('KYLE','2026-07-31','SL')">🤒 SL (Sick Leave)</button>
-                <button class="btn" style="padding:12px;background:#f1f5f9;border:1px solid #cbd5e1" onclick="doScheduleAdd('KYLE','2026-07-31','Unpaid Leave')">💰 Unpaid Leave</button>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Fri, Jul 31, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab" onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Thu, Jul 30, 2026</span><button class="today-btn" onclick="goToday()">Today</button></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3 class="" >⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
+            <span class="workload-label">KYLE 🎯</span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#a855f7"></div>
             </div>
-            
-            <button class="btn btn-secondary" style="width:100%" onclick="closeModal()">Cancel</button>
-        </div>
-    </div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
+            <span class="workload-label">JUNEALYN </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:100%;background:#ef4444"></div>
+            </div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
+            <span class="workload-label">Paola </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOSHUA'; render();">
+            <span class="workload-label">JOSHUA </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:100%;background:#ef4444"></div>
+            </div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOHN CARLO'; render();">
+            <span class="workload-label">JOHN CARLO </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Ma.Jenica'; render();">
+            <span class="workload-label">Ma.Jenica </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:100%;background:#ef4444"></div>
+            </div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Rendy'; render();">
+            <span class="workload-label">John Rendy </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#10b981"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div></div><div class="card"><h3 class="">📅 Monthly Output (Per Member)</h3><div class="workload-row">
+            <span class="workload-label">JUNEALYN</span>
+            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">JOSHUA</span>
+            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Ma.Jenica</span>
+            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">KYLE</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Paola</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">JOHN CARLO</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">John Rendy</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Paola</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('Paola')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JOHN CARLO</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('JOHN CARLO')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">John Rendy</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('John Rendy')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">KYLE</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('KYLE')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip blocked">⏸️ KYLE (0)</span><span class="member-chip active">JUNEALYN (0)</span><span class="member-chip blocked">⏸️ Paola (0)</span><span class="member-chip">JOSHUA (0)</span><span class="member-chip blocked">⏸️ JOHN CARLO (0)</span><span class="member-chip">Ma.Jenica (0)</span><span class="member-chip blocked">⏸️ John Rendy (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -589,6 +432,7 @@ async function addLog(a, d) {
 function isMemberBlocked(m){const today=getTodayStr();const now=new Date();const ct=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');return state.leaves.some(l=>{if(l.memberId!==m)return false;if(l.type==='Skip'){if(l.startDate!==today)return false;return l.skipStartTime&&l.skipEndTime?ct>=l.skipStartTime&&ct<=l.skipEndTime:false}if(l.startDate<=today&&l.endDate>=today){if(l.blockFromTime&&l.startDate===today)return ct>=l.blockFromTime;return true}return false})}
 function getDayBalance(m) {
     const mClean = (m || "").trim().toLowerCase();
+    const today = getTodayStr(); // Kunin ang date ngayon (YYYY-MM-DD)
     
     const tickets = state.tickets.filter(t => {
         const tAssignee = (t.assignee || "").trim().toLowerCase();
@@ -597,13 +441,15 @@ function getDayBalance(m) {
         const isRemoved = (t.status === 'Removed' || !!t.removedreason || !!t.removedReason);
         
         // Check kung may parent ticket at kung removed ang parent na iyon
-        const parent = t.parentId ? state.tickets.find(p => String(p.id) === String(t.parentId)) : null;
+        const parent = t.parentId ? state.tickets.filter(p => String(p.id) === String(t.parentId))[0] : null;
         const isParentRemoved = parent ? (parent.status === 'Removed' || !!parent.removedreason || !!parent.removedReason) : false;
         
         const matchAssignee = tAssignee === mClean;
         const matchStatus = (t.status === 'Open' || t.status === 'Grouped');
+        // Siguraduhin na TODAY lang ang bibilangin
+        const matchDate = t.createdAt && t.createdAt.startsWith(today);
         
-        return matchAssignee && matchStatus && !isRemoved && !isParentRemoved;
+        return matchAssignee && matchStatus && !isRemoved && !isParentRemoved && matchDate;
     });
     
     // Sum up the task counts (load) for this member
@@ -1273,7 +1119,7 @@ function renderPerformance() {
             l.action.toLowerCase().includes('routed') && 
             !l.action.toLowerCase().includes('child') && 
             !l.details.includes('Group:') && 
-            matchesMember(l.details, m)
+            l.details.toLowerCase().includes('from ' + m.toLowerCase())
         ).length;
         
         h += `<tr style="border-bottom:1px solid #eee">
@@ -1341,10 +1187,20 @@ function showPerformanceDetail(member, type) {
         data = state.tickets.filter(t => t.assignee === member && t.removedreason);
     } else if (type === 'routed') {
         isLog = true;
-        data = state.logs.filter(l => l.details && l.details.includes(member) && l.action.toLowerCase().includes('routed') && !l.details.includes('Group:'));
+        data = state.logs.filter(l => 
+            l.details && 
+            l.details.toLowerCase().includes('from ' + member.toLowerCase()) && 
+            l.action.toLowerCase().includes('routed') && 
+            !l.details.includes('Group:')
+        );
     } else if (type === 'grouped') {
         isLog = true;
-        data = state.logs.filter(l => l.details && l.details.includes(member) && l.action.toLowerCase().includes('routed') && l.details.includes('Group:'));
+        data = state.logs.filter(l => 
+            l.details && 
+            l.details.toLowerCase().includes('assignee: ' + member.toLowerCase()) && 
+            l.action.toLowerCase().includes('routed') && 
+            l.details.includes('Group:')
+        );
     }
 
     const dataJson = encodeURIComponent(JSON.stringify(data));
@@ -2107,7 +1963,7 @@ async function doRouteTicket(id) {
         
         if (success) {
             addLog((t.parentId ? 'Child Ticket Promoted & Routed' : 'Ticket Routed'), 
-                (t.parentId ? '[Promotion] ' : '') + t.title + ' -> ' + newAssignee + ' | ' + justification);
+                (t.parentId ? '[Promotion] ' : '') + t.title + ' from ' + oldAssignee + ' to ' + newAssignee + ' | ' + justification);
             
             // FORCE FETCH REFRESH
             const { data: refreshedTickets } = await supabaseClient.from('tickets').select('*');
