@@ -366,13 +366,14 @@ function getDayBalance(m) {
     const tickets = state.tickets.filter(t => {
         const tAssignee = (t.assignee || "").trim().toLowerCase();
         
-        // Only count currently open/active tickets assigned to this member
-        const hasRemovedReason = (t.removedreason || t.removedReason);
-        const matchAssignee = tAssignee === mClean;
-        const matchStatus = (t.status === 'Open' || t.status === 'Grouped');
-        const notRemoved = !hasRemovedReason;
+        // Check if ticket is removed (handle both lowercase and camelCase)
+        const isRemoved = !!(t.removedreason || t.removedReason || t.status === 'Removed');
         
-        return matchAssignee && matchStatus && notRemoved;
+        const matchAssignee = tAssignee === mClean;
+        // Include "Open" and "Grouped" but explicitly check for removal
+        const matchStatus = (t.status === 'Open' || t.status === 'Grouped');
+        
+        return matchAssignee && matchStatus && !isRemoved;
     });
     
     // Sum up the task counts (load) for this member
@@ -907,7 +908,17 @@ function renderLog(){
 
 function renderPerformance() {
     if (!state.perfMonth) state.perfMonth = getTodayStr().substring(0, 7);
-    const filteredTickets = state.tickets.filter(t => t.createdAt && t.createdAt.substring(0, 7) === state.perfMonth);
+    
+    // Identify all removed parent ticket IDs
+    const removedIds = new Set(state.tickets.filter(t => t.removedreason || t.status === 'Removed').map(t => String(t.id)));
+    
+    // Filter out removed tickets AND children of removed tickets
+    const filteredTickets = state.tickets.filter(t => {
+        if (!t.createdAt || !t.createdAt.startsWith(state.perfMonth)) return false;
+        if (t.removedreason || t.status === 'Removed') return false; 
+        if (t.parentId && removedIds.has(String(t.parentId))) return false;
+        return true;
+    });
 
     let h = '<div class="card">';
     h += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">';
@@ -941,11 +952,28 @@ function renderPerformance() {
     h += '<table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;">';
     h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Routed to Group</th><th style="padding:10px">Reassigned</th></tr>';
     
-    const monthlyLogs = state.logs.filter(l => l.timestamp && l.timestamp.startsWith(state.perfMonth));
+    // Kumuha lamang ng logs kung ang ticket ay nage-exist pa sa state.tickets
+    const activeTicketTitles = state.tickets.filter(t => !t.removedreason && t.status !== 'Removed').map(t => t.title);
+    const monthlyLogs = state.logs.filter(l => 
+        l.timestamp && 
+        l.timestamp.startsWith(state.perfMonth) &&
+        activeTicketTitles.some(title => l.details.includes(title))
+    );
 
     state.members.forEach(m => {
-        const routedToGroup = monthlyLogs.filter(l => l.action.toLowerCase().includes('routed') && l.details.includes('Group:') && l.details.includes(m)).length;
-        const reassigned = monthlyLogs.filter(l => l.action.toLowerCase().includes('routed') && !l.details.includes('Group:') && l.details.includes(m)).length;
+        const routedToGroup = monthlyLogs.filter(l => 
+            l.action.toLowerCase().includes('routed') && 
+            !l.action.toLowerCase().includes('child') && 
+            l.details.includes('Group:') && 
+            l.details.includes(m)
+        ).length;
+        
+        const reassigned = monthlyLogs.filter(l => 
+            l.action.toLowerCase().includes('routed') && 
+            !l.action.toLowerCase().includes('child') && 
+            !l.details.includes('Group:') && 
+            l.details.includes(m)
+        ).length;
         
         h += `<tr style="border-bottom:1px solid #eee">
             <td style="padding:10px"><strong>${m}</strong></td>
@@ -962,7 +990,7 @@ function renderPerformance() {
 
     // Calculate total team load first to get percentages
     const memberLoads = state.members.map(m => {
-        const mTix = filteredTickets.filter(t => t.assignee === m);
+        const mTix = filteredTickets.filter(t => t.assignee === m && !t.removedreason && t.status !== 'Removed');
         return {
             name: m,
             count: mTix.length // Parent + Child tickets
