@@ -115,77 +115,80 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Fri, Jul 31, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab" onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Thu, Jul 30, 2026</span><button class="today-btn" onclick="goToday()">Today</button></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3 class="" >⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
-            <span class="workload-label">KYLE 🎯</span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#a855f7"></div>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Fri, Jul 31, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Fri, Jul 31, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option><option value="Paola">Paola</option><option value="JOSHUA">JOSHUA</option><option value="JOHN CARLO">JOHN CARLO</option><option value="Ma.Jenica">Ma.Jenica</option><option value="John Rendy">John Rendy</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">1 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Tickets</th></tr></thead><tbody><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">KYLE</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">JUNEALYN</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">Paola</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">JOSHUA</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">JOHN CARLO</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">Ma.Jenica</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785428222841')">
+        <div style="margin-bottom: 6px;">
+            <div style="font-size:0.85rem; font-weight:600">
+                🎫  TEST TICKET - CBIS 
+                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
             </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
-            <span class="workload-label">JUNEALYN </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:100%;background:#ef4444"></div>
-            </div>
-            <span class="workload-value">4 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
-            <span class="workload-label">Paola </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOSHUA'; render();">
-            <span class="workload-label">JOSHUA </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:100%;background:#ef4444"></div>
-            </div>
-            <span class="workload-value">4 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOHN CARLO'; render();">
-            <span class="workload-label">JOHN CARLO </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Ma.Jenica'; render();">
-            <span class="workload-label">Ma.Jenica </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:100%;background:#ef4444"></div>
-            </div>
-            <span class="workload-value">4 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Rendy'; render();">
-            <span class="workload-label">John Rendy </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><h3 class="">📅 Monthly Output (Per Member)</h3><div class="workload-row">
-            <span class="workload-label">JUNEALYN</span>
-            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">4 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">JOSHUA</span>
-            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">4 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Ma.Jenica</span>
-            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">4 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">KYLE</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Paola</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">JOHN CARLO</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">John Rendy</span>
-            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Paola</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('Paola')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JOHN CARLO</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('JOHN CARLO')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">John Rendy</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('John Rendy')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">KYLE</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('KYLE')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip blocked">⏸️ KYLE (0)</span><span class="member-chip active">JUNEALYN (0)</span><span class="member-chip blocked">⏸️ Paola (0)</span><span class="member-chip">JOSHUA (0)</span><span class="member-chip blocked">⏸️ JOHN CARLO (0)</span><span class="member-chip">Ma.Jenica (0)</span><span class="member-chip blocked">⏸️ John Rendy (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
+            <div style="font-size:0.7rem; color:#4338ca">👤 Ma.Jenica</div>
+            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-30 12:17 AM • Open</div>
+            
+            
+        </div>
+        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
+            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785428222841')">✅ Done</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785428222841')">🔄 Reassign</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785428222841')">✏️ Edit</button>
+            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785428222841')">🗑️ Remove</button>
+        </div>
+    </div></div>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">John Rendy</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem" class="">No pending tasks</span>
+                    </td>
+                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -224,7 +227,12 @@ function doLogin(){
 }
 
 let state={loggedIn:false,currentUser:'',darkMode:false,members:[],tickets:[],leaves:[],rotationIndex:0,customApps:[],logs:[],memberEmails:{},maxTicketsPerDay:0,memberTicketCaps:{},dedicatedRules:[],activeTab:'dashboard',viewDate:getTodayStr(),filterMember:'all',searchQuery:'',ticketsViewMode:'byMember'};
-function getTodayStr(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')}
+function getTodayStr(){
+    // Force Manila Time (PST, UTC+8)
+    const now = new Date();
+    const manilaTime = new Date(now.getTime() + (8 * 60 * 60 * 1000));
+    return manilaTime.toISOString().substring(0, 10);
+}
 function getLocalDate(isoString) {
     const d = new Date(isoString);
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -431,28 +439,35 @@ async function addLog(a, d) {
 }
 function isMemberBlocked(m){const today=getTodayStr();const now=new Date();const ct=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');return state.leaves.some(l=>{if(l.memberId!==m)return false;if(l.type==='Skip'){if(l.startDate!==today)return false;return l.skipStartTime&&l.skipEndTime?ct>=l.skipStartTime&&ct<=l.skipEndTime:false}if(l.startDate<=today&&l.endDate>=today){if(l.blockFromTime&&l.startDate===today)return ct>=l.blockFromTime;return true}return false})}
 function getDayBalance(m) {
+    const todayStr = getTodayStr(); // YYYY-MM-DD (Manila time-based)
     const mClean = (m || "").trim().toLowerCase();
-    const today = getTodayStr(); // Kunin ang date ngayon (YYYY-MM-DD)
+    
+    // Helper function para sa Manila time matching
+    function isToday(isoDate) {
+        if (!isoDate) return false;
+        const d = new Date(isoDate);
+        // Manila offset UTC+8
+        const manila = new Date(d.getTime() + (8 * 60 * 60 * 1000));
+        return manila.toISOString().substring(0, 10) === todayStr;
+    }
     
     const tickets = state.tickets.filter(t => {
         const tAssignee = (t.assignee || "").trim().toLowerCase();
         
-        // Check kung removed ang mismong ticket
+        // Check kung removed
         const isRemoved = (t.status === 'Removed' || !!t.removedreason || !!t.removedReason);
         
-        // Check kung may parent ticket at kung removed ang parent na iyon
-        const parent = t.parentId ? state.tickets.filter(p => String(p.id) === String(t.parentId))[0] : null;
+        // Check kung ang parent ay removed
+        const parent = t.parentId ? state.tickets.find(p => String(p.id) === String(t.parentId)) : null;
         const isParentRemoved = parent ? (parent.status === 'Removed' || !!parent.removedreason || !!parent.removedReason) : false;
         
         const matchAssignee = tAssignee === mClean;
         const matchStatus = (t.status === 'Open' || t.status === 'Grouped');
-        // Siguraduhin na TODAY lang ang bibilangin
-        const matchDate = t.createdAt && t.createdAt.startsWith(today);
+        const matchDate = isToday(t.createdAt);
         
         return matchAssignee && matchStatus && !isRemoved && !isParentRemoved && matchDate;
     });
     
-    // Sum up the task counts (load) for this member
     return tickets.reduce((sum, t) => sum + (t.parentId ? 1 : (t.applications ? t.applications.length : 1)), 0);
 }
 function getNextAssignee(){
@@ -507,21 +522,34 @@ function getTicketsForDate(){
     });
 }
 function getFilteredTickets(){
-    // Start with all non-removed, non-child tickets
-    let r = state.tickets.filter(t => !t.removedreason && (!t.parentId || t.parentId === 'null' || t.parentId === 0 || t.parentId === 'undefined'));
+    // 1. Get base set of tickets: Non-removed and Non-child tickets
+    // Important: Include status !== "Removed"
+    let r = state.tickets.filter(t => 
+        !t.removedreason && 
+        t.status !== 'Removed' &&
+        (!t.parentId || t.parentId === 'null' || t.parentId === 0 || t.parentId === 'undefined')
+    );
     
-    // Apply date filter ONLY if we are NOT searching
-    if (!state.searchQuery) {
-       r = getTicketsForDate().filter(t => !t.removedreason && (!t.parentId || t.parentId === 'null' || t.parentId === 0 || t.parentId === 'undefined'));
-    }
+    // 2. Apply Date filter
+    const today = state.viewDate;
+    r = r.filter(t => {
+        if (!t.createdAt) return false;
+        const dateObj = new Date(t.createdAt);
+        const manilaTime = new Date(dateObj.getTime() + (8 * 60 * 60 * 1000));
+        return manilaTime.toISOString().substring(0, 10) === today;
+    });
     
-    if(state.filterMember !== 'all') {
-        r = r.filter(t => t.assignee === state.filterMember);
-    }
+    // 3. Search query
     if(state.searchQuery){
         const q = state.searchQuery.toLowerCase();
         r = r.filter(t => t.title.toLowerCase().includes(q) || t.assignee.toLowerCase().includes(q) || (t.applications || []).some(a => a.toLowerCase().includes(q)))
     }
+    
+    // 4. Member filter
+    if(state.filterMember !== 'all') {
+        r = r.filter(t => t.assignee === state.filterMember);
+    }
+    
     return r;
 }
 function render(){
@@ -540,8 +568,16 @@ function render(){
 function renderLogin(){return '<div class="login-page" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px"><div class="card" style="width:100%;max-width:400px;text-align:center"><h2>RotaGuard Login</h2><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px">Enter your email to access your dashboard.</p><input type="email" id="login-email" placeholder="email@company.com" style="width:100%;padding:10px;border:1px solid var(--border-color);border-radius:8px;background:var(--bg-color);margin-bottom:16px"><button class="btn btn-primary" style="width:100%" onclick="doLogin()">Enter Dashboard</button></div></div>'}
 function renderMain(){const today=getTodayStr();const tfd=getTicketsForDate();const ac=tfd.filter(t=>!t.removedReason).length;const na=getNextAssignee();return '<div class="header"><h1>\u{1F6E1}\uFE0F RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">'+formatDate(getTodayStr())+'</span></h1><div class="header-actions"><span class="user-badge">\u{1F464} '+escHtml(state.currentUser)+'</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">'+(state.darkMode?'\u2600\uFE0F':'\u{1F319}')+'</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">\u{1F4E5} CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">\u{1F4E6} Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab '+(state.activeTab==='dashboard'?'active':'')+'" onclick="console.log(1);setTab(\'dashboard\')">\u{1F4CA} Dashboard</div><div class="tab '+(state.activeTab==='tickets'?'active':'')+'" onclick="console.log(2);setTab(\'tickets\')">\u{1F4CB} Tickets</div><div class="tab '+(state.activeTab==='done'?'active':'')+'" onclick="console.log(8);setTab(\'done\')">✅ Done</div><div class="tab '+(state.activeTab==='members'?'active':'')+'" onclick="console.log(3);setTab(\'members\')">\u{1F465} Members</div><div class="tab '+(state.activeTab==='schedule'?'active':'')+'" onclick="console.log(4);setTab(\'schedule\')">\u{1F4C5} Schedule</div><div class="tab '+(state.activeTab==='dedicated'?'active':'')+'" onclick="console.log(5);setTab(\'dedicated\')">\u{1F3AF} Dedicated</div><div class="tab '+(state.activeTab==='availability'?'active':'')+'" onclick="console.log(6);setTab(\'availability\')">\u{1F550} Availability</div><div class="tab '+(state.activeTab==='log'?'active':'')+'" onclick="console.log(7);setTab(\'log\')">\u{1F4DC} Log</div><div class="tab '+(state.activeTab==='perf'?'active':'')+'" onclick="console.log(9);setTab(\'perf\')">📈 Performance</div></div></div><div class="main-content">'+(state.activeTab==='dashboard'?renderDashboard(tfd,ac,na,today):'')+(state.activeTab==='tickets'?renderTickets():'')+(state.activeTab==='done'?renderDoneTickets():'')+(state.activeTab==='members'?renderMembers():'')+(state.activeTab==='schedule'?renderSchedule():'')+(state.activeTab==='dedicated'?renderDedicated():'')+(state.activeTab==='availability'?renderAvailability():'')+(state.activeTab==='log'?renderLog():'')+(state.activeTab==='perf'?renderPerformance():'')+'</div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button>'}
 function renderDashboard(tfd,ac,na,today){
+    const todayStr = getTodayStr(); // YYYY-MM-DD
+    function isToday(isoDate) {
+        if (!isoDate) return false;
+        const d = new Date(isoDate);
+        const manila = new Date(d.getTime() + (8 * 60 * 60 * 1000));
+        return manila.toISOString().substring(0, 10) === todayStr;
+    }
+
     // Exclude child tickets AND removed tickets from stats
-    const allTix = state.tickets.filter(t => t.createdAt.startsWith(today) && !t.parentId && !t.removedreason && t.status !== 'Removed');
+    const allTix = state.tickets.filter(t => isToday(t.createdAt) && !t.parentId && !t.removedreason && t.status !== 'Removed');
     
     // Stats: Include only non-removed tickets
     const openTix = allTix.filter(t => t.status === 'Open').length;
@@ -553,7 +589,7 @@ function renderDashboard(tfd,ac,na,today){
     const completionRate = (displayTotal > 0) ? Math.round((doneTix / displayTotal) * 100) : 0;
 
     const currentMonth = today.substring(0, 7);
-    const monthlyTix = state.tickets.filter(t => t.createdAt.startsWith(currentMonth) && !t.parentId && !t.removedreason && t.status !== 'Removed');
+    const monthlyTix = state.tickets.filter(t => t.createdAt && t.createdAt.startsWith(currentMonth) && !t.parentId && !t.removedreason && t.status !== 'Removed');
 
     // Filter leaves and deduplicate by member so they don't double up
     const todayLeaves = state.leaves.filter(l=>{if(l.type==='Skip'){return l.startDate===today}return l.startDate<=today&&l.endDate>=today});
@@ -604,19 +640,23 @@ function renderDashboard(tfd,ac,na,today){
     const membersToShow = activeMembersForRotation.length > 0 ? activeMembersForRotation : state.members;
     
     // Simple display: Every member is shown, but we tag them if they are dedicated
-    const mx = Math.max(...state.members.map(m => getDayBalance(m)), 1);
+    // Use a minimum of 5 to keep progress bars proportional when load is low
+    const activeBalances = state.members.map(m => getDayBalance(m));
+    const mx = Math.max(...activeBalances, 5);
 
     state.members.forEach(m => {
         const c = getDayBalance(m);
         const isDed = dedicatedNamesArray.includes(m.trim().toLowerCase());
         const p = (c / mx) * 100;
-        const col = isDed ? '#a855f7' : (p >= 90 ? '#ef4444' : p >= 60 ? '#f59e0b' : '#10b981');
-        const tx = c; // Use the balance from getDayBalance which respects viewDate
+        // Make sure it is visible if count > 0, min 10%
+        const displayWidth = c > 0 ? Math.max(p, 10) : 0;
+        const col = isDed ? '#a855f7' : (c > 0 ? '#10b981' : '#e2e8f0');
+        const tx = c;
         
         h += `<div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='${m}'; render();">
             <span class="workload-label">${m} ${isDed ? '🎯' : ''}</span>
             <div class="workload-track">
-                <div class="workload-fill" style="width:${p}%;background:${col}"></div>
+                <div class="workload-fill" style="width:${displayWidth}%;background:${col}"></div>
             </div>
             <span class="workload-value">${tx} tix</span>
         </div>`;
@@ -1614,7 +1654,16 @@ function updateAssignmentExplanation() {
 function addCustomApp(){const i=document.getElementById('t-newapp');const n=i.value.trim();if(!n)return;if(!state.customApps.includes(n))state.customApps.push(n);document.getElementById('t-apps').insertAdjacentHTML('beforeend','<div class="app-chip selected" onclick="this.classList.toggle(\'selected\')">'+n+'</div>');i.value=''}
 
 function getAssignmentExplanation() {
-    const today = getTodayStr();
+    const todayStr = getTodayStr(); // YYYY-MM-DD (Manila time-based)
+    
+    // Manila-offset check (Helper function)
+    function isToday(isoDate) {
+        if (!isoDate) return false;
+        const d = new Date(isoDate);
+        const manila = new Date(d.getTime() + (8 * 60 * 60 * 1000));
+        return manila.toISOString().substring(0, 10) === todayStr;
+    }
+
     // Calculate day index for dedicated rules
     const jsDay = new Date().getDay();
     const dayIndex = jsDay === 0 ? 6 : jsDay - 1;
@@ -1628,9 +1677,17 @@ function getAssignmentExplanation() {
         const isBlocked = isMemberBlocked(m);
         const mClean = (m || "").trim().toLowerCase();
         const isDedicated = dedicatedNames.has(mClean);
-        const tix = state.tickets.filter(t => t.assignee === m && t.createdAt.startsWith(today) && !t.removedReason);
+        
+        // Gamitin ang logic ng getDayBalance
+        const tix = state.tickets.filter(t => 
+            t.assignee === m && 
+            isToday(t.createdAt) && 
+            (t.status === 'Open' || t.status === 'Grouped') && 
+            !(t.status === 'Removed' || !!t.removedreason || !!t.removedReason)
+        );
+
         // Load = apps + 1 per ticket as per user description of "tasks"
-        const load = tix.reduce((sum, t) => sum + (t.applications ? t.applications.length : 1), 0);
+        const load = tix.reduce((sum, t) => sum + (t.parentId ? 1 : (t.applications ? t.applications.length : 1)), 0);
         return { name: m, load, tixCount: tix.length, isBlocked, isDedicated };
     });
 
@@ -2230,4 +2287,4 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)saveState()
 </script>
 
   <qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar>
-<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="top" data-lpop-hoverable="" data-lpop-animation-disabled="" data-lpop-pill-right="" data-lpop-extended-selection="" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 353.104px !important; top: 467.333px !important; height: 14.6667px !important;"><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 239px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="dark" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 151.812px !important; top: 300px !important; height: 17.3333px !important; --lpop-original-caret-color: rgb(237, 241, 245);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 818px; position: absolute !important; top: 652px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
+<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="top" data-lpop-hoverable="" data-lpop-animation-disabled="" data-lpop-pill-right="" data-lpop-extended-selection="" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 353.104px !important; top: 467.333px !important; height: 14.6667px !important;"><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 239px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="dark" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 151.812px !important; top: 300px !important; height: 17.3333px !important; --lpop-original-caret-color: rgb(237, 241, 245);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 818px; position: absolute !important; top: 652px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 685px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
