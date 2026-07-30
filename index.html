@@ -665,7 +665,7 @@ function renderDashboard(tfd,ac,na,today){
     }
     h+='<div class="card"><div class="members-bar">';state.members.forEach(m=>{const b=isMemberBlocked(m);const isN=na===m;const tc=state.tickets.filter(t=>t.assignee===m&&t.createdAt.startsWith(today)&&!t.removedReason).length;h+='<span class="member-chip'+(b?' blocked':'')+(isN?' active':'')+'">'+(b?'\u23F8\uFE0F ':'')+m+' ('+tc+')</span>'});h+='</div></div>';
 
-    h+='<div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()"'+(na?'':' disabled')+'>+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()"'+(state.members.length===0?' disabled':'')+'>\u23F8\uFE0F Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button><button class="btn btn-danger" onclick="resetAllData()">🗑️ Reset All Data</button></div></div>';return h}
+    h+='<div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()"'+(na?'':' disabled')+'>+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()"'+(state.members.length===0?' disabled':'')+'>\u23F8\uFE0F Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div>';return h}
 function toggleActions(el){
     const actions = el.nextElementSibling;
     actions.style.display = actions.style.display === 'flex' ? 'none' : 'flex';
