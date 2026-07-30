@@ -137,7 +137,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
                     •
                 </div>
             </td><td>
-                <div onclick="schedCellClick('KYLE','2026-07-31')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;" >
+                <div onclick="schedCellClick('KYLE','2026-07-31')" class="schedule-cell" style="background:var(--sidebar-bg); color:var(--text-muted); cursor:pointer; font-size:0.7rem;">
                     •
                 </div>
             </td><td>
@@ -661,17 +661,12 @@ function getTicketsForDate(){
     });
 }
 function getFilteredTickets(){
-    // Show all non-removed tickets by default, but hide children
-    // so they don't appear as separate cards in the main grid
-    console.log("Filtering tickets, sample:", state.tickets.slice(0, 3));
-    // Filter out tickets that have a parentId (meaning they are children)
-    // AND explicitly filter out child tickets if parentId is not null, not 'null', and not empty
+    // Start with all non-removed, non-child tickets
     let r = state.tickets.filter(t => !t.removedreason && (!t.parentId || t.parentId === 'null' || t.parentId === 0 || t.parentId === 'undefined'));
-    return r;
     
     // Apply date filter ONLY if we are NOT searching
     if (!state.searchQuery) {
-       r = getTicketsForDate().filter(t => !t.removedreason);
+       r = getTicketsForDate().filter(t => !t.removedreason && (!t.parentId || t.parentId === 'null' || t.parentId === 0 || t.parentId === 'undefined'));
     }
     
     if(state.filterMember !== 'all') {
@@ -1264,27 +1259,21 @@ function renderPerformance() {
     h += '<table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;">';
     h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Routed to Group</th><th style="padding:10px">Reassigned</th></tr>';
     
-    // Kumuha lamang ng logs kung ang ticket ay nage-exist pa sa state.tickets
-    const activeTicketTitles = state.tickets.filter(t => !t.removedreason && t.status !== 'Removed').map(t => t.title);
-    const monthlyLogs = state.logs.filter(l => 
-        l.timestamp && 
-        l.timestamp.startsWith(state.perfMonth) &&
-        activeTicketTitles.some(title => l.details.includes(title))
-    );
+    const monthlyLogs = state.logs.filter(l => l.timestamp && l.timestamp.startsWith(state.perfMonth));
 
     state.members.forEach(m => {
         const routedToGroup = monthlyLogs.filter(l => 
             l.action.toLowerCase().includes('routed') && 
             !l.action.toLowerCase().includes('child') && 
             l.details.includes('Group:') && 
-            l.details.includes(m)
+            matchesMember(l.details, m)
         ).length;
         
         const reassigned = monthlyLogs.filter(l => 
             l.action.toLowerCase().includes('routed') && 
             !l.action.toLowerCase().includes('child') && 
             !l.details.includes('Group:') && 
-            l.details.includes(m)
+            matchesMember(l.details, m)
         ).length;
         
         h += `<tr style="border-bottom:1px solid #eee">
