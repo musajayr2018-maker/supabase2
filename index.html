@@ -115,7 +115,80 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Thu, Jul 30, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab active" onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab" onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:16px"><div><h3 style="margin:0 0 4px;font-size:1.05rem;font-weight:700">🎯 Dedicated Task Assignments</h3><p style="margin:0;font-size:0.78rem;color:#6b7280">Assign specific tasks to a dedicated person. If they're on leave, task goes to the backup chain.</p></div><button class="btn btn-primary btn-sm" onclick="showAddDedicated()">+ Add Rule</button></div><div style="text-align:center;padding:32px 16px;background:#f9fafb;border-radius:8px;border:1px dashed #d1d5db"><span style="font-size:2rem">📌</span><p style="margin:8px 0 0;font-size:0.85rem;color:#6b7280">No dedicated task rules yet.</p></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Thu, Jul 30, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label ">Thu, Jul 30, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option><option value="Paola">Paola</option><option value="JOSHUA">JOSHUA</option><option value="JOHN CARLO">JOHN CARLO</option><option value="Ma.Jenica">Ma.Jenica</option><option value="John Rendy">John Rendy</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">1 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">KYLE</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">JUNEALYN</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">Paola</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">JOSHUA</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <div class="tickets-grid"><div class="ticket-card " style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785421566833')">
+        <div style="margin-bottom: 6px;">
+            <div style="font-size:0.85rem; font-weight:600">
+                🎫  34234234 - Active Directory 
+                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
+            </div>
+            <div style="font-size:0.7rem; color:#4338ca">👤 JOSHUA</div>
+            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-30 10:26 PM • Open</div>
+            <div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#4f46e5;" class="">📋 Tasks — 0/2 completed</div>
+            
+        </div>
+        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
+            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785421566833')">✅ Done</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785421566833')">🔄 Reassign</button>
+            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785421566833')">✏️ Edit</button>
+            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785421566833')">🗑️ Remove</button>
+        </div>
+    </div></div>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">JOHN CARLO</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">Ma.Jenica</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr><tr style="background:#fff">
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
+                        <div style="font-size:0.85rem">John Rendy</div>
+                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
+                    </td>
+                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
+                    </td>
+                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -362,18 +435,23 @@ async function addLog(a, d) {
 function isMemberBlocked(m){const today=getTodayStr();const now=new Date();const ct=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');return state.leaves.some(l=>{if(l.memberId!==m)return false;if(l.type==='Skip'){if(l.startDate!==today)return false;return l.skipStartTime&&l.skipEndTime?ct>=l.skipStartTime&&ct<=l.skipEndTime:false}if(l.startDate<=today&&l.endDate>=today){if(l.blockFromTime&&l.startDate===today)return ct>=l.blockFromTime;return true}return false})}
 function getDayBalance(m) {
     const mClean = (m || "").trim().toLowerCase();
+    
+    // Identify all removed parent ticket IDs
+    const removedIds = new Set(state.tickets.filter(t => t.removedreason || t.status === 'Removed').map(t => String(t.id)));
 
     const tickets = state.tickets.filter(t => {
         const tAssignee = (t.assignee || "").trim().toLowerCase();
         
-        // Check if ticket is removed (handle both lowercase and camelCase)
+        // Check for removal
         const isRemoved = !!(t.removedreason || t.removedReason || t.status === 'Removed');
         
+        // Check kung ang parent ay removed
+        const isParentRemoved = t.parentId && removedIds.has(String(t.parentId));
+        
         const matchAssignee = tAssignee === mClean;
-        // Include "Open" and "Grouped" but explicitly check for removal
         const matchStatus = (t.status === 'Open' || t.status === 'Grouped');
         
-        return matchAssignee && matchStatus && !isRemoved;
+        return matchAssignee && matchStatus && !isRemoved && !isParentRemoved;
     });
     
     // Sum up the task counts (load) for this member
@@ -469,15 +547,20 @@ function render(){
 function renderLogin(){return '<div class="login-page" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px"><div class="card" style="width:100%;max-width:400px;text-align:center"><h2>RotaGuard Login</h2><p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px">Enter your email to access your dashboard.</p><input type="email" id="login-email" placeholder="email@company.com" style="width:100%;padding:10px;border:1px solid var(--border-color);border-radius:8px;background:var(--bg-color);margin-bottom:16px"><button class="btn btn-primary" style="width:100%" onclick="doLogin()">Enter Dashboard</button></div></div>'}
 function renderMain(){const today=getTodayStr();const tfd=getTicketsForDate();const ac=tfd.filter(t=>!t.removedReason).length;const na=getNextAssignee();return '<div class="header"><h1>\u{1F6E1}\uFE0F RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">'+formatDate(getTodayStr())+'</span></h1><div class="header-actions"><span class="user-badge">\u{1F464} '+escHtml(state.currentUser)+'</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">'+(state.darkMode?'\u2600\uFE0F':'\u{1F319}')+'</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">\u{1F4E5} CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">\u{1F4E6} Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab '+(state.activeTab==='dashboard'?'active':'')+'" onclick="console.log(1);setTab(\'dashboard\')">\u{1F4CA} Dashboard</div><div class="tab '+(state.activeTab==='tickets'?'active':'')+'" onclick="console.log(2);setTab(\'tickets\')">\u{1F4CB} Tickets</div><div class="tab '+(state.activeTab==='done'?'active':'')+'" onclick="console.log(8);setTab(\'done\')">✅ Done</div><div class="tab '+(state.activeTab==='members'?'active':'')+'" onclick="console.log(3);setTab(\'members\')">\u{1F465} Members</div><div class="tab '+(state.activeTab==='schedule'?'active':'')+'" onclick="console.log(4);setTab(\'schedule\')">\u{1F4C5} Schedule</div><div class="tab '+(state.activeTab==='dedicated'?'active':'')+'" onclick="console.log(5);setTab(\'dedicated\')">\u{1F3AF} Dedicated</div><div class="tab '+(state.activeTab==='availability'?'active':'')+'" onclick="console.log(6);setTab(\'availability\')">\u{1F550} Availability</div><div class="tab '+(state.activeTab==='log'?'active':'')+'" onclick="console.log(7);setTab(\'log\')">\u{1F4DC} Log</div><div class="tab '+(state.activeTab==='perf'?'active':'')+'" onclick="console.log(9);setTab(\'perf\')">📈 Performance</div></div></div><div class="main-content">'+(state.activeTab==='dashboard'?renderDashboard(tfd,ac,na,today):'')+(state.activeTab==='tickets'?renderTickets():'')+(state.activeTab==='done'?renderDoneTickets():'')+(state.activeTab==='members'?renderMembers():'')+(state.activeTab==='schedule'?renderSchedule():'')+(state.activeTab==='dedicated'?renderDedicated():'')+(state.activeTab==='availability'?renderAvailability():'')+(state.activeTab==='log'?renderLog():'')+(state.activeTab==='perf'?renderPerformance():'')+'</div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button>'}
 function renderDashboard(tfd,ac,na,today){
-    // Exclude child tickets from stats: t.parentId === null
-    const allTix = state.tickets.filter(t => t.createdAt.startsWith(today) && !t.parentId);
-    const openTix = allTix.filter(t => t.status === 'Open' && !t.removedreason).length;
-    const doneTix = allTix.filter(t => t.status === 'Completed' && !t.removedreason).length;
-    const removedTix = allTix.filter(t => t.removedreason).length;
-    const completionRate = (allTix.length - removedTix) > 0 ? Math.round((doneTix / (allTix.length - removedTix)) * 100) : 0;
+    // Exclude child tickets AND removed tickets from stats
+    const allTix = state.tickets.filter(t => t.createdAt.startsWith(today) && !t.parentId && !t.removedreason && t.status !== 'Removed');
+    
+    // Stats: Include only non-removed tickets
+    const openTix = allTix.filter(t => t.status === 'Open').length;
+    const doneTix = allTix.filter(t => t.status === 'Completed').length;
+    
+    // Total including removed just for comparison if needed, but for "Total" metric:
+    const displayTotal = allTix.length; 
+    
+    const completionRate = (displayTotal > 0) ? Math.round((doneTix / displayTotal) * 100) : 0;
 
     const currentMonth = today.substring(0, 7);
-    const monthlyTix = state.tickets.filter(t => t.createdAt.startsWith(currentMonth) && !t.parentId);
+    const monthlyTix = state.tickets.filter(t => t.createdAt.startsWith(currentMonth) && !t.parentId && !t.removedreason && t.status !== 'Removed');
 
     // Filter leaves and deduplicate by member so they don't double up
     const todayLeaves = state.leaves.filter(l=>{if(l.type==='Skip'){return l.startDate===today}return l.startDate<=today&&l.endDate>=today});
@@ -550,7 +633,8 @@ function renderDashboard(tfd,ac,na,today){
     h += '<div class="card"><h3>📅 Monthly Output (Per Member)</h3>';
     const mSorted = state.members.map(m => ({
         name: m,
-        count: monthlyTix.filter(t => t.assignee === m && !t.removedReason).length
+        // Count only if NOT removed
+        count: monthlyTix.filter(t => t.assignee === m && !t.removedreason && !t.removedReason && t.status !== 'Removed').length
     })).sort((a, b) => b.count - a.count);
     const mMax = Math.max(...mSorted.map(item => item.count), 1);
 
@@ -1060,8 +1144,19 @@ function showPerformanceDetail(member, type) {
             h += '<tr><th>Time</th><th>Action</th><th>Details</th><th>Action</th></tr>';
             h += data.map(l => `<tr><td>${new Date(l.timestamp).toLocaleDateString()}</td><td>${l.action}</td><td>${escHtml(l.details)}</td><td><button class="btn btn-danger btn-sm" onclick="removeLogFromModal('${l.id}', '${member}', '${type}')">🗑️ Remove</button></td></tr>`).join('');
         } else {
-            h += '<tr><th>Title</th><th>Apps</th><th>Status</th><th>Action</th></tr>';
-            h += data.map(t => `<tr><td>${escHtml(t.title)}</td><td>${(t.applications||[]).join(', ')}</td><td>${t.status}</td><td><button class="btn btn-danger btn-sm" onclick="removeTicketFromModal('${t.id}')">🗑️ Remove</button></td></tr>`).join('');
+            const isChildView = (type === 'child');
+            h += `<tr><th>#</th><th>Title</th>${isChildView ? '<th>Parent Ticket</th>' : ''}<th>Apps</th><th>Status</th><th>Action</th></tr>`;
+            h += data.map(t => {
+                const parent = isChildView ? state.tickets.find(pt => String(pt.id) === String(t.parentId)) : null;
+                return `<tr>
+                    <td>${escHtml(t.ticketNumber || '')}</td>
+                    <td>${escHtml(t.title)}</td>
+                    ${isChildView ? `<td>${parent ? escHtml(parent.ticketNumber || parent.title) : 'N/A'}</td>` : ''}
+                    <td>${(t.applications||[]).join(', ')}</td>
+                    <td>${t.status}</td>
+                    <td><button class="btn btn-danger btn-sm" onclick="removeTicketFromModal('${t.id}')">🗑️ Remove</button></td>
+                </tr>`;
+            }).join('');
         }
         h += '</table>';
     }
@@ -1395,7 +1490,7 @@ function showEditTicket(id){
 }
 
 async function doEditTicket(id){
-    const t = state.tickets.find(x => x.id == id);
+    const t = state.tickets.find(x => String(x.id) == String(id));
     if (!t) return;
     const oldTitle = t.title;
     const newTitle = document.getElementById('t-edit-title').value.trim();
@@ -1405,7 +1500,9 @@ async function doEditTicket(id){
         t.title = newTitle;
         t.ticketNumber = newNumber;
         
-        await dbUpdateTicket(id, { title: newTitle, ticketnumber: newNumber });
+        // Supabase expects the column to be lowercase in the database like 'ticketnumber'
+        // Let's use 'title' and 'ticketnumber' in the updates
+        await dbUpdateTicket(id, { title: newTitle, ticketNumber: newNumber });
         
         addLog((t.parentId ? 'Child Ticket Edited' : 'Ticket Edited'), (t.parentId ? '[Child] ' : '') + oldTitle +' \u2192 '+newTitle);
         closeModal();
@@ -1828,22 +1925,30 @@ async function removeTicket(id){
     const r = prompt('Reason for removal?');
     if(!r) return;
     
-    // Find the ticket
+    // 1. Find the parent ticket
     const t = state.tickets.find(x => String(x.id) === String(id));
     if(!t) { alert("Ticket not found locally."); return; }
     
-    // Delete from DB immediately
+    // 2. Identify all children to remove them too
+    const children = state.tickets.filter(c => String(c.parentId) === String(id));
+    
+    // 3. Delete all children in DB
+    for (const child of children) {
+        await dbDeleteTicket(child.id);
+    }
+    
+    // 4. Delete the parent in DB
     const success = await dbDeleteTicket(id);
     
     if (success) {
-        // Update local state by filtering out the removed ticket
-        state.tickets = state.tickets.filter(x => String(x.id) !== String(id));
+        // Reload state to ensure sync
+        await loadState();
         
-        addLog('Ticket Permanently Removed', '"'+t.title+'" - '+r);
+        addLog('Ticket Permanently Removed', '"'+t.title+'" (Parent/Child deleted) - '+r);
         
-        // Final UI sync
+        // Render
         render();
-        showToast('Ticket completely removed');
+        showToast('Ticket and children removed & synced');
     } else {
         alert("Delete failed in database. Check console for details.");
     }
@@ -2071,4 +2176,4 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)saveState()
 </script>
 
   <qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar>
-<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="top" data-lpop-hoverable="" data-lpop-animation-disabled="" data-lpop-pill-right="" data-lpop-extended-selection="" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 353.104px !important; top: 467.333px !important; height: 14.6667px !important;"><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 239px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="dark" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 151.812px !important; top: 300px !important; height: 17.3333px !important; --lpop-original-caret-color: rgb(237, 241, 245);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 818px; position: absolute !important; top: 652px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
+<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="top" data-lpop-hoverable="" data-lpop-animation-disabled="" data-lpop-pill-right="" data-lpop-extended-selection="" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 353.104px !important; top: 467.333px !important; height: 14.6667px !important;"><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 239px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="dark" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 151.812px !important; top: 300px !important; height: 17.3333px !important; --lpop-original-caret-color: rgb(237, 241, 245);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 818px; position: absolute !important; top: 652px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><div class="toast" style="border: 2px solid rgb(16, 185, 129);"><span style="font-size:1.2rem">✅</span><span style="font-size:0.88rem;font-weight:600" class="" >Ticket completely removed</span></div></body></html>
