@@ -111,84 +111,84 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 .fab:hover{transform:scale(1.1)}
 .user-badge{font-size:0.78rem;background:#eef2ff;color:#4338ca;padding:4px 10px;border-radius:10px;border:1px solid #c7d2fe}
 .hidden{display:none!important}
+.collapsible-section{border:1px solid var(--border-color);border-radius:8px;margin-bottom:10px;background:var(--card-bg)}
+.collapsible-header{padding:12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.02)}
+.collapsible-content{padding:12px;border-top:1px solid var(--border-color)}
 @media(max-width:768px){.header h1{font-size:1rem}.ticket-card{width:100%}.container{padding:10px}.workload-label{min-width:60px;font-size:0.65rem}}
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Fri, Jul 31, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab " onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab active" onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav" style="margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Fri, Jul 31, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)" disabled="">Next ▶</button></div><div class="filter-row"><div class="search-box" style="flex:1;max-width:300px"><span>🔍</span><input type="text" placeholder="Search tickets..." value="" oninput="state.searchQuery=this.value;render()"></div><select class="filter-select" onchange="state.filterMember=this.value;render()"><option value="all" selected="">All Members</option><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option><option value="Paola">Paola</option><option value="JOSHUA">JOSHUA</option><option value="JOHN CARLO">JOHN CARLO</option><option value="Ma.Jenica">Ma.Jenica</option><option value="John Rendy">John Rendy</option></select><select class="filter-select" onchange="state.ticketsViewMode=this.value;render()"><option value="card">Cards</option><option value="list">List</option><option value="table">Table</option><option value="compact">Compact</option><option value="kanban">Kanban</option><option value="detailed">Detailed</option><option value="byMember" selected="">By Member</option></select><span style="font-size:0.78rem;color:var(--text-muted)">1 tickets</span></div></div><div class="card"><div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem" class="">Tickets</th></tr></thead><tbody><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">KYLE</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">JUNEALYN</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">Paola</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">JOSHUA</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">JOHN CARLO</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem">No pending tasks</span>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">Ma.Jenica</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">1 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <div class="tickets-grid"><div class="ticket-card" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:8px; cursor:pointer;" onclick="showTicketDetails('1785428222841')">
-        <div style="margin-bottom: 6px;">
-            <div style="font-size:0.85rem; font-weight:600">
-                🎫  TEST TICKET - CBIS 
-                <span style="font-size:0.65rem; color: #6366f1;">Creation</span>
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Fri, Jul 31, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Fri, Jul 31, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
+            <span class="workload-label">KYLE </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
             </div>
-            <div style="font-size:0.7rem; color:#4338ca">👤 Ma.Jenica</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 2026-07-30 12:17 AM • Open</div>
-            
-            
-        </div>
-        <div class="actions" onclick="event.stopPropagation()" style="display:flex; gap: 3px; flex-wrap: wrap;">
-            <button class="btn btn-success" style="padding: 2px 6px; font-size: 0.65rem;" onclick="completeTicket('1785428222841')">✅ Done</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showRouteToMember('1785428222841')">🔄 Reassign</button>
-            <button class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.65rem;" onclick="showEditTicket('1785428222841')">✏️ Edit</button>
-            <button class="btn btn-danger" style="padding: 2px 6px; font-size: 0.65rem;" onclick="removeTicket('1785428222841')">🗑️ Remove</button>
-        </div>
-    </div></div>
-                    </td>
-                </tr><tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">John Rendy</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">0 tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
-                        <span style="color:#ccc;font-size:0.8rem" class="">No pending tasks</span>
-                    </td>
-                </tr></tbody></table></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
+            <span class="workload-label">JUNEALYN </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
+            <span class="workload-label">Paola </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOSHUA'; render();">
+            <span class="workload-label">JOSHUA </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOHN CARLO'; render();">
+            <span class="workload-label">JOHN CARLO </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Ma.Jenica'; render();">
+            <span class="workload-label">Ma.Jenica </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Rendy'; render();">
+            <span class="workload-label">John Rendy </span>
+            <div class="workload-track">
+                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
+            </div>
+            <span class="workload-value">0 tix</span>
+        </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
+            <span class="workload-label">JUNEALYN</span>
+            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">JOSHUA</span>
+            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Ma.Jenica</span>
+            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">4 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">KYLE</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">Paola</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">JOHN CARLO</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div><div class="workload-row">
+            <span class="workload-label">John Rendy</span>
+            <div class="workload-track"><div class="workload-fill" style="width:0%;background:var(--accent-color)"></div></div>
+            <span class="workload-value">0 tix</span>
+        </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">Paola</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('Paola')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JOHN CARLO</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('JOHN CARLO')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">John Rendy</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('John Rendy')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">KYLE</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#dbeafe;color:#1d4ed8">VL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-07-31</div><button class="btn btn-sm btn-secondary" onclick="unblock('KYLE')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">KYLE</div><div style="color:var(--text-muted)">2026-08-02</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip blocked">⏸️ KYLE (0)</span><span class="member-chip active">JUNEALYN (0)</span><span class="member-chip blocked">⏸️ Paola (0)</span><span class="member-chip">JOSHUA (0)</span><span class="member-chip blocked">⏸️ JOHN CARLO (0)</span><span class="member-chip">Ma.Jenica (0)</span><span class="member-chip blocked">⏸️ John Rendy (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -793,20 +793,19 @@ else if(state.ticketsViewMode==='kanban') viewContent = '<div style="display:fle
 else if(state.ticketsViewMode==='detailed') viewContent = '<div style="display:flex;flex-direction:column;gap:12px">'+f.map(t=>'<div style="padding:15px;border:1px solid var(--border-color)"><strong>'+escHtml(t.title)+'</strong><br>By: '+t.assignee+' | Status: '+t.status+'</div>').join('')+'</div>';
 else if(state.ticketsViewMode==='byMember') {
     const activeMembers = (state.filterMember === 'all') ? state.members : [state.filterMember];
-    const rows = activeMembers.map(m => {
+    viewContent = activeMembers.map((m, index) => {
         const memberTix = f.filter(t => t.assignee === m);
-        return `<tr style="background:#fff">
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6;font-weight:600;min-width:150px;vertical-align:top">
-                        <div style="font-size:0.85rem">${m}</div>
-                        <div style="font-size:0.75rem;color:#666;font-weight:400">${memberTix.length} tickets</div>
-                    </td>
-                    <td style="padding:12px 14px;border-bottom:1px solid #f3f4f6">
+        const sectionId = 'ticket-member-' + index;
+        return `<div class="collapsible-section" id="${sectionId}">
+                    <div class="collapsible-header" onclick="toggleSection('${sectionId}')">
+                        <span style="font-weight:600">👤 ${m} <span style="font-size:0.75rem;color:#666;font-weight:400">(${memberTix.length} tickets)</span></span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="collapsible-content">
                         ${memberTix.length > 0 ? '<div class="tickets-grid">'+memberTix.map(t=>renderTicketCard(t)).join('')+'</div>' : '<span style="color:#ccc;font-size:0.8rem">No pending tasks</span>'}
-                    </td>
-                </tr>`;
+                    </div>
+                </div>`;
     }).join('');
-    
-    viewContent = '<div style="overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb"><table style="width:100%;border-collapse:collapse;min-width:700px"><thead><tr><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Member</th><th style="padding:12px 14px;text-align:left;background:#f3f4f6;font-size:0.8rem">Tickets</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
 }
 else viewContent = '<div class="tickets-grid">'+f.map(t=>renderTicketCard(t)).join('')+'</div>';
 
@@ -1121,81 +1120,77 @@ function renderPerformance() {
             <button class="btn btn-secondary btn-sm" onclick="changePerfMonth(1, event)">Next ▶</button>
           </div></div>`;
 
-    h += '<table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;">';
-    h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Total</th><th style="padding:10px">Parent</th><th style="padding:10px">Child</th><th style="padding:10px">Done</th></tr>';
+    h += `<div class="collapsible-section" id="perf-1">
+            <div class="collapsible-header" onclick="toggleSection('perf-1')">
+                <span style="font-weight:600">📊 Productivity Breakdown</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="collapsible-content">
+                <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                    <tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Total</th><th style="padding:10px">Parent</th><th style="padding:10px">Child</th><th style="padding:10px">Done</th></tr>
+                    ${state.members.map(m => {
+                        const mTix = filteredTickets.filter(t => t.assignee === m);
+                        return `<tr style="border-bottom:1px solid #eee">
+                            <td style="padding:10px"><strong>${m}</strong></td>
+                            <td style="padding:10px">${mTix.length}</td>
+                            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'parent')">${mTix.filter(t => !t.parentId).length}</td>
+                            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'child')">${mTix.filter(t => t.parentId).length}</td>
+                            <td style="padding:10px; color:#059669; font-weight:bold">${mTix.filter(t => t.status === 'Completed').length}</td>
+                        </tr>`;
+                    }).join('')}
+                </table>
+            </div>
+        </div>`;
     
-    state.members.forEach(m => {
-        const mTix = filteredTickets.filter(t => t.assignee === m);
-        const parents = mTix.filter(t => !t.parentId).length;
-        const children = mTix.filter(t => t.parentId).length;
-        const done = mTix.filter(t => t.status === 'Completed').length;
-        
-        h += `<tr style="border-bottom:1px solid #eee">
-            <td style="padding:10px"><strong>${m}</strong></td>
-            <td style="padding:10px">${mTix.length}</td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'parent')">${parents}</td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'child')">${children}</td>
-            <td style="padding:10px; color:#059669; font-weight:bold">${done}</td>
-        </tr>`;
-    });
-    h += '</table>';
-
-    // New Separate Table
-    h += '<h3 style="margin-top:24px;">Routing & Reassignment Activity</h3>';
-    h += '<table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;">';
-    h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Routed to Group</th><th style="padding:10px">Reassigned</th></tr>';
+        // New Separate Table
+        const monthlyLogs = state.logs.filter(l => l.timestamp && l.timestamp.startsWith(state.perfMonth));
+        h += `<div class="collapsible-section" id="perf-2">
+            <div class="collapsible-header" onclick="toggleSection('perf-2')">
+                <span style="font-weight:600">↗️ Routing Activity</span>
+                <span class="toggle-icon">▶</span>
+            </div>
+            <div class="collapsible-content" style="display:none">
+                <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                    <tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Routed to Group</th><th style="padding:10px">Reassigned</th></tr>
+                    ${state.members.map(m => {
+                        const routedToGroup = monthlyLogs.filter(l => l.action.toLowerCase().includes('routed') && !l.action.toLowerCase().includes('child') && l.details.includes('Group:') && matchesMember(l.details, m)).length;
+                        const reassigned = monthlyLogs.filter(l => l.action.toLowerCase().includes('routed') && !l.action.toLowerCase().includes('child') && !l.details.includes('Group:') && l.details.toLowerCase().includes('from ' + m.toLowerCase())).length;
+                        return `<tr style="border-bottom:1px solid #eee">
+                            <td style="padding:10px"><strong>${m}</strong></td>
+                            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'grouped')">${routedToGroup}</td>
+                            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'routed')">${reassigned}</td>
+                        </tr>`;
+                    }).join('')}
+                </table>
+            </div>
+        </div>`;
     
-    const monthlyLogs = state.logs.filter(l => l.timestamp && l.timestamp.startsWith(state.perfMonth));
-
-    state.members.forEach(m => {
-        const routedToGroup = monthlyLogs.filter(l => 
-            l.action.toLowerCase().includes('routed') && 
-            !l.action.toLowerCase().includes('child') && 
-            l.details.includes('Group:') && 
-            matchesMember(l.details, m)
-        ).length;
+        // Third Table: Member Workload Percentage
+        const memberLoads = state.members.map(m => {
+            const mTix = filteredTickets.filter(t => t.assignee === m && !t.removedreason && t.status !== 'Removed');
+            return { name: m, count: mTix.length };
+        });
         
-        const reassigned = monthlyLogs.filter(l => 
-            l.action.toLowerCase().includes('routed') && 
-            !l.action.toLowerCase().includes('child') && 
-            !l.details.includes('Group:') && 
-            l.details.toLowerCase().includes('from ' + m.toLowerCase())
-        ).length;
-        
-        h += `<tr style="border-bottom:1px solid #eee">
-            <td style="padding:10px"><strong>${m}</strong></td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'grouped')">${routedToGroup}</td>
-            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'routed')">${reassigned}</td>
-        </tr>`;
-    });
-    h += '</table>';
-
-    // Third Table: Member Workload Percentage
-    h += '<h3 style="margin-top:24px;">Member Workload % (Parent + Child)</h3>';
-    h += '<table style="width:100%; border-collapse:collapse; margin-top:16px; font-size:0.85rem;">';
-    h += '<tr style="background:#f3f4f6; text-align:left"><th style="padding:10px">Member</th><th style="padding:10px">Parent + Child</th><th style="padding:10px">% of Total Team Load</th></tr>';
-
-    // Calculate total team load first to get percentages
-    const memberLoads = state.members.map(m => {
-        const mTix = filteredTickets.filter(t => t.assignee === m && !t.removedreason && t.status !== 'Removed');
-        return {
-            name: m,
-            count: mTix.length // Parent + Child tickets
-        };
-    });
+        const totalTeamLoad = memberLoads.reduce((sum, member) => sum + member.count, 0);
     
-    const totalTeamLoad = memberLoads.reduce((sum, member) => sum + member.count, 0);
-
-    memberLoads.forEach(m => {
-        const percentage = totalTeamLoad > 0 ? ((m.count / totalTeamLoad) * 100).toFixed(1) : 0;
-        
-        h += `<tr style="border-bottom:1px solid #eee">
-            <td style="padding:10px"><strong>${m.name}</strong></td>
-            <td style="padding:10px">${m.count}</td>
-            <td style="padding:10px"><div style="background:#e5e7eb; width:100px; height:8px; border-radius:4px; overflow:hidden; display:inline-block; margin-right:8px;"><div style="background:#4f46e5; width:${percentage}%; height:100%;"></div></div>${percentage}%</td>
-        </tr>`;
-    });
-    h += '</table></div>';
+        h += `<div class="collapsible-section" id="perf-3">
+            <div class="collapsible-header" onclick="toggleSection('perf-3')">
+                <span style="font-weight:600">⚖️ Workload Distribution</span>
+                <span class="toggle-icon">▶</span>
+            </div>
+            <div class="collapsible-content" style="display:none">
+                <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                    ${memberLoads.map(m => {
+                        const percentage = totalTeamLoad > 0 ? ((m.count / totalTeamLoad) * 100).toFixed(1) : 0;
+                        return `<tr style="border-bottom:1px solid #eee">
+                            <td style="padding:10px"><strong>${m.name}</strong></td>
+                            <td style="padding:10px">${m.count}</td>
+                            <td style="padding:10px"><div style="background:#e5e7eb; width:100px; height:8px; border-radius:4px; overflow:hidden; display:inline-block; margin-right:8px;"><div style="background:#4f46e5; width:${percentage}%; height:100%;"></div></div>${percentage}%</td>
+                        </tr>`;
+                    }).join('')}
+                </table>
+            </div>
+        </div></div>`;
     return h;
 }
 
@@ -1488,6 +1483,18 @@ function changePerfMonth(n, event) {
     let d = new Date(y, m - 1 + n, 1);
     state.perfMonth = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
     render();
+}
+function toggleSection(id) {
+    const el = document.getElementById(id);
+    const content = el.querySelector('.collapsible-content');
+    const icon = el.querySelector('.toggle-icon');
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        icon.textContent = '▶';
+    }
 }
 function showAddMember(){const h='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>+ Add Team Member</h3><label>Name</label><input type="text" id="m-name" placeholder="e.g. Juan Dela Cruz"><label>Email (optional)</label><input type="email" id="m-email" placeholder="e.g. juan@company.com"><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddMember()">Add</button></div></div></div>';document.getElementById('app').insertAdjacentHTML('beforeend',h);document.getElementById('m-name').focus()}
 async function doAddMember(){
@@ -2287,4 +2294,5 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)saveState()
 </script>
 
   <qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar>
-<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="top" data-lpop-hoverable="" data-lpop-animation-disabled="" data-lpop-pill-right="" data-lpop-extended-selection="" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 353.104px !important; top: 467.333px !important; height: 14.6667px !important;"><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 239px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="dark" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 151.812px !important; top: 300px !important; height: 17.3333px !important; --lpop-original-caret-color: rgb(237, 241, 245);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 818px; position: absolute !important; top: 652px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 685px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
+<qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 740.389px !important; top: 346px !important; height: 13.3333px !important; --lpop-original-caret-color: rgb(107, 114, 128);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="light" data-lpop-circle-position="top" data-lpop-hoverable="" data-lpop-animation-disabled="" data-lpop-pill-right="" data-lpop-extended-selection="" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 353.104px !important; top: 467.333px !important; height: 14.6667px !important;"><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper qb-toolbar__wrapper--hide"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 239px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="dark" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 151.812px !important; top: 300px !important; height: 17.3333px !important; --lpop-original-caret-color: rgb(237, 241, 245);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 818px; position: absolute !important; top: 652px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 685px; position: absolute !important; top: 297px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar>
+<lpop-container data-lpop-os="Windows" spellcheck="false" data-lpop-adapter-name="contenteditable" data-lpop-disable-all-circle-dilation="" data-lpop-theme="green" data-lpop-theme-mode="dark" data-lpop-circle-position="bottom" style="--lpop-brand-icon: url(chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/assets/images/toolbox/contextual-cursor-icon.svg); left: 157.542px !important; top: 354.667px !important; height: 17.3333px !important; --lpop-original-caret-color: rgb(203, 213, 225);" data-lpop-blinking="" data-lpop-hoverable=""><lpop-circle></lpop-circle><lpop-pill-container><lpop-dilation-label></lpop-dilation-label><lpop-contextual-home-container></lpop-contextual-home-container></lpop-pill-container></lpop-container><qb-toolbar id="qb-toolbar-container" style="display: none;"><qb-div class="qb-toolbar__wrapper" style="left: 239px; position: absolute !important; top: 352px !important; bottom: auto !important; z-index: auto; opacity: 1 !important; pointer-events: all !important;"><div style="all: initial !important;"><qb-div style="all: initial !important;"></qb-div></div></qb-div></qb-toolbar></body></html>
