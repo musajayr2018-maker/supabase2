@@ -1212,7 +1212,7 @@ function renderPerformance() {
                             <td style="padding:10px"><strong>${m}</strong></td>
                             <td style="padding:10px">${mTix.length}</td>
                             <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'parent')">${mTix.filter(t => !t.parentId).length}</td>
-                            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'child')">${mTix.filter(t => t.parentId).length}</td>
+                            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'child')">${mTix.filter(t => t.length > 0 && t.parentId).length}</td>
                             <td style="padding:10px; color:#059669; font-weight:bold">${mTix.filter(t => t.status === 'Completed').length}</td>
                         </tr>`;
                     }).join('')}
@@ -1291,16 +1291,25 @@ function showPerformanceDetail(member, type) {
     let title = 'Summary - ' + member + ' (' + type + ')';
     let data = [];
     let isLog = false;
+
+    // Helper to check Manila Month
+    const isInMonth = (isoDate) => {
+        if (!isoDate) return false;
+        const d = new Date(isoDate);
+        const manila = new Date(d.getTime() + (8 * 60 * 60 * 1000));
+        return manila.toISOString().substring(0, 7) === state.perfMonth;
+    };
     
     if (type === 'parent') {
-        data = state.tickets.filter(t => t.assignee === member && !t.parentId && !t.removedreason && t.status === 'Open');
+        data = state.tickets.filter(t => t.assignee === member && !t.parentId && !t.removedreason && t.status === 'Open' && isInMonth(t.createdAt));
     } else if (type === 'child') {
-        data = state.tickets.filter(t => t.assignee === member && t.parentId && !t.removedreason && t.status === 'Open');
+        data = state.tickets.filter(t => t.assignee === member && t.parentId && !t.removedreason && t.status === 'Open' && isInMonth(t.createdAt));
     } else if (type === 'removed') {
-        data = state.tickets.filter(t => t.assignee === member && t.removedreason);
+        data = state.tickets.filter(t => t.assignee === member && t.removedreason && isInMonth(t.createdAt));
     } else if (type === 'routed') {
         isLog = true;
         data = state.logs.filter(l => 
+            l.timestamp && isInMonth(l.timestamp) &&
             l.details && 
             l.details.toLowerCase().includes('from ' + member.toLowerCase()) && 
             l.action.toLowerCase().includes('routed') && 
@@ -1309,6 +1318,7 @@ function showPerformanceDetail(member, type) {
     } else if (type === 'grouped') {
         isLog = true;
         data = state.logs.filter(l => 
+            l.timestamp && isInMonth(l.timestamp) &&
             l.details && 
             l.details.toLowerCase().includes('assignee: ' + member.toLowerCase()) && 
             l.action.toLowerCase().includes('routed') && 
@@ -1425,15 +1435,22 @@ function downloadReport() {
 
 function exportPerformanceDetail(title, dataJson, isLog) {
     const data = JSON.parse(decodeURIComponent(dataJson));
-    let csvCells = isLog ? ['Time', 'Action', 'Details'] : ['Title', 'Apps', 'Status'];
-    let csv = csvCells.join(',') + '\\n';
+    let csvRows = [];
+    if (isLog) {
+        csvRows.push(['Time', 'Action', 'Details']);
+        data.forEach(item => {
+            csvRows.push([new Date(item.timestamp).toLocaleDateString(), item.action, item.details]);
+        });
+    } else {
+        csvRows.push(['Title', 'Apps', 'Status']);
+        data.forEach(item => {
+            csvRows.push([item.title, (item.applications||[]).join('; '), item.status]);
+        });
+    }
     
-    data.forEach(item => {
-        if (isLog) csv += `"${new Date(item.timestamp).toLocaleDateString()}","${item.action.replace(/"/g, '""')}","${(item.details||'').replace(/"/g, '""')}"\\n`;
-        else csv += `"${(item.title||'').replace(/"/g, '""')}","${(item.applications||[]).join(';').replace(/"/g, '""')}","${item.status}"\\n`;
-    });
+    let csv = csvRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\r\n');
     
-    const b = new Blob([csv], {type:'text/csv'});
+    const b = new Blob(['\ufeff', csv], {type:'text/csv;charset=utf-8;'});
     const url = URL.createObjectURL(b);
     const a = document.createElement('a');
     a.href = url;
