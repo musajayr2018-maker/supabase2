@@ -445,15 +445,29 @@ async function saveState() {
 }
 
 async function addLog(a, d) {
+    const now = new Date();
     const logEntry = {
-        timestamp: new Date().toISOString(),
+        timestamp: now.toISOString(),
         action: a,
         details: d
     };
     
     // Add to local state
     state.logs.unshift(logEntry);
-    if(state.logs.length > 200) state.logs = state.logs.slice(0, 200);
+
+    // Auto-delete logs older than 24 hours
+    const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+    state.logs = state.logs.filter(log => new Date(log.timestamp) > twentyFourHoursAgo);
+    
+    // Cleanup Supabase logs older than 24 hours
+    try {
+        await supabaseClient
+            .from('app_logs')
+            .delete()
+            .lt('timestamp', twentyFourHoursAgo.toISOString());
+    } catch (err) {
+        console.error("Log cleanup error:", err);
+    }
     
     // Insert to Supabase 'app_logs' table
     try {
