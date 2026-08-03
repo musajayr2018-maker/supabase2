@@ -786,7 +786,9 @@ function toggleActions(el){
 }
 
 function renderTicketCard(t) {
-    const time = t.createdAt ? new Date(t.createdAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
+    const dateObj = t.createdAt ? new Date(t.createdAt) : null;
+    const time = (dateObj && !isNaN(dateObj)) ? dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : 'N/A';
+    const dateStr = (dateObj && !isNaN(dateObj)) ? t.createdAt.split('T')[0] : 'N/A';
     const cls = t.status === 'Completed' ? 'completed' : '';
     
     // Count children for progress
@@ -802,7 +804,7 @@ function renderTicketCard(t) {
                 <span style="font-size:0.65rem; color: #6366f1;">${t.actionType || ''}</span>
             </div>
             <div style="font-size:0.7rem; color:#4338ca">👤 ${t.assignee} ${ (t.notes||'').includes('[Assignment:') ? `<span style="font-size:0.6rem; opacity:0.8; margin-left:4px;">(${(t.notes||'').split('[Assignment: ')[1].split(']')[0]})</span>` : ''}</div>
-            <div style="font-size:0.65rem; color:#6b7280">📅 ${t.createdAt ? t.createdAt.split('T')[0] : 'N/A'} ${time} • ${t.status}</div>
+            <div style="font-size:0.65rem; color:#6b7280">📅 ${dateStr} ${time} • ${t.status}</div>
             ${children.length > 0 ? `<div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#4f46e5;">📋 Tasks — ${completedTasks}/${children.length} completed</div>` : ''}
             ${t.notes && t.notes.includes("(Promoted from Parent:") ? `<div style="font-size:0.7rem; margin-top:3px; font-weight:600; color:#db2777;">📌 ${escHtml(t.notes.split('(')[1].replace(')', ''))}</div>` : ''}
         </div>
@@ -1219,7 +1221,7 @@ function renderPerformance() {
                             <td style="padding:10px"><strong>${m}</strong></td>
                             <td style="padding:10px">${mTix.length}</td>
                             <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'parent')">${mTix.filter(t => !t.parentId).length}</td>
-                            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'child')">${mTix.filter(t => t.length > 0 && t.parentId).length}</td>
+                            <td style="padding:10px; cursor:pointer; color:#4f46e5" onclick="showPerformanceDetail('${m}', 'child')">${mTix.filter(t => !!t.parentId).length}</td>
                             <td style="padding:10px; color:#059669; font-weight:bold">${mTix.filter(t => t.status === 'Completed').length}</td>
                         </tr>`;
                     }).join('')}
