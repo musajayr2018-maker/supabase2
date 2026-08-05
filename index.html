@@ -49,12 +49,36 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 .member-chip.active{background:var(--accent-color);color:white;opacity:1}
 .member-chip.blocked{background:rgba(239,68,68,0.2);color:#ef4444;opacity:0.7}
 
-.workload-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.workload-label{font-size:0.72rem;font-weight:500;min-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.workload-track{flex:1;height:16px;background:#f3f4f6;border-radius:8px;overflow:hidden}
-.workload-fill{height:100%;border-radius:8px;transition:width 0.3s}
-.workload-value{font-size:0.68rem;color:#6b7280;min-width:70px;text-align:right}
+.workload-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:8px 10px;border:1px solid var(--border-color);border-radius:10px;background:var(--bg-color);transition:transform .2s,box-shadow .2s}
+ .workload-row:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(15,23,42,.08)}
+ .workload-label{font-size:0.78rem;font-weight:700;min-width:105px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .workload-track{flex:1;height:12px;background:var(--border-color);border-radius:8px;overflow:hidden}
+ .workload-fill{height:100%;border-radius:8px;transition:width 0.3s}
+ .workload-value{font-size:0.74rem;color:var(--text-color);min-width:88px;text-align:right;line-height:1.35;font-weight:700}
+ .workload-value small{font-size:0.68rem;color:var(--text-muted);font-weight:600}
+ .workload-row{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--bg-color),rgba(99,102,241,.05))}
+ .workload-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#6366f1,#a855f7);opacity:.85}
+ .workload-label{padding-left:6px}
+ .workload-track{box-shadow:inset 0 1px 3px rgba(15,23,42,.12)}
+ .workload-value{background:rgba(99,102,241,.08);padding:4px 7px;border-radius:8px}
+ .workload-value small{display:block;margin-top:1px}
 
+.member-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;box-shadow:0 3px 8px rgba(15,23,42,.18);flex:none}
+.member-info{display:flex;flex-direction:column;gap:2px;min-width:105px;flex:1}.member-subtitle{font-size:.62rem;color:var(--text-muted)}
+.balance-numbers{display:flex;align-items:stretch;gap:0;border:1px solid var(--border-color);border-radius:10px;overflow:hidden;background:var(--bg-color)}
+.balance-numbers>div{min-width:52px;padding:5px 8px;text-align:center;border-right:1px solid var(--border-color)}
+.balance-numbers>div:last-child{border-right:0}.balance-numbers b{display:block;font-size:1rem}.balance-numbers small{display:block;font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.03em}
+.total-number{background:rgba(99,102,241,.08)}
+.monthly-total{min-width:76px;text-align:center;padding:7px 12px;border-radius:10px;background:rgba(99,102,241,.1);color:var(--accent-color)}
+.leave-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}.leave-card{position:relative;padding:16px;border:1px solid var(--border-color);border-radius:16px;background:var(--bg-color);box-shadow:0 5px 16px rgba(15,23,42,.08);overflow:hidden}.leave-card:before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(#f97316,#ef4444)}.leave-card-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}.leave-avatar{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;font-weight:800;font-size:1.05rem}.leave-person{display:flex;flex-direction:column;gap:2px;flex:1}.leave-member{font-weight:800;font-size:.9rem}.leave-label{font-size:.65rem;color:var(--text-muted)}.leave-type{padding:5px 9px;border-radius:999px;font-size:.65rem;font-weight:800}.leave-card button{margin-top:10px;width:100%}
+ .upcoming-section.collapsed .upcoming-grid{display:none}.upcoming-section .collapsible-header{margin:-20px -20px 16px;padding:14px 20px;border-radius:16px 16px 0 0}.upcoming-section .collapsible-header h3{margin:0;display:flex;align-items:center;gap:8px}.collapse-icon{font-size:1.1rem;color:var(--text-muted);transition:transform .2s}.upcoming-section.collapsed .collapse-icon{transform:rotate(-90deg)}.upcoming-count{margin-left:auto;min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:#ede9fe;color:#6d28d9;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center}.upcoming-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.upcoming-card{padding:16px;border:1px solid var(--border-color);border-radius:16px;background:var(--bg-color);box-shadow:0 5px 16px rgba(15,23,42,.08);position:relative;overflow:hidden}.upcoming-card:before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(#6366f1,#a855f7)}.upcoming-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}.upcoming-avatar{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;font-weight:800;font-size:1.05rem}.upcoming-top div{display:flex;flex-direction:column;gap:2px}.upcoming-top strong{font-size:.9rem}.upcoming-top small{font-size:.65rem;color:var(--text-muted)}.upcoming-date{padding:9px;border-radius:9px;background:rgba(99,102,241,.08);color:var(--text-color);font-size:.75rem;margin-bottom:10px}.upcoming-type{display:inline-block;padding:5px 10px;border-radius:999px;background:#ede9fe;color:#6d28d9;font-size:.65rem;font-weight:800}@media(max-width:600px){.upcoming-grid{grid-template-columns:1fr}}
+.monthly-total b{display:block;font-size:1.15rem}.monthly-total small{font-size:.62rem;text-transform:uppercase;color:var(--text-muted)}
+.balance-counts{display:flex;gap:7px;flex:1;justify-content:center;flex-wrap:wrap}
+.count-pill,.total-pill{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;font-size:.7rem;white-space:nowrap}
+.parent-pill{background:#eef2ff;color:#4338ca}.child-pill{background:#ecfdf5;color:#047857}
+.total-pill{background:var(--bg-color);border:1px solid;min-width:68px;justify-content:center;color:var(--text-color)}
+.count-pill b,.total-pill b{font-size:.9rem}
+@media(max-width:600px){.workload-label{min-width:82px}.balance-counts{gap:4px}.count-pill,.total-pill{padding:5px 7px;font-size:.65rem}}
 .schedule-table{width:100%;border-collapse:separate;border-spacing:0;font-size:0.85rem}
 .schedule-table th, .schedule-table td{padding:10px;border-bottom:1px solid var(--border-color)}
 .schedule-table th{background:var(--card-bg);text-align:center}
@@ -118,77 +142,63 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
 </style>
 <meta property="og:title" content="RotaGuard — Standalone Ticket Rotation System" data-id="th-modified"><meta name="description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:description" content="rotaguard-standalone (2)" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://emerald-aigneis-30.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script data-cookieconsent="ignore" data-uc-allowed="true" src="chrome-extension://iidnbdjijdkbmajdffnidomddglmieko/executor.js" async="" fetchpriority="low"></script><script defer="" data-domain="peach-tuesday-15.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script></head>
 <body class="">
-<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Wed, Aug 5, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Wed, Aug 5, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">51</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">51</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
-            <span class="workload-label">KYLE 🎯</span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:57.14285714285714%;background:#a855f7"></div>
-            </div>
-            <span class="workload-value">8 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
-            <span class="workload-label">JUNEALYN </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
-            <span class="workload-label">Paola </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:100%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">14 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOSHUA'; render();">
-            <span class="workload-label">JOSHUA </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:100%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">14 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOHN CARLO'; render();">
-            <span class="workload-label">JOHN CARLO </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:92.85714285714286%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">13 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Ma.Jenica'; render();">
-            <span class="workload-label">Ma.Jenica </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:100%;background:#10b981"></div>
-            </div>
-            <span class="workload-value">14 tix</span>
-        </div><div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Rendy'; render();">
-            <span class="workload-label">John Rendy </span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:0%;background:#e2e8f0"></div>
-            </div>
-            <span class="workload-value">0 tix</span>
-        </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row">
-            <span class="workload-label">JOHN CARLO</span>
-            <div class="workload-track"><div class="workload-fill" style="width:100%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">99 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Ma.Jenica</span>
-            <div class="workload-track"><div class="workload-fill" style="width:62.62626262626263%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">62 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">JOSHUA</span>
-            <div class="workload-track"><div class="workload-fill" style="width:61.61616161616161%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">61 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">Paola</span>
-            <div class="workload-track"><div class="workload-fill" style="width:59.59595959595959%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">59 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">John Rendy</span>
-            <div class="workload-track"><div class="workload-fill" style="width:40.4040404040404%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">40 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">JUNEALYN</span>
-            <div class="workload-track"><div class="workload-fill" style="width:32.323232323232325%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">32 tix</span>
-        </div><div class="workload-row">
-            <span class="workload-label">KYLE</span>
-            <div class="workload-track"><div class="workload-fill" style="width:14.14141414141414%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">14 tix</span>
-        </div></div><div class="card"><h3>🎯 Active Dedicated Rules</h3><div style="margin:10px 0 14px;padding:12px;background:var(--bg-color);border:1px solid var(--border-color);border-radius:10px"><div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;margin-bottom:8px"><strong>Regular Ticket Limit</strong><span style="font-size:0.7rem;color:var(--text-muted)">Daily • resets automatically</span></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="padding:5px 10px;border-radius:14px;background:#eef2ff;color:#4338ca;font-size:0.75rem;font-weight:700">3 used</span><span style="padding:5px 10px;border-radius:14px;background:#ecfdf5;color:#047857;font-size:0.75rem;font-weight:700">7 remaining</span><span style="padding:5px 10px;border-radius:14px;background:#fef3c7;color:#92400e;font-size:0.75rem;font-weight:700">10 total</span></div><div style="font-size:0.68rem;color:var(--text-muted)">Per member: 10 regular tickets per day (Creation + Modification + Termination). Dedicated-rule tickets are unlimited.</div><div style="margin-top:10px;padding:12px;border:1px solid var(--border-color);border-radius:10px;background:var(--card-bg);display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="min-width:0"><div style="display:flex;align-items:center;gap:7px"><span style="font-size:1.05rem">👤</span><strong style="font-size:0.82rem">KYLE</strong><span style="font-size:0.65rem;padding:3px 7px;border-radius:10px;background:#e0e7ff;color:#3730a3;font-weight:700">3/10</span></div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px"><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#4f46e5;border:2px solid transparent;cursor:help" title="SCTASK00212147 • Termination"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#4f46e5;border:2px solid transparent;cursor:help" title="SCTASK00212172 • Termination"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#4f46e5;border:2px solid transparent;cursor:help" title="SCTASK00212179 • Termination"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span></div><div style="font-size:0.67rem;color:var(--text-muted);margin-top:5px">7 tickets remaining today</div></div><button class="btn btn-sm btn-success" onclick="toggleRegularTicketCap('KYLE')">ON</button></div></div><div style="padding:6px 0; border-bottom:1px solid var(--border-color); font-size: 0.8rem; display:flex; justify-content:space-between;">
+<div id="app"><div class="header"><h1>🛡️ RotaGuard <span style="font-size:0.8rem; font-weight:400; color:#94a3b8; margin-left:8px;">Wed, Aug 5, 2026</span></h1><div class="header-actions"><span class="user-badge">👤 musajayr2018@gmail.com</span><button class="btn btn-secondary btn-sm" onclick="toggleDark()">🌙</button><button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 CSV</button><button class="btn btn-secondary btn-sm" onclick="exportJSON()">📦 Backup</button><button class="btn btn-danger btn-sm" onclick="doLogout()">Logout</button></div></div><div class="container"><div class="sidebar"><div class="tabs"><div class="tab active" onclick="console.log(1);setTab('dashboard')">📊 Dashboard</div><div class="tab " onclick="console.log(2);setTab('tickets')">📋 Tickets</div><div class="tab " onclick="console.log(8);setTab('done')">✅ Done</div><div class="tab " onclick="console.log(3);setTab('members')">👥 Members</div><div class="tab " onclick="console.log(4);setTab('schedule')">📅 Schedule</div><div class="tab " onclick="console.log(5);setTab('dedicated')">🎯 Dedicated</div><div class="tab " onclick="console.log(6);setTab('availability')">🕐 Availability</div><div class="tab " onclick="console.log(7);setTab('log')">📜 Log</div><div class="tab " onclick="console.log(9);setTab('perf')">📈 Performance</div></div></div><div class="main-content"><div class="card"><div class="date-nav"><button class="btn btn-secondary btn-sm" onclick="goDate(-1, event)">◀ Prev</button><div><span class="date-label">Wed, Aug 5, 2026</span></div><button class="btn btn-secondary btn-sm" onclick="goDate(1, event)" disabled="">Next ▶</button></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px;"><div class="card" style="margin-bottom:0;text-align:center"><h3>Total</h3><div style="font-size:1.5rem;font-weight:700">93</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Open</h3><div style="font-size:1.5rem;font-weight:700;color:#4f46e5">93</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Done</h3><div style="font-size:1.5rem;font-weight:700;color:#10b981">0</div></div><div class="card" style="margin-bottom:0;text-align:center"><h3>Eff.</h3><div style="font-size:1.5rem;font-weight:700">0%</div></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px; margin-bottom:16px;"><div class="card"><h3>⚖️ Day Balance (Today)</h3><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
+            <div class="member-avatar" style="background:#a855f7">K</div>
+            <div class="member-info"><span class="workload-label">KYLE 🎯</span><span class="member-subtitle">Today’s ticket assignment</span></div>
+            <div class="balance-numbers"><div><b>9</b><small>Parent</small></div><div><b>0</b><small>Child</small></div><div class="total-number"><b>9</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
+            <div class="member-avatar" style="background:#94a3b8">J</div>
+            <div class="member-info"><span class="workload-label">JUNEALYN </span><span class="member-subtitle">Today’s ticket assignment</span></div>
+            <div class="balance-numbers"><div><b>0</b><small>Parent</small></div><div><b>0</b><small>Child</small></div><div class="total-number"><b>0</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
+            <div class="member-avatar" style="background:#10b981">P</div>
+            <div class="member-info"><span class="workload-label">Paola </span><span class="member-subtitle">Today’s ticket assignment</span></div>
+            <div class="balance-numbers"><div><b>24</b><small>Parent</small></div><div><b>6</b><small>Child</small></div><div class="total-number"><b>30</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOSHUA'; render();">
+            <div class="member-avatar" style="background:#10b981">J</div>
+            <div class="member-info"><span class="workload-label">JOSHUA </span><span class="member-subtitle">Today’s ticket assignment</span></div>
+            <div class="balance-numbers"><div><b>24</b><small>Parent</small></div><div><b>6</b><small>Child</small></div><div class="total-number"><b>30</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOHN CARLO'; render();">
+            <div class="member-avatar" style="background:#10b981">J</div>
+            <div class="member-info"><span class="workload-label">JOHN CARLO </span><span class="member-subtitle">Today’s ticket assignment</span></div>
+            <div class="balance-numbers"><div><b>11</b><small>Parent</small></div><div><b>2</b><small>Child</small></div><div class="total-number"><b>13</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Ma.Jenica'; render();">
+            <div class="member-avatar" style="background:#10b981">M</div>
+            <div class="member-info"><span class="workload-label">Ma.Jenica </span><span class="member-subtitle">Today’s ticket assignment</span></div>
+            <div class="balance-numbers"><div><b>25</b><small class="">Parent</small></div><div><b class="">5</b><small class="">Child</small></div><div class="total-number"><b>30</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Rendy'; render();">
+            <div class="member-avatar" style="background:#94a3b8">J</div>
+            <div class="member-info"><span class="workload-label">John Rendy </span><span class="member-subtitle">Today’s ticket assignment</span></div>
+            <div class="balance-numbers"><div><b>0</b><small>Parent</small></div><div><b>0</b><small>Child</small></div><div class="total-number"><b>0</b><small>Total</small></div></div>
+        </div></div><div class="card"><h3>📅 Monthly Output (Per Member)</h3><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOHN CARLO'; render();">
+            <div class="member-avatar" style="background:var(--accent-color)">J</div>
+            <div class="member-info"><span class="workload-label">JOHN CARLO</span><span class="member-subtitle">This month’s ticket output</span></div>
+            <div class="balance-numbers"><div><b>78</b><small>Parent</small></div><div><b>21</b><small>Child</small></div><div class="total-number"><b>99</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Ma.Jenica'; render();">
+            <div class="member-avatar" style="background:var(--accent-color)">M</div>
+            <div class="member-info"><span class="workload-label">Ma.Jenica</span><span class="member-subtitle">This month’s ticket output</span></div>
+            <div class="balance-numbers"><div><b>68</b><small>Parent</small></div><div><b>10</b><small>Child</small></div><div class="total-number"><b>78</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JOSHUA'; render();">
+            <div class="member-avatar" style="background:var(--accent-color)">J</div>
+            <div class="member-info"><span class="workload-label">JOSHUA</span><span class="member-subtitle">This month’s ticket output</span></div>
+            <div class="balance-numbers"><div><b>67</b><small>Parent</small></div><div><b>10</b><small>Child</small></div><div class="total-number"><b>77</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='Paola'; render();">
+            <div class="member-avatar" style="background:var(--accent-color)">P</div>
+            <div class="member-info"><span class="workload-label">Paola</span><span class="member-subtitle">This month’s ticket output</span></div>
+            <div class="balance-numbers"><div><b>65</b><small>Parent</small></div><div><b>10</b><small>Child</small></div><div class="total-number"><b>75</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='John Rendy'; render();">
+            <div class="member-avatar" style="background:var(--accent-color)">J</div>
+            <div class="member-info"><span class="workload-label">John Rendy</span><span class="member-subtitle">This month’s ticket output</span></div>
+            <div class="balance-numbers"><div><b>37</b><small>Parent</small></div><div><b>3</b><small>Child</small></div><div class="total-number"><b>40</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='JUNEALYN'; render();">
+            <div class="member-avatar" style="background:var(--accent-color)">J</div>
+            <div class="member-info"><span class="workload-label">JUNEALYN</span><span class="member-subtitle">This month’s ticket output</span></div>
+            <div class="balance-numbers"><div><b>27</b><small>Parent</small></div><div><b>5</b><small>Child</small></div><div class="total-number"><b>32</b><small>Total</small></div></div>
+        </div><div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='KYLE'; render();">
+            <div class="member-avatar" style="background:var(--accent-color)">K</div>
+            <div class="member-info"><span class="workload-label">KYLE</span><span class="member-subtitle">This month’s ticket output</span></div>
+            <div class="balance-numbers"><div><b>15</b><small>Parent</small></div><div><b>0</b><small>Child</small></div><div class="total-number"><b>15</b><small>Total</small></div></div>
+        </div></div><div class="card"><h3>🎯 Active Dedicated Rules</h3><div style="margin:10px 0 14px;padding:12px;background:var(--bg-color);border:1px solid var(--border-color);border-radius:10px"><div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;margin-bottom:8px"><strong>Regular Ticket Limit</strong><span style="font-size:0.7rem;color:var(--text-muted)" class="">Daily • resets automatically</span></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="padding:5px 10px;border-radius:14px;background:#eef2ff;color:#4338ca;font-size:0.75rem;font-weight:700">3 used</span><span style="padding:5px 10px;border-radius:14px;background:#ecfdf5;color:#047857;font-size:0.75rem;font-weight:700">7 remaining</span><span style="padding:5px 10px;border-radius:14px;background:#fef3c7;color:#92400e;font-size:0.75rem;font-weight:700">10 total</span></div><div style="font-size:0.68rem;color:var(--text-muted)">Per member: 10 regular tickets per day (Creation + Modification + Termination). Dedicated-rule tickets are unlimited.</div><div style="margin-top:10px;padding:12px;border:1px solid var(--border-color);border-radius:10px;background:var(--card-bg);display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="min-width:0"><div style="display:flex;align-items:center;gap:7px"><span style="font-size:1.05rem">👤</span><strong style="font-size:0.82rem">KYLE</strong><span style="font-size:0.65rem;padding:3px 7px;border-radius:10px;background:#e0e7ff;color:#3730a3;font-weight:700">3/10</span></div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px"><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#4f46e5;border:2px solid transparent;cursor:help" title="SCTASK00212147 • Termination"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#4f46e5;border:2px solid transparent;cursor:help" title="SCTASK00212172 • Termination"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#4f46e5;border:2px solid transparent;cursor:help" title="SCTASK00212179 • Termination"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span><span style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#e5e7eb;border:2px solid #cbd5e1;cursor:default" title="Available slot"></span></div><div style="font-size:0.67rem;color:var(--text-muted);margin-top:5px">7 tickets remaining today</div></div><button class="btn btn-sm btn-success" onclick="toggleRegularTicketCap('KYLE')">ON</button></div></div><div style="padding:6px 0; border-bottom:1px solid var(--border-color); font-size: 0.8rem; display:flex; justify-content:space-between;">
                 <span><strong>BT</strong></span>
                 <span style="color:var(--accent-color)">KYLE</span>
               </div><div style="padding:6px 0; border-bottom:1px solid var(--border-color); font-size: 0.8rem; display:flex; justify-content:space-between;">
@@ -197,14 +207,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-color);color:v
               </div><div style="padding:6px 0; border-bottom:1px solid var(--border-color); font-size: 0.8rem; display:flex; justify-content:space-between;">
                 <span><strong>PO</strong></span>
                 <span style="color:var(--accent-color)">KYLE</span>
-              </div></div><div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">John Rendy</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca" class="">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-08-05</div><button class="btn btn-sm btn-secondary" onclick="unblock('John Rendy')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JUNEALYN</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px" class="">📅 2026-08-05</div><button class="btn btn-sm btn-secondary" onclick="unblock('JUNEALYN')">Unblock</button></div><div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">JOHN CARLO</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:#fef3c7;color:#b45309">SL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px" class="">📅 2026-08-05</div><button class="btn btn-sm btn-secondary" onclick="unblock('JOHN CARLO')">Unblock</button></div></div></div><div class="card"><h3>📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JOHN CARLO</div><div style="color:var(--text-muted)">2026-08-06</div><div style="font-weight:600;color:var(--accent-color)">Night Shift</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JUNEALYN</div><div style="color:var(--text-muted)">2026-08-06</div><div style="font-weight:600;color:var(--accent-color)">Night Shift</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JOSHUA</div><div style="color:var(--text-muted)">2026-08-07</div><div style="font-weight:600;color:var(--accent-color)">Night Shift</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">Ma.Jenica</div><div style="color:var(--text-muted)">2026-08-07</div><div style="font-weight:600;color:var(--accent-color)">Night Shift</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JOHN CARLO</div><div style="color:var(--text-muted)">2026-08-07</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip">KYLE (0)</span><span class="member-chip blocked">⏸️ JUNEALYN (0)</span><span class="member-chip">Paola (1)</span><span class="member-chip active">JOSHUA (2)</span><span class="member-chip blocked">⏸️ JOHN CARLO (0)</span><span class="member-chip">Ma.Jenica (1)</span><span class="member-chip blocked">⏸️ John Rendy (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div><div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content"><h3>Create Ticket</h3><label>Ticket Number</label><input type="text" id="t-title" placeholder="e.g. SCTASK0012345" oninput="checkDuplicate(this.value)"><div id="t-dup-msg" style="color:#d97706; font-size:0.8rem; margin: -12px 0 12px 0; font-weight:600" class="">✓ Ticket number is available</div><label class="">Action Type</label><select id="t-action"><option value="Creation">Creation</option><option value="Modification">Modification</option><option value="Termination">Termination</option></select><label class="">Applications</label><div class="apps-grid" id="t-apps" onclick="updateAssignmentExplanation()"><div class="app-chip" onclick="this.classList.toggle('selected')">Active Directory</div><div class="app-chip" onclick="this.classList.toggle('selected')">Email Account</div><div class="app-chip" onclick="this.classList.toggle('selected')">Phoenix</div><div class="app-chip" onclick="this.classList.toggle('selected')">Peoplesoft</div><div class="app-chip" onclick="this.classList.toggle('selected')">8x8</div><div class="app-chip" onclick="this.classList.toggle('selected')">CBIS</div><div class="app-chip" onclick="this.classList.toggle('selected')">Astra</div><div class="app-chip" onclick="this.classList.toggle('selected')">Adobe</div><div class="app-chip" onclick="this.classList.toggle('selected')">Purchase Order</div><div class="app-chip" onclick="this.classList.toggle('selected')">BT</div></div><div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="t-newapp" placeholder="Add custom app..." style="flex:1;margin:0"><button class="btn btn-secondary btn-sm" onclick="addCustomApp()">+ Add</button></div><label class="">Assignment</label><div style="display:flex;gap:8px;margin-bottom:12px"><button onclick="document.getElementById('t-assign-opt').value='auto'; this.style.background='#e0e7ff'; this.nextElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='none'; document.getElementById('t-assign-expl').style.display='block'; updateAssignmentExplanation();" class="btn" style="flex:1;background:#e0e7ff;border:1px solid #c7d2fe">⚖️ Auto (Balanced)</button><button onclick="document.getElementById('t-assign-opt').value='specific'; this.style.background='#e0e7ff'; this.previousElementSibling.style.background='#f3f4f6'; document.getElementById('t-assign-specific').style.display='block'; document.getElementById('t-assign-expl').style.display='none';" class="btn" style="flex:1;background:#f3f4f6;border:1px solid #d1d5db">👤 Specific Person</button></div><input type="hidden" id="t-assign-opt" value="auto"><div id="t-assign-expl"><div style="font-size:0.75rem; color:#4338ca; background:#e0e7ff; padding:8px; border-radius:6px; margin-bottom:8px;">
-        <div style="font-weight:700; margin-bottom:4px" class="">📊 Why JOSHUA? (⚖️ Day Balance)</div>
-        <div style="margin-left:4px" class="">
-            • <strong>JOSHUA</strong>: 14 tasks today (14 tickets) (lowest today)<br>
-            • Others:<br>
-            &nbsp;&nbsp; JOSHUA: 14 (14 tix)<br>&nbsp;&nbsp; Ma.Jenica: 14 (14 tix)
-        </div><div style="margin-top:6px; margin-left:4px; font-size: 0.7rem; color: #666;">⏸️ Blocked/Leave: JUNEALYN, JOHN CARLO, John Rendy<br>🎯 Dedicated Assigned: KYLE<br></div><div style="margin-top:6px; font-weight:600; color:#059669">✅ Fewest daily tasks (apps + child tickets) gets the next ticket</div>
-    </div></div><select id="t-assign-specific" style="margin-bottom:12px; display:none;"><option value="KYLE">KYLE</option><option value="JUNEALYN">JUNEALYN</option><option value="Paola">Paola</option><option value="JOSHUA">JOSHUA</option><option value="JOHN CARLO">JOHN CARLO</option><option value="Ma.Jenica">Ma.Jenica</option><option value="John Rendy">John Rendy</option></select><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="doAddTicket('null')">Create</button></div></div></div></div>
+              </div></div><div class="card leave-section"><h3 style="font-size:0.9rem;margin-bottom:10px">⏸️ Blocked / On Leave Today</h3><div class="leave-grid"><div class="leave-card"><div class="leave-card-header"><span class="leave-avatar">J</span><div class="leave-person"><span class="leave-member">John Rendy</span><span class="leave-label">Unavailable today</span></div><span class="leave-type" style="background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-08-05</div><button class="btn btn-sm btn-secondary" onclick="unblock('John Rendy')">Unblock</button></div><div class="leave-card"><div class="leave-card-header"><span class="leave-avatar">J</span><div class="leave-person"><span class="leave-member">JUNEALYN</span><span class="leave-label">Unavailable today</span></div><span class="leave-type" style="background:#e0e7ff;color:#4338ca">Day Off</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-08-05</div><button class="btn btn-sm btn-secondary" onclick="unblock('JUNEALYN')">Unblock</button></div><div class="leave-card"><div class="leave-card-header"><span class="leave-avatar">J</span><div class="leave-person"><span class="leave-member">JOHN CARLO</span><span class="leave-label">Unavailable today</span></div><span class="leave-type" style="background:#fef3c7;color:#b45309">SL</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">📅 2026-08-05</div><button class="btn btn-sm btn-secondary" onclick="unblock('JOHN CARLO')">Unblock</button></div></div></div><div class="card"><h3 class="">📅 Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JOHN CARLO</div><div style="color:var(--text-muted)">2026-08-06</div><div style="font-weight:600;color:var(--accent-color)">Night Shift</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600" class="">JUNEALYN</div><div style="color:var(--text-muted)" class="">2026-08-06</div><div style="font-weight:600;color:var(--accent-color)" class="">Night Shift</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JOSHUA</div><div style="color:var(--text-muted)">2026-08-07</div><div style="font-weight:600;color:var(--accent-color)">Night Shift</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">Ma.Jenica</div><div style="color:var(--text-muted)">2026-08-07</div><div style="font-weight:600;color:var(--accent-color)">Night Shift</div></div><div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem"><div style="font-weight:600">JOHN CARLO</div><div style="color:var(--text-muted)">2026-08-07</div><div style="font-weight:600;color:var(--accent-color)">Day Off</div></div></div></div><div class="card"><div class="members-bar"><span class="member-chip">KYLE (1)</span><span class="member-chip blocked">⏸️ JUNEALYN (0)</span><span class="member-chip active">Paola (17)</span><span class="member-chip">JOSHUA (18)</span><span class="member-chip blocked">⏸️ JOHN CARLO (0)</span><span class="member-chip">Ma.Jenica (17)</span><span class="member-chip blocked">⏸️ John Rendy (0)</span></div></div><div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="showAddTicket()">+ Create Ticket</button><button class="btn btn-warning" onclick="showBlock()">⏸️ Block/Skip</button><button class="btn btn-secondary" onclick="showAddMember()">+ Add Member</button></div></div></div></div><button class="fab" onclick="showAddTicket()" title="Create Ticket">+</button></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -496,7 +499,7 @@ async function addLog(a, d) {
     render();
 }
 function isMemberBlocked(m){const today=getTodayStr();const now=new Date();const ct=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');return state.leaves.some(l=>{if(l.memberId!==m)return false;if(l.type==='Skip'){if(l.startDate!==today)return false;return l.skipStartTime&&l.skipEndTime?ct>=l.skipStartTime&&ct<=l.skipEndTime:false}if(l.startDate<=today&&l.endDate>=today){if(l.blockFromTime&&l.startDate===today)return ct>=l.blockFromTime;return true}return false})}
-function getDayBalance(m) {
+function getDayBalanceTickets(m) {
     const todayStr = getTodayStr(); // YYYY-MM-DD (Manila time-based)
     const mClean = (m || "").trim().toLowerCase();
     
@@ -530,6 +533,25 @@ function getDayBalance(m) {
     
     // Consistent workload calculation: Parent = custom apps count (or 1), Child = 1
     return tickets.reduce((sum, t) => sum + (t.parentId ? 1 : (t.applications ? t.applications.length : 1)), 0);
+}
+function getDayBalance(m) {
+    return getDayBalanceTickets(m);
+}
+function getDayBalanceCounts(m) {
+    const todayStr = getTodayStr();
+    const mClean = (m || '').trim().toLowerCase();
+    const isToday = iso => {
+        if (!iso) return false;
+        const d = new Date(iso);
+        return new Date(d.getTime() + 8 * 60 * 60 * 1000).toISOString().substring(0, 10) === todayStr;
+    };
+    const valid = state.tickets.filter(t => {
+        const parent = t.parentId ? state.tickets.find(p => String(p.id) === String(t.parentId)) : null;
+        return (t.assignee || '').trim().toLowerCase() === mClean && isToday(t.createdAt) &&
+            t.status !== 'Completed' && t.status !== 'Removed' && !t.removedreason && !t.removedReason &&
+            !(parent && (parent.status === 'Removed' || parent.removedreason || parent.removedReason));
+    });
+    return { parent: valid.filter(t => !t.parentId).length, child: valid.filter(t => !!t.parentId).length };
 }
 function getNextAssignee(){
     const jsDay = new Date().getDay();
@@ -711,38 +733,35 @@ function renderDashboard(tfd,ac,na,today){
     const mx = Math.max(...activeBalances, 5);
 
     state.members.forEach(m => {
-        const c = getDayBalance(m);
+        const counts = getDayBalanceCounts(m);
+        const c = counts.parent + counts.child;
         const isDed = dedicatedNamesArray.includes(m.trim().toLowerCase());
-        const p = (c / mx) * 100;
-        // Make sure it is visible if count > 0, min 10%
-        const displayWidth = c > 0 ? Math.max(p, 10) : 0;
-        const col = isDed ? '#a855f7' : (c > 0 ? '#10b981' : '#e2e8f0');
+        const col = isDed ? '#a855f7' : (c > 0 ? '#10b981' : '#94a3b8');
         const tx = c;
         
-        h += `<div class="workload-row" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='${m}'; render();">
-            <span class="workload-label">${m} ${isDed ? '🎯' : ''}</span>
-            <div class="workload-track">
-                <div class="workload-fill" style="width:${displayWidth}%;background:${col}"></div>
-            </div>
-            <span class="workload-value">${tx} tix</span>
+        h += `<div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='${m}'; render();">
+            <div class="member-avatar" style="background:${col}">${(m || '?').charAt(0).toUpperCase()}</div>
+            <div class="member-info"><span class="workload-label">${m} ${isDed ? '🎯' : ''}</span><span class="member-subtitle">Today’s ticket assignment</span></div>
+            <div class="balance-numbers"><div><b>${counts.parent}</b><small>Parent</small></div><div><b>${counts.child}</b><small>Child</small></div><div class="total-number"><b>${tx}</b><small>Total</small></div></div>
         </div>`;
     });
     h+='</div>';
 
     h += '<div class="card"><h3>📅 Monthly Output (Per Member)</h3>';
-    const mSorted = state.members.map(m => ({
-        name: m,
-        // Count only if NOT removed
-        count: monthlyTix.filter(t => t.assignee === m).length
-    })).sort((a, b) => b.count - a.count);
+    const mSorted = state.members.map(m => {
+        const memberTix = monthlyTix.filter(t => t.assignee === m);
+        const parent = memberTix.filter(t => !t.parentId).length;
+        const child = memberTix.filter(t => !!t.parentId).length;
+        return { name: m, parent, child, count: parent + child };
+    }).sort((a, b) => b.count - a.count);
     const mMax = Math.max(...mSorted.map(item => item.count), 1);
 
     mSorted.forEach(m => {
-        const p = (m.count / mMax) * 100;
-        h += `<div class="workload-row">
-            <span class="workload-label">${m.name}</span>
-            <div class="workload-track"><div class="workload-fill" style="width:${p}%;background:var(--accent-color)"></div></div>
-            <span class="workload-value">${m.count} tix</span>
+        const col = m.count > 0 ? 'var(--accent-color)' : '#94a3b8';
+        h += `<div class="workload-row balance-card" style="cursor:pointer" onclick="state.activeTab='tickets'; state.filterMember='${m.name}'; render();">
+            <div class="member-avatar" style="background:${col}">${(m.name || '?').charAt(0).toUpperCase()}</div>
+            <div class="member-info"><span class="workload-label">${m.name}</span><span class="member-subtitle">This month’s ticket output</span></div>
+            <div class="balance-numbers"><div><b>${m.parent}</b><small>Parent</small></div><div><b>${m.child}</b><small>Child</small></div><div class="total-number"><b>${m.count}</b><small>Total</small></div></div>
         </div>`;
     });
     h += '</div>';
@@ -789,18 +808,14 @@ function renderDashboard(tfd,ac,na,today){
     }
     h += '</div>';
     
-    if(lvs.length>0){h+='<div class="card"><h3 style="font-size:0.9rem;margin-bottom:10px">\u23F8\uFE0F Blocked / On Leave Today</h3><div style="display:flex;flex-wrap:wrap;gap:10px">';lvs.forEach(l=>{const colors=l.type==='VL'?{bg:'#dbeafe',text:'#1d4ed8'}:l.type==='SL'?{bg:'#fef3c7',text:'#b45309'}:l.type==='Unpaid Leave'?{bg:'#fee2e2',text:'#dc2626'}:l.type==='Skip'?{bg:'#fef9c3',text:'#a16207'}:{bg:'#e0e7ff',text:'#4338ca'};h+='<div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:var(--card-bg);width:240px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-weight:600;font-size:0.9rem">'+escHtml(l.memberId)+'</span><span style="font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;background:'+colors.bg+';color:'+colors.text+'">'+(l.type==='Skip'?'\u23ED\uFE0F Skip':l.type)+'</span></div>';if(l.type==='Skip'){h+='<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">\u{1F550} '+escHtml(l.skipStartTime||'')+' \u2013 '+escHtml(l.skipEndTime||'')+' on '+l.startDate+'</div>'}else{h+='<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">\u{1F4C5} '+l.startDate+(l.startDate!==l.endDate?' \u2192 '+l.endDate:'')+'</div>'}if(l.remarks){h+='<div style="font-size:0.8rem;color:var(--text-muted);font-style:italic;margin-bottom:8px">\u{1F4AC} '+escHtml(l.remarks)+'</div>'}h+='<button class="btn btn-sm btn-secondary" onclick="unblock(\''+escHtml(l.memberId)+'\')">Unblock</button></div>'});h+='</div></div>'}
+    if(lvs.length>0){h+='<div class="card leave-section"><h3 style="font-size:0.9rem;margin-bottom:10px">\u23F8\uFE0F Blocked / On Leave Today</h3><div class="leave-grid">';lvs.forEach(l=>{const colors=l.type==='VL'?{bg:'#dbeafe',text:'#1d4ed8'}:l.type==='SL'?{bg:'#fef3c7',text:'#b45309'}:l.type==='Unpaid Leave'?{bg:'#fee2e2',text:'#dc2626'}:l.type==='Skip'?{bg:'#fef9c3',text:'#a16207'}:{bg:'#e0e7ff',text:'#4338ca'};h+='<div class="leave-card"><div class="leave-card-header"><span class="leave-avatar">'+escHtml((l.memberId||'?').charAt(0).toUpperCase())+'</span><div class="leave-person"><span class="leave-member">'+escHtml(l.memberId)+'</span><span class="leave-label">Unavailable today</span></div><span class="leave-type" style="background:'+colors.bg+';color:'+colors.text+'">'+(l.type==='Skip'?'\u23ED\uFE0F Skip':l.type)+'</span></div>';if(l.type==='Skip'){h+='<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">\u{1F550} '+escHtml(l.skipStartTime||'')+' \u2013 '+escHtml(l.skipEndTime||'')+' on '+l.startDate+'</div>'}else{h+='<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:4px">\u{1F4C5} '+l.startDate+(l.startDate!==l.endDate?' \u2192 '+l.endDate:'')+'</div>'}if(l.remarks){h+='<div style="font-size:0.8rem;color:var(--text-muted);font-style:italic;margin-bottom:8px">\u{1F4AC} '+escHtml(l.remarks)+'</div>'}h+='<button class="btn btn-sm btn-secondary" onclick="unblock(\''+escHtml(l.memberId)+'\')">Unblock</button></div>'});h+='</div></div>'}
     
     // Upcoming Leaves
     const upcoming = state.leaves.filter(l => l.startDate > today).sort((a,b) => a.startDate.localeCompare(b.startDate)).slice(0, 5);
     if(upcoming.length > 0){
-        h+='<div class="card"><h3>\u{1F4C5} Upcoming Leaves</h3><div style="display:flex;flex-wrap:wrap;gap:10px">';
+        h+='<div class="card upcoming-section"><div class="collapsible-header" onclick="this.parentElement.classList.toggle(\'collapsed\')"><h3>\u{1F4C5} Upcoming Leaves <span class="collapse-icon">⌄</span></h3><span class="upcoming-count">'+upcoming.length+'</span></div><div class="upcoming-grid">';
         upcoming.forEach(l => {
-            h+='<div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;background:var(--bg-color);width:160px;font-size:0.8rem">';
-            h+='<div style="font-weight:600">'+escHtml(l.memberId)+'</div>';
-            h+='<div style="color:var(--text-muted)">'+l.startDate+'</div>';
-            h+='<div style="font-weight:600;color:var(--accent-color)">'+l.type+'</div>';
-            h+='</div>';
+            h+='<div class="upcoming-card"><div class="upcoming-top"><span class="upcoming-avatar">'+escHtml((l.memberId||'?').charAt(0).toUpperCase())+'</span><div><strong>'+escHtml(l.memberId)+'</strong><small>Scheduled leave</small></div></div><div class="upcoming-date">📅 '+l.startDate+(l.startDate!==l.endDate?' → '+l.endDate:'')+'</div><span class="upcoming-type">'+escHtml(l.type)+'</span></div>';
         });
         h+='</div></div>';
     }
